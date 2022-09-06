@@ -9,24 +9,20 @@ public class BallController : MonoBehaviour
     public Camera mainCam;
     private Vector3 startPos;
     private Vector3 mousePos;
+    private Vector2 shootDirection;
     private Rigidbody2D body;
 
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        startPos = body.transform.position;
+        body.constraints = RigidbodyConstraints2D.FreezePosition;
     }
 
     // Update is called once per frame
     void Update()
     {
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,10 +36,9 @@ public class BallController : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    public void Shoot(Vector2 shootDirection)
     {
-        body.simulated = true;
-        Vector2 shootDirection = (mousePos - body.transform.position);
+        body.constraints = RigidbodyConstraints2D.None;
         body.AddForce(shootDirection * force);
     }
 }
