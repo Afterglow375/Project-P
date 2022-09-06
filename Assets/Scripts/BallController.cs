@@ -41,10 +41,13 @@ public class BallController : MonoBehaviour
 
     public void Shoot(Vector2 shootDirection)
     {
-        _body.simulated = true;
-        _body.constraints = RigidbodyConstraints2D.None;
-        _body.AddForce(shootDirection.normalized * force);
-        isLaunched = true;
+        if (!isLaunched)
+        {
+            _body.simulated = true;
+            _body.constraints = RigidbodyConstraints2D.None;
+            _body.AddForce(shootDirection.normalized * force);
+            isLaunched = true;
+        }
     }
     private void ResetPos()
     {
