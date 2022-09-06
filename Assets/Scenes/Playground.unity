@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7250848614108818211, guid: 2f8f2dfdc0f4a6446837b892b42252d3, type: 3}
       propertyPath: m_Name
-      value: BallWithAim
+      value: Launcher
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f8f2dfdc0f4a6446837b892b42252d3, type: 3}

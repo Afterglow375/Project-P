@@ -7,22 +7,14 @@ public class BallController : MonoBehaviour
     int points = 0;
     public int force = 50;
     public Camera mainCam;
-    private Vector3 startPos;
-    private Vector3 mousePos;
-    private Vector2 shootDirection;
-    private Rigidbody2D body;
+
+    private Rigidbody2D _body;
 
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
-        body.constraints = RigidbodyConstraints2D.FreezePosition;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _body = GetComponent<Rigidbody2D>();
+        _body.constraints = RigidbodyConstraints2D.FreezePosition;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -38,7 +30,7 @@ public class BallController : MonoBehaviour
 
     public void Shoot(Vector2 shootDirection)
     {
-        body.constraints = RigidbodyConstraints2D.None;
-        body.AddForce(shootDirection * force);
+        _body.constraints = RigidbodyConstraints2D.None;
+        _body.AddForce(shootDirection.normalized * force);
     }
 }
