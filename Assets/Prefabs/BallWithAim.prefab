@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 1000
   mainCam: {fileID: 0}
+  isLaunched: 0
 --- !u!50 &2292406741953592969
 Rigidbody2D:
   serializedVersion: 4
@@ -269,4 +270,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 0}
-  ball: {fileID: 3771453374526053386}

@@ -6,7 +6,6 @@ public class LauncherController : MonoBehaviour
 {
     private Vector2 _shootDirection;
     private Vector3 _mousePos;
-    private bool _isLaunched = false;
     private BallController _ballController;
 
     public Camera mainCam;
@@ -23,14 +22,13 @@ public class LauncherController : MonoBehaviour
         _mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         _shootDirection = (_mousePos - transform.position).normalized;
 
-        if (!_isLaunched)
+        if (!_ballController.isLaunched)
         {
             transform.up = _shootDirection;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _isLaunched = true;
             _ballController.Shoot(_shootDirection);
         }
     }
