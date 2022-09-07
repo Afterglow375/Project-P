@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class LauncherController : MonoBehaviour
 {
+    public Camera mainCam;
+
     private Vector2 _shootDirection;
     private Vector3 _mousePos;
     private BallController _ballController;
-
-    public Camera mainCam;
-
+    
     // Start is called before the first frame update
     void Start()
     {
