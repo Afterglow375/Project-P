@@ -8,14 +8,17 @@ public class BallController : MonoBehaviour
     public int force = 50;
     public Camera mainCam;
     public bool isLaunched = false;
-
+    public GameObject trail;
+    
     private Rigidbody2D _body;
     private Vector2 _startPos;
+    private TrailRenderer _trailRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
         _body = GetComponent<Rigidbody2D>();
+        _trailRenderer = trail.GetComponent<TrailRenderer>();
         _body.constraints = RigidbodyConstraints2D.FreezePosition;
         _startPos = _body.position;
     }
@@ -55,5 +58,6 @@ public class BallController : MonoBehaviour
         _body.transform.position = _startPos;
         _body.simulated = false;
         isLaunched = false;
+        _trailRenderer.Clear();
     }
 }
