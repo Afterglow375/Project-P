@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
     public void LevelSelect()
     {
         // TODO: switch scene to level select
+        SceneManager.LoadScene("LevelSelect");
         Debug.Log("level select!");
     }
 
