@@ -852,50 +852,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 85098541}
     m_Modifications:
-    - target: {fileID: 4497681818809389568, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_Name
-      value: PlayButtonText
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681818809389598, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_fontColor.b
-      value: 0.1764706
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681818809389598, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_fontColor.g
-      value: 0.07450981
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681818809389598, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_fontColor.r
-      value: 0.058823533
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681818809389598, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4281144079
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681819207849819, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_Colors.m_NormalColor.b
-      value: 0.9575472
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681819207849819, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_Colors.m_NormalColor.g
-      value: 0.98132074
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681819207849819, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_Colors.m_NormalColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681819207849819, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_Colors.m_PressedColor.b
-      value: 0.4481132
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681819207849819, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_Colors.m_PressedColor.g
-      value: 0.45849475
-      objectReference: {fileID: 0}
-    - target: {fileID: 4497681819207849819, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
-      propertyPath: m_Colors.m_PressedColor.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849820, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
