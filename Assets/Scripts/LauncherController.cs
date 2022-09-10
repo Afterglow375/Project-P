@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class LauncherController : MonoBehaviour
 {
-    public Camera mainCam;
-
     private Vector2 _shootDirection;
     private Vector3 _mousePos;
     private BallController _ballController;
@@ -19,7 +17,7 @@ public class LauncherController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _shootDirection = (_mousePos - transform.position).normalized;
 
         if (!_ballController.isLaunched && !PauseMenu.isPaused)
