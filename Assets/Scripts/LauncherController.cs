@@ -22,7 +22,7 @@ public class LauncherController : MonoBehaviour
         _mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         _shootDirection = (_mousePos - transform.position).normalized;
 
-        if (!_ballController.isLaunched)
+        if (!_ballController.isLaunched && !PauseMenu.isPaused)
         {
             transform.up = _shootDirection;
         }

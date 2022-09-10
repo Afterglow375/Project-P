@@ -846,7 +846,7 @@ GameObject:
   - component: {fileID: 138256686}
   - component: {fileID: 138256685}
   m_Layer: 5
-  m_Name: ResumeButton
+  m_Name: Pause_ResumeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1471,7 +1471,7 @@ GameObject:
   - component: {fileID: 306309805}
   - component: {fileID: 306309804}
   m_Layer: 5
-  m_Name: MainMenuButton
+  m_Name: Pause_MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6173,6 +6173,7 @@ GameObject:
   - component: {fileID: 2133612502}
   - component: {fileID: 2133612501}
   - component: {fileID: 2133612500}
+  - component: {fileID: 2133612504}
   m_Layer: 5
   m_Name: Canvas Pause Menu
   m_TagString: Untagged
@@ -6262,6 +6263,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2133612504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133612499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce56cb0872e64f479aabb330bf36d46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pauseMenuCanvas: {fileID: 0}
 --- !u!1001 &627781001771020532
 PrefabInstance:
   m_ObjectHideFlags: 0
