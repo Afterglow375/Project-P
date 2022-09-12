@@ -32,6 +32,7 @@ namespace UI
 
         public void ResumeGame()
         {
+            Debug.Log("Resume: " + _previousState);
             Time.timeScale = 1f;
             _pauseMenuUI.SetActive(false);
             GameManager.Instance.State = _previousState;
@@ -39,10 +40,11 @@ namespace UI
 
         public void PauseGame()
         {
+            Debug.Log("Paused");
             _previousState = GameManager.Instance.State;
+            GameManager.Instance.UpdateGameState(GameState.Pause);
             Time.timeScale = 0f;
             _pauseMenuUI.SetActive(true);
-            GameManager.Instance.UpdateGameState(GameState.Pause);
         }
 
         public void MainMenu()
