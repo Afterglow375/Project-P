@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Gameplay;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -19,15 +20,20 @@ namespace Managers
         [SerializeField] private int _enemyMaxHp;
         [SerializeField] private int _minEnemyDamage = 0;
         [SerializeField] private int _maxEnemyDamage = 30;
-        private int _pegScore;
+
         private int _pegCount;
+        private int _pegScore;
         private int _currPlayerHp;
         private int _currEnemyHp;
 
+        public static event Action<int> PegScoreUpdateEvent;
         public static event Action<int> PegBonusEvent;
         public static event Action<int> PlayerHealthChangeEvent;
         public static event Action<int> EnemyHealthChangeEvent;
-        public static event Action<int> PegScoreUpdateEvent;
+        public static event Action PlayerTurnStartEvent;
+        public static event Action PlayerTurnEndEvent;
+        public static event Action EnemyTurnStartEvent;
+        public static event Action EnemyTurnEndEvent;
         
         private BallController _ballController;
 
@@ -67,34 +73,38 @@ namespace Managers
             if (_pegCount % 5 == 0)
             {
                 _pegScore += _pegBonus;
-                PegBonusEvent?.Invoke(_pegScore);
+                PegBonusEvent?.Invoke(_pegBonus);
             }
         }
 
         public void DoCombat()
         {
-            PlayerTurn();
+            StartCoroutine(PlayerTurn());
         }
 
-        // TODO: add some delay for player/enemy turns
-        private void PlayerTurn()
+        private IEnumerator PlayerTurn()
         {
             GameManager.Instance.UpdateGameState(GameState.PlayerTurn);
+            PlayerTurnStartEvent?.Invoke();
             Debug.Log($"Pegs hit: {_pegCount}, Peg score (player attack damage): {_pegScore}");
+            yield return new WaitForSeconds(1);
             _currEnemyHp -= _pegScore;
             EnemyHealthChangeEvent?.Invoke(_currEnemyHp);
-            _pegScore = 0;
-            _pegCount = 0;
-            EnemyTurn();
+            yield return new WaitForSeconds(1);
+            PlayerTurnEndEvent?.Invoke();
+            StartCoroutine(EnemyTurn());
         }
         
-        private void EnemyTurn()
+        private IEnumerator EnemyTurn()
         {
             GameManager.Instance.UpdateGameState(GameState.EnemyTurn);
+            EnemyTurnStartEvent?.Invoke();
             int enemyDamage = Random.Range(_minEnemyDamage, _maxEnemyDamage+1);
             Debug.Log($"Enemy damage: {enemyDamage}");
             _currPlayerHp -= enemyDamage;
             PlayerHealthChangeEvent?.Invoke(_currPlayerHp);
+            yield return new WaitForSeconds(1);
+            EnemyTurnEndEvent?.Invoke();
             ResetBall();
         }
 
@@ -119,6 +129,7 @@ namespace Managers
         private void ResetPegScore()
         {
             _pegScore = 0;
+            _pegCount = 0;
             PegScoreUpdateEvent?.Invoke(_pegScore);
         }
     }
