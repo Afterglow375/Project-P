@@ -55,7 +55,7 @@ namespace UI
     
         public void UpdateEnemyHealthText(int hp)
         {
-            _enemyHealth.text = $"Player health: {hp}/{_enemyMaxHp}";
+            _enemyHealth.text = $"Enemy health: {hp}/{_enemyMaxHp}";
         }
 
         public void UpdatePegScoreText(int pegScore = 0)

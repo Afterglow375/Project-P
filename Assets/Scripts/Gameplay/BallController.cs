@@ -27,16 +27,16 @@ namespace Gameplay
         {
             if (collision.gameObject.CompareTag("Respawn"))
             {
-                GameManager.Instance.UpdateGameState(GameState.PlayerTurn);
+                CombatManager.Instance.DoCombat();
             }
         }
 
         public void Shoot(Vector2 shootDirection)
         {
+            GameManager.Instance.UpdateGameState(GameState.Shooting);
             _body.simulated = true;
             _body.constraints = RigidbodyConstraints2D.None;
             _body.AddForce(shootDirection.normalized * force);
-            GameManager.Instance.UpdateGameState(GameState.Shooting);
         }
         
         public void ResetPos()

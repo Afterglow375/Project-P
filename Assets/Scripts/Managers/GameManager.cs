@@ -33,7 +33,6 @@ namespace Managers
         }
         
         public GameState State;
-        private BallController _ballController;
 
         void Awake()
         {
@@ -68,120 +67,6 @@ namespace Managers
         {
             Debug.Log("State changed: " + newState);
             State = newState;
-            
-            switch (newState)
-            {
-                case GameState.MainMenu:
-                    HandleMainMenu();
-                    break;
-                case GameState.LevelSelect:
-                    HandleLevelSelect();
-                    break;
-                case GameState.LoadingScene:
-                    HandleLoadingScene();
-                    break;
-                case GameState.ReadyToShoot:
-                    HandleWaitingToShoot();
-                    break;
-                case GameState.Shooting:
-                    HandleShooting();
-                    break;
-                case GameState.ResettingBall:
-                    HandleResettingBall();
-                    break;
-                case GameState.PlayerTurn:
-                    HandlePlayerTurn();
-                    break;
-                case GameState.EnemyTurn:
-                    HandleEnemyTurn();
-                    break;
-                case GameState.LevelVictory:
-                    HandleLevelVictory();
-                    break;
-                case GameState.NextLevel:
-                    HandleNextLevel();
-                    break;
-                case GameState.GameVictory:
-                    HandleGameVictory();
-                    break;
-                case GameState.Lose:
-                    HandleLose();
-                    break;
-                case GameState.Pause:
-                    HandlePause();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
-            }
-        }
-
-        private void HandleMainMenu()
-        {
-                    
-        }
-        
-        private void HandleLevelSelect()
-        {
-        
-        }
-    
-        private void HandleLoadingScene()
-        {   
-            // TODO: loading screen?
-        }
-    
-        private void HandleWaitingToShoot()
-        {
-        
-        }
-
-        private void HandleShooting()
-        {
-            
-        }
-        
-        private void HandleResettingBall()
-        {
-            _ballController.ResetPos();
-            CombatManager.Instance.ResetPegScore();
-            _instance.UpdateGameState(GameState.ReadyToShoot);
-        }
-    
-        private void HandlePlayerTurn()
-        {
-            CombatManager.Instance.PlayerTurn();
-            _instance.UpdateGameState(GameState.EnemyTurn);
-        }
-    
-        private void HandleEnemyTurn()
-        {
-            CombatManager.Instance.EnemyTurn();
-            _instance.UpdateGameState(GameState.ResettingBall);
-        }
-
-        private void HandleGameVictory()
-        {
-        
-        }
-
-        private void HandleLevelVictory()
-        {
-        
-        }
-        
-        private void HandleNextLevel()
-        {
-        
-        }
-
-        private void HandleLose()
-        {
-            
-        }
-    
-        private void HandlePause()
-        {
-            
         }
 
         public void ChangeScene(string scene)
@@ -209,8 +94,6 @@ namespace Managers
             }
             else // we're in a level scene
             {
-                _ballController = GameObject.FindWithTag("Ball").GetComponent<BallController>();
-                Debug.Assert(_ballController != null, "GameManager could not find BallController component");
                 UpdateGameState(GameState.ReadyToShoot);
             }
         }

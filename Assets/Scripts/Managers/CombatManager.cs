@@ -28,6 +28,8 @@ namespace Managers
         public static event Action<int> PlayerHealthChangeEvent;
         public static event Action<int> EnemyHealthChangeEvent;
         public static event Action<int> PegScoreUpdateEvent;
+        
+        private BallController _ballController;
 
         void Awake()
         {
@@ -42,14 +44,19 @@ namespace Managers
             }
 
             PegController.PegHitEvent += PegHitByBall;
-
-            _currPlayerHp = _playerMaxHp;
-            _currEnemyHp = _enemyMaxHp;
         }
 
         private void OnDestroy()
         {
             PegController.PegHitEvent -= PegHitByBall;
+        }
+
+        private void Start()
+        {
+            _currPlayerHp = _playerMaxHp;
+            _currEnemyHp = _enemyMaxHp;
+            _ballController = GameObject.FindWithTag("Ball").GetComponent<BallController>();
+            Debug.Assert(_ballController != null, "GameManager could not find BallController component");
         }
 
         private void PegHitByBall(int score)
@@ -64,22 +71,39 @@ namespace Managers
             }
         }
 
-        // TODO: add some delay for player/enemy turns
-        public void PlayerTurn()
+        public void DoCombat()
         {
+            PlayerTurn();
+        }
+
+        // TODO: add some delay for player/enemy turns
+        private void PlayerTurn()
+        {
+            GameManager.Instance.UpdateGameState(GameState.PlayerTurn);
             Debug.Log($"Pegs hit: {_pegCount}, Peg score (player attack damage): {_pegScore}");
             _currEnemyHp -= _pegScore;
             EnemyHealthChangeEvent?.Invoke(_currEnemyHp);
             _pegScore = 0;
             _pegCount = 0;
+            EnemyTurn();
         }
         
-        public void EnemyTurn()
+        private void EnemyTurn()
         {
+            GameManager.Instance.UpdateGameState(GameState.EnemyTurn);
             int enemyDamage = Random.Range(_minEnemyDamage, _maxEnemyDamage+1);
             Debug.Log($"Enemy damage: {enemyDamage}");
             _currPlayerHp -= enemyDamage;
             PlayerHealthChangeEvent?.Invoke(_currPlayerHp);
+            ResetBall();
+        }
+
+        private void ResetBall()
+        {
+            GameManager.Instance.UpdateGameState(GameState.ResettingBall);
+            _ballController.ResetPos();
+            ResetPegScore();
+            GameManager.Instance.UpdateGameState(GameState.ReadyToShoot);
         }
 
         public int GetMaxPlayerHp()
@@ -92,7 +116,7 @@ namespace Managers
             return _enemyMaxHp;
         }
 
-        public void ResetPegScore()
+        private void ResetPegScore()
         {
             _pegScore = 0;
             PegScoreUpdateEvent?.Invoke(_pegScore);
