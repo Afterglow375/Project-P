@@ -1,10 +1,16 @@
+using System.Diagnostics;
+using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
 
-public class LevelSelector : MonoBehaviour
+namespace UI
 {
-    public void LoadLevel(string levelName)
+    public class LevelSelector : MonoBehaviour
     {
-        SceneManager.LoadScene(levelName);
+        public void LoadLevel(string levelName)
+        {
+            GameManager.Instance.ChangeScene(levelName);
+        }
     }
 }

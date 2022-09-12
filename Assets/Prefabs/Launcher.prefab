@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 4443308500386198713}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,10 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 700
-  isLaunched: 0
   trail: {fileID: 113722027310744298}
-  minEnemyDamage: 0
-  maxEnemyDamage: 30
 --- !u!50 &2292406741953592969
 Rigidbody2D:
   serializedVersion: 4
