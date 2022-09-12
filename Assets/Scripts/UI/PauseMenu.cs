@@ -7,11 +7,11 @@ namespace UI
     public class PauseMenu : MonoBehaviour
     {
         private GameState _previousState;
-        
-        [SerializeField] private GameObject _pauseMenuUI;
+        private GameObject _pauseMenuUI;
         
         private void Start()
         {
+            _pauseMenuUI = transform.GetChild(0).gameObject;
             _pauseMenuUI.SetActive(false);
         }
         
