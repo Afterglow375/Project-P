@@ -32,6 +32,11 @@ namespace Gameplay
             if (GameManager.Instance.State == GameState.ReadyToShoot)
             {
                 DrawTrajectory();
+                _lineRenderer.enabled = true;
+            }
+            else
+            {
+                _lineRenderer.enabled = false;
             }
         }
 
