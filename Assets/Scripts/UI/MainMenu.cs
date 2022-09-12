@@ -1,27 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utilities;
 
-public class MainMenu : MonoBehaviour
+namespace UI
 {
-    public string level;
+    public class MainMenu : MonoBehaviour
+    {
+        public string level;
     
-    // these functions are connected to the respective main menu buttons
-    public void Play()
-    {
-        SceneManager.LoadScene(level);
-    }
+        // these functions are connected to the respective main menu buttons
+        public void Play()
+        {
+            GameManager.Instance.ChangeScene(level);
+        }
 
-    public void LevelSelect()
-    {
-        Debug.Log("level select!");
-        SceneManager.LoadScene("LevelSelect");
-    }
+        public void LevelSelect()
+        {
+            GameManager.Instance.ChangeScene(Scenes.LevelSelect);
+        }
 
-    public void Quit()
-    {
-        Debug.Log("quitting!");
-        Application.Quit();
+        public void Quit()
+        {
+            Debug.Log("Quitting!");
+            Application.Quit();
+        }
     }
 }
