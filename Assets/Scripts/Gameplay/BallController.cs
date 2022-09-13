@@ -25,7 +25,7 @@ namespace Gameplay
 
         private void OnTriggerEnter2D(Collider2D collision) // Hit reset trigger
         {
-            if (collision.gameObject.CompareTag("Respawn"))
+            if (collision.gameObject.CompareTag("Respawn") && GameManager.Instance.State == GameState.Shooting)
             {
                 CombatManager.Instance.DoCombat();
             }
