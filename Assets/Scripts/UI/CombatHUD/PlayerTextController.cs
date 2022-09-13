@@ -42,6 +42,7 @@ namespace UI.CombatHUD
         private void OnPlayerHealthChange(int hp)
         {
             UpdatePlayerHealthText(hp);
+            StartCoroutine(CombatHUDHelper.AnimateDamageTaken(_textMesh));
         }
         
         private void OnPlayerTurnStart()

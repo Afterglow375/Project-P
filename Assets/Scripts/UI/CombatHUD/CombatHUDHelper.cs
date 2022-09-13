@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -19,6 +20,21 @@ namespace UI.CombatHUD
                 float t = (Mathf.Sin(Mathf.PI * timeAnimating * speed + shiftPhase) + 1) / 2.0f;
                 timeAnimating += Time.deltaTime;
                 textMesh.color = Color.Lerp(Color.clear, _flashingTurnColor, t);
+                yield return null;
+            }
+        }
+
+        public static IEnumerator AnimateDamageTaken(TextMeshProUGUI textMesh)
+        {
+            Color origColor = textMesh.color;
+            float timeAnimating = 0f;
+            float fadeDuration = .5f;
+            textMesh.color = Color.red;
+            yield return new WaitForSeconds(0.3f);
+            while (timeAnimating < fadeDuration)
+            {
+                timeAnimating += Time.deltaTime;
+                textMesh.color = Color.Lerp(Color.red, origColor, timeAnimating / fadeDuration);
                 yield return null;
             }
         }
