@@ -86,8 +86,8 @@ namespace Managers
         {
             GameManager.Instance.UpdateGameState(GameState.PlayerTurn);
             PlayerTurnStartEvent?.Invoke();
-            Debug.Log($"Pegs hit: {_pegCount}, Peg score (player attack damage): {_pegScore}");
             yield return new WaitForSeconds(1);
+            Debug.Log($"Pegs hit: {_pegCount}, Peg score (player attack damage): {_pegScore}");
             _currEnemyHp -= _pegScore;
             EnemyHealthChangeEvent?.Invoke(_currEnemyHp);
             yield return new WaitForSeconds(1);
@@ -99,6 +99,7 @@ namespace Managers
         {
             GameManager.Instance.UpdateGameState(GameState.EnemyTurn);
             EnemyTurnStartEvent?.Invoke();
+            yield return new WaitForSeconds(1);
             int enemyDamage = Random.Range(_minEnemyDamage, _maxEnemyDamage+1);
             Debug.Log($"Enemy damage: {enemyDamage}");
             _currPlayerHp -= enemyDamage;
