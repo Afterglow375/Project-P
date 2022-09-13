@@ -5091,6 +5091,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas Combat HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 5436716367780021022, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4282892589
+      objectReference: {fileID: 0}
+    - target: {fileID: 5633612442450854210, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
 --- !u!1001 &5648962449754098801

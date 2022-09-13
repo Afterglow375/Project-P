@@ -73,7 +73,7 @@ namespace Managers
             if (_pegCount % 5 == 0)
             {
                 _pegScore += _pegBonus;
-                PegBonusEvent?.Invoke(_pegBonus);
+                PegBonusEvent?.Invoke(_pegScore);
             }
         }
 
