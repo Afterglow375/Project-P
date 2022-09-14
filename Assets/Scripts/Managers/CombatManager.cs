@@ -34,6 +34,8 @@ namespace Managers
         public static event Action PlayerTurnEndEvent;
         public static event Action EnemyTurnStartEvent;
         public static event Action EnemyTurnEndEvent;
+        public static event Action LevelVictoryEvent;
+        public static event Action LevelFailureEvent;
         
         private BallController _ballController;
 
@@ -91,6 +93,12 @@ namespace Managers
             _currEnemyHp -= _pegScore;
             EnemyHealthChangeEvent?.Invoke(_currEnemyHp);
             yield return new WaitForSeconds(1);
+            if (_currEnemyHp <= 0)
+            {
+                GameManager.Instance.UpdateGameState(GameState.LevelVictory);
+                LevelVictoryEvent?.Invoke();
+                yield break;
+            }
             PlayerTurnEndEvent?.Invoke();
             StartCoroutine(EnemyTurn());
         }
