@@ -760,14 +760,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3857571671927292478, guid: 2b1587545b6cac6448552b3c71b7cd06, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4982427136608859715, guid: 2b1587545b6cac6448552b3c71b7cd06, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5533630679450093120, guid: 2b1587545b6cac6448552b3c71b7cd06, type: 3}
       propertyPath: m_Name
       value: Level Failed
@@ -1893,10 +1885,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5975091876631927260, guid: 7d251c854e336a4409794eae93795043, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5975091877619315494, guid: 7d251c854e336a4409794eae93795043, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

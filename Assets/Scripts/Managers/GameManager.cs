@@ -112,7 +112,7 @@ namespace Managers
         LevelVictory,
         NextLevel,
         GameVictory,
-        Lose,
+        LevelFailed,
         Pause
     }
 }

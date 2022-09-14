@@ -35,7 +35,7 @@ namespace Managers
         public static event Action EnemyTurnStartEvent;
         public static event Action EnemyTurnEndEvent;
         public static event Action LevelVictoryEvent;
-        public static event Action LevelFailureEvent;
+        public static event Action LevelFailedEvent;
         
         private BallController _ballController;
 
@@ -113,6 +113,12 @@ namespace Managers
             _currPlayerHp -= enemyDamage;
             PlayerHealthChangeEvent?.Invoke(_currPlayerHp);
             yield return new WaitForSeconds(1);
+            if (_currPlayerHp <= 0)
+            {
+                GameManager.Instance.UpdateGameState(GameState.LevelFailed);
+                LevelFailedEvent?.Invoke();
+                yield break;
+            }
             EnemyTurnEndEvent?.Invoke();
             ResetBall();
         }
