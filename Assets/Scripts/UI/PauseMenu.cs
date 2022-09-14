@@ -23,7 +23,7 @@ namespace UI
                 {
                     ResumeGame();
                 }
-                else
+                else if (GameManager.Instance.State != GameState.LevelVictory || GameManager.Instance.State != GameState.LevelFailed)
                 {
                     PauseGame();
                 }
