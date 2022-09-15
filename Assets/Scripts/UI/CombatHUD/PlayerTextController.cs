@@ -6,11 +6,14 @@ namespace UI.CombatHUD
 {
     public class PlayerTextController : MonoBehaviour
     {
-        private TextMeshProUGUI _textMesh;
+        private TextMeshProUGUI _playerHealthText;
+        private TextMeshProUGUI _playerHealthChangeText;
+        private Animator _playerHealthChangeAnimator;
         private int _playerMaxHp;
         private Coroutine _textAnimationCoroutine;
-        private static Color _origTextColor;
-        
+        private Color _origTextColor;
+        private readonly int _playerHealthChange = Animator.StringToHash("OnPlayerDamageTaken");
+
         private void Awake()
         {
             CombatManager.PlayerHealthChangeEvent += OnPlayerHealthChange;
@@ -27,35 +30,46 @@ namespace UI.CombatHUD
 
         void Start()
         {
-            _textMesh = GetComponent<TextMeshProUGUI>();
-            Debug.Assert(_textMesh != null);
+            _playerHealthText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            _playerHealthChangeText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            _playerHealthChangeAnimator = transform.GetChild(1).GetComponent<Animator>();
+            Debug.Assert(_playerHealthText != null);
+            Debug.Assert(_playerHealthChangeText != null);
+            Debug.Assert(_playerHealthChangeAnimator != null);
             _playerMaxHp = CombatManager.Instance.GetMaxPlayerHp();
-            _origTextColor = _textMesh.color;
+            _origTextColor = _playerHealthText.color;
             UpdatePlayerHealthText(_playerMaxHp);
         }
         
         private void UpdatePlayerHealthText(int hp)
         {
-            _textMesh.text = $"Player health: {hp}/{_playerMaxHp}";
+            _playerHealthText.text = $"Player health: {hp}/{_playerMaxHp}";
         }
 
-        private void OnPlayerHealthChange(int hp)
+        private void UpdatePlayerHealthAnimationText(int hpChange)
+        {
+            _playerHealthChangeText.text = $"-{hpChange}";
+        }
+
+        private void OnPlayerHealthChange(int hp, int damageTaken)
         {
             UpdatePlayerHealthText(hp);
-            StartCoroutine(CombatHUDHelper.AnimateDamageTaken(_textMesh));
+            UpdatePlayerHealthAnimationText(damageTaken);
+            _playerHealthChangeAnimator.SetTrigger(_playerHealthChange);
+            StartCoroutine(CombatHUDHelper.AnimateDamageTaken(_playerHealthText, damageTaken));
         }
         
         private void OnPlayerTurnStart()
         {
-            _textAnimationCoroutine = StartCoroutine(CombatHUDHelper.AnimateTurnText(_textMesh));
-            _textMesh.fontSize += 10;
+            _textAnimationCoroutine = StartCoroutine(CombatHUDHelper.AnimateTurnText(_playerHealthText));
+            _playerHealthText.fontSize += 10;
         }
 
         private void OnPlayerTurnEnd()
         {
             StopCoroutine(_textAnimationCoroutine);
-            _textMesh.color = _origTextColor;
-            _textMesh.fontSize -= 10;
+            _playerHealthText.color = _origTextColor;
+            _playerHealthText.fontSize -= 10;
         }
     }
 }

@@ -24,17 +24,18 @@ namespace UI.CombatHUD
             }
         }
 
-        public static IEnumerator AnimateDamageTaken(TextMeshProUGUI textMesh)
+        public static IEnumerator AnimateDamageTaken(TextMeshProUGUI textMesh, int damageTaken)
         {
             Color origColor = textMesh.color;
             float timeAnimating = 0f;
             float fadeDuration = .5f;
-            textMesh.color = Color.red;
+            Color dmgTakenColor = damageTaken == 0 ? new Color(0.7f, 0.7f, 0.7f) : Color.red;
+            textMesh.color = dmgTakenColor;
             yield return new WaitForSeconds(0.3f);
             while (timeAnimating < fadeDuration)
             {
                 timeAnimating += Time.deltaTime;
-                textMesh.color = Color.Lerp(Color.red, origColor, timeAnimating / fadeDuration);
+                textMesh.color = Color.Lerp(dmgTakenColor, origColor, timeAnimating / fadeDuration);
                 yield return null;
             }
         }

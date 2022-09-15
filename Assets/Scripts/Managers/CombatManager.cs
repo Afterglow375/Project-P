@@ -28,8 +28,8 @@ namespace Managers
 
         public static event Action<int> PegScoreUpdateEvent;
         public static event Action<int> PegBonusEvent;
-        public static event Action<int> PlayerHealthChangeEvent;
-        public static event Action<int> EnemyHealthChangeEvent;
+        public static event Action<int, int> PlayerHealthChangeEvent;
+        public static event Action<int, int> EnemyHealthChangeEvent;
         public static event Action PlayerTurnStartEvent;
         public static event Action PlayerTurnEndEvent;
         public static event Action EnemyTurnStartEvent;
@@ -75,7 +75,8 @@ namespace Managers
             if (_pegCount % 5 == 0)
             {
                 _pegScore += _pegBonus;
-                PegBonusEvent?.Invoke(_pegScore);
+                PegBonusEvent?.Invoke(_pegBonus);
+                PegScoreUpdateEvent?.Invoke(_pegScore);
             }
         }
 
@@ -91,7 +92,7 @@ namespace Managers
             yield return new WaitForSeconds(1);
             Debug.Log($"Pegs hit: {_pegCount}, Peg score (player attack damage): {_pegScore}");
             _currEnemyHp -= _pegScore;
-            EnemyHealthChangeEvent?.Invoke(_currEnemyHp);
+            EnemyHealthChangeEvent?.Invoke(_currEnemyHp, _pegScore);
             yield return new WaitForSeconds(1);
             if (_currEnemyHp <= 0)
             {
@@ -111,7 +112,7 @@ namespace Managers
             int enemyDamage = Random.Range(_minEnemyDamage, _maxEnemyDamage+1);
             Debug.Log($"Enemy damage: {enemyDamage}");
             _currPlayerHp -= enemyDamage;
-            PlayerHealthChangeEvent?.Invoke(_currPlayerHp);
+            PlayerHealthChangeEvent?.Invoke(_currPlayerHp, enemyDamage);
             yield return new WaitForSeconds(1);
             if (_currPlayerHp <= 0)
             {

@@ -6,8 +6,10 @@ namespace UI.CombatHUD
 {
     public class PegScoreTextController : MonoBehaviour
     {
-        private TextMeshProUGUI _textMesh;
-        private Animator _animator;
+        private TextMeshProUGUI _pegScoreText;
+        private TextMeshProUGUI _pegBonusText;
+        private Animator _pegScoreAnimator;
+        private Animator _pegBonusAnimator;
         private readonly int _onPegBonus = Animator.StringToHash("OnPegBonus");
 
         private void Awake()
@@ -24,22 +26,32 @@ namespace UI.CombatHUD
 
         void Start()
         {
-            _animator = GetComponent<Animator>();
-            _textMesh = GetComponent<TextMeshProUGUI>();
-            Debug.Assert(_animator != null);
-            Debug.Assert(_textMesh != null);
+            _pegScoreText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            _pegScoreAnimator = transform.GetChild(0).GetComponent<Animator>();
+            _pegBonusText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            _pegBonusAnimator = transform.GetChild(1).GetComponent<Animator>();
+            Debug.Assert(_pegScoreText != null);
+            Debug.Assert(_pegScoreAnimator != null);
+            Debug.Assert(_pegBonusText != null);
+            Debug.Assert(_pegBonusAnimator != null);
             UpdatePegScoreText(0);
         }
-
-        private void OnPegBonusEvent(int pegScore)
-        {
-            _animator.SetTrigger(_onPegBonus);
-            UpdatePegScoreText(pegScore);
-        }
-
+        
         private void UpdatePegScoreText(int pegScore)
         {
-            _textMesh.text = $"Peg score: {pegScore}";
+            _pegScoreText.text = $"Peg score: {pegScore}";
+        }
+        
+        private void UpdatePegBonusText(int pegBonus)
+        {
+            _pegBonusText.text = $"+{pegBonus}";
+        }
+
+        private void OnPegBonusEvent(int pegBonus)
+        {
+            _pegScoreAnimator.SetTrigger(_onPegBonus);
+            UpdatePegBonusText(pegBonus);
+            _pegBonusAnimator.SetTrigger(_onPegBonus);
         }
     }
 }
