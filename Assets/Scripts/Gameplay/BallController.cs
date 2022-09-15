@@ -27,6 +27,7 @@ namespace Gameplay
         {
             if (collision.gameObject.CompareTag("Respawn") && GameManager.Instance.State == GameState.Shooting)
             {
+                _body.constraints = RigidbodyConstraints2D.FreezePosition;
                 CombatManager.Instance.DoCombat();
             }
         }
