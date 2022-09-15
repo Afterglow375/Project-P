@@ -65,6 +65,10 @@ namespace Managers
             _currEnemyHp = _enemyMaxHp;
             _ballController = GameObject.FindWithTag("Ball").GetComponent<BallController>();
             Debug.Assert(_ballController != null, "GameManager could not find BallController component");
+            
+            // make enemy damage a multiple of 5
+            _minEnemyDamage /= 5;
+            _maxEnemyDamage /= 5;
         }
 
         private void PegHitByBall(int score)
@@ -109,7 +113,7 @@ namespace Managers
             GameManager.Instance.UpdateGameState(GameState.EnemyTurn);
             EnemyTurnStartEvent?.Invoke();
             yield return new WaitForSeconds(1);
-            int enemyDamage = Random.Range(_minEnemyDamage, _maxEnemyDamage+1);
+            int enemyDamage = Random.Range(_minEnemyDamage, _maxEnemyDamage+1)*5;
             Debug.Log($"Enemy damage: {enemyDamage}");
             _currPlayerHp -= enemyDamage;
             PlayerHealthChangeEvent?.Invoke(_currPlayerHp, enemyDamage);
