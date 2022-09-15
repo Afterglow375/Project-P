@@ -5197,26 +5197,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 375964070, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 375964070, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
-      propertyPath: m_fontColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 375964070, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 6bba0611655f0784e9cd250b6f87bb69, type: 2}
-    - target: {fileID: 375964070, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4278255360
-      objectReference: {fileID: 0}
-    - target: {fileID: 5436716367374129926, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5436716367498850728, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5305,18 +5285,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas Combat HUD
       objectReference: {fileID: 0}
-    - target: {fileID: 5436716367898851493, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6534807269752786280, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 6bba0611655f0784e9cd250b6f87bb69, type: 2}
-    - target: {fileID: 7654764891718292105, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 6bba0611655f0784e9cd250b6f87bb69, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
 --- !u!1001 &5648962449754098801
