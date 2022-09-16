@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25dfb9a5910a0248b985f338d75477e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pegBonus: 10
+  _pegBonus: 10
   _playerMaxHp: 100
   _enemyMaxHp: 100
   _minEnemyDamage: 0
