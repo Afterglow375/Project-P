@@ -29,7 +29,7 @@ namespace Gameplay
 
         void Update()
         {
-            if (GameManager.Instance.State == GameState.ReadyToShoot)
+            if (GameManager.Instance.state == GameState.ReadyToShoot)
             {
                 DrawTrajectory();
                 _lineRenderer.enabled = true;

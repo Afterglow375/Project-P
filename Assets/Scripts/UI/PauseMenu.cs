@@ -19,11 +19,11 @@ namespace UI
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (GameManager.Instance.State == GameState.Pause)
+                if (GameManager.Instance.state == GameState.Pause)
                 {
                     ResumeGame();
                 }
-                else if (GameManager.Instance.State != GameState.LevelVictory || GameManager.Instance.State != GameState.LevelFailed)
+                else if (GameManager.Instance.state != GameState.LevelVictory || GameManager.Instance.state != GameState.LevelFailed)
                 {
                     PauseGame();
                 }
@@ -35,13 +35,13 @@ namespace UI
             Debug.Log("Resume: " + _previousState);
             Time.timeScale = 1f;
             _pauseMenuUI.SetActive(false);
-            GameManager.Instance.State = _previousState;
+            GameManager.Instance.state = _previousState;
         }
 
         public void PauseGame()
         {
             Debug.Log("Paused");
-            _previousState = GameManager.Instance.State;
+            _previousState = GameManager.Instance.state;
             GameManager.Instance.UpdateGameState(GameState.Pause);
             Time.timeScale = 0f;
             _pauseMenuUI.SetActive(true);

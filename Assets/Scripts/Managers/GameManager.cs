@@ -5,6 +5,7 @@ using Gameplay;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Utilities;
 
 namespace Managers
@@ -15,28 +16,12 @@ namespace Managers
     public class GameManager : MonoBehaviour
     {
         private static GameManager _instance;
-        public static GameManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    GameObject gm = new GameObject("GameManager");
-                    gm.AddComponent<GameManager>();
-                    DontDestroyOnLoad(gm);
-                    Debug.Log("Created GameManager");
-                }
-
-                return _instance;
-            }
-            private set => _instance = value;
-        }
-        
-        public GameState State;
+        public static GameManager Instance { get; private set; }
+        public GameState state;
 
         void Awake()
         {
-            // for safety, if there's a duplicate instance delete itself
+            // for safety, delete duplicate instance if it exists in the scene
             if (_instance != null && _instance != this)
             {
                 Destroy(gameObject);
@@ -44,15 +29,10 @@ namespace Managers
             else
             {
                 Instance = this;
+                DontDestroyOnLoad(this);
             }
         }
 
-        void Start()
-        {
-            // this works for setting initial GameState for now, but should probably be changed later
-            UpdateStateBasedOnScene(SceneManager.GetActiveScene().name);
-        }
-        
         private void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -66,7 +46,7 @@ namespace Managers
         public void UpdateGameState(GameState newState)
         {
             Debug.Log("State changed: " + newState);
-            State = newState;
+            state = newState;
         }
 
         public void ChangeScene(string scene)

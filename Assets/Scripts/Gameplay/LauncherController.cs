@@ -19,7 +19,7 @@ namespace Gameplay
 
         void Update()
         {
-            if (GameManager.Instance.State == GameState.ReadyToShoot)
+            if (GameManager.Instance.state == GameState.ReadyToShoot)
             {
                 _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
                 _shootDirection = (_mousePos - transform.position).normalized;
