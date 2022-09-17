@@ -29,7 +29,6 @@ namespace Managers
             else
             {
                 Instance = this;
-                DontDestroyOnLoad(this);
             }
         }
 

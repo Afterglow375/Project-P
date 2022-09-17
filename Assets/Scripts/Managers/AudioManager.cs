@@ -19,7 +19,6 @@ public class AudioManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
 
         PegController.PegHitEvent += PegHitByBall;
