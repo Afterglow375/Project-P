@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b056cec3b8483a64981a16ff20b0d3d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 700
+  force: 70000
   trail: {fileID: 113722027310744298}
 --- !u!50 &2292406741953592969
 Rigidbody2D:
@@ -263,9 +263,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: e1b5e66511727fe47948566f1b63da30, type: 2}
   m_Interpolate: 0
