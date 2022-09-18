@@ -50,7 +50,7 @@ namespace UI
         public void MainMenu()
         {
             Time.timeScale = 1f;
-            GameManager.Instance.ChangeScene(Scenes.MainMenu);
+            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
         }
     }
 }

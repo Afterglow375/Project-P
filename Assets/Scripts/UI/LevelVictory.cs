@@ -33,7 +33,7 @@ namespace UI
 
         public void RetryLevel()
         {
-            GameManager.Instance.ChangeScene(SceneManager.GetActiveScene().name);
+            SceneLoader.Instance.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         // TODO: make this not terrible
@@ -62,12 +62,12 @@ namespace UI
                 nextLevel = Scenes.Level6;
             }
 
-            GameManager.Instance.ChangeScene(nextLevel);
+            SceneLoader.Instance.LoadScene(nextLevel);
         }
 
         public void MainMenu()
         {
-            GameManager.Instance.ChangeScene(Scenes.MainMenu);
+            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace UI
 
         public void LoadLevel(string levelName)
         {
-            GameManager.Instance.ChangeScene(levelName);
+            SceneLoader.Instance.LoadScene(levelName);
         }
     }
 }

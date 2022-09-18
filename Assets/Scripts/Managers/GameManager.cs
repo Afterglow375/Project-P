@@ -1,3 +1,5 @@
+using System;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
@@ -40,12 +42,6 @@ namespace Managers
         {
             Debug.Log("State changed: " + newState);
             state = newState;
-        }
-
-        public void ChangeScene(string scene)
-        {
-            UpdateGameState(GameState.LoadingScene);
-            SceneManager.LoadScene(scene);
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

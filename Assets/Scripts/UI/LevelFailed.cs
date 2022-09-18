@@ -33,12 +33,12 @@ namespace UI
 
         public void RetryLevel()
         {
-            GameManager.Instance.ChangeScene(SceneManager.GetActiveScene().name);
+            SceneLoader.Instance.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void MainMenu()
         {
-            GameManager.Instance.ChangeScene(Scenes.MainMenu);
+            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
         }
     }
 }

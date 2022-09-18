@@ -31,7 +31,7 @@ namespace UI
 
         public void MainMenu()
         {
-            GameManager.Instance.ChangeScene(Scenes.MainMenu);
+            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
         }
     }
 }
