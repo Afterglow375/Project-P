@@ -61,7 +61,7 @@ namespace UI
             {
                 nextLevel = Scenes.Level6;
             }
-            
+
             GameManager.Instance.ChangeScene(nextLevel);
         }
 

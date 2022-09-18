@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Gameplay;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -103,17 +104,21 @@ namespace Managers
             yield return new WaitForSeconds(1);
             if (_currEnemyHp <= 0)
             {
+                string furthestLevelReached;
+                // if we're not on the last level
                 if (SceneManager.GetActiveScene().name != Scenes.Level6)
                 {
                     GameManager.Instance.UpdateGameState(GameState.LevelVictory);
+                    furthestLevelReached = LevelsHelper.LevelOrderDict[SceneManager.GetActiveScene().name];
                     LevelVictoryEvent?.Invoke();
                 }
                 else
                 {
                     GameManager.Instance.UpdateGameState(GameState.GameVictory);
+                    furthestLevelReached = Scenes.BonusLevel2;
                     GameVictoryEvent?.Invoke();
                 }
-                
+                LevelsHelper.SetFurthestLevel(furthestLevelReached);
                 yield break;
             }
             PlayerTurnEndEvent?.Invoke();
