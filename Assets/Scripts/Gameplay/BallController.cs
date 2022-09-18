@@ -12,7 +12,7 @@ namespace Gameplay
         public GameObject trail;
     
         private Rigidbody2D _body;
-        private Vector2 _startPos;
+        private Vector3 _startPos;
         private TrailRenderer _trailRenderer;
 
         void Start()
@@ -20,7 +20,7 @@ namespace Gameplay
             _body = GetComponent<Rigidbody2D>();
             _trailRenderer = trail.GetComponent<TrailRenderer>();
             _body.constraints = RigidbodyConstraints2D.FreezePosition;
-            _startPos = _body.position;
+            _startPos = transform.position;
         }
 
         public void Shoot(Vector2 shootDirection)
@@ -34,7 +34,7 @@ namespace Gameplay
         public void ResetPos()
         {
             _body.velocity = Vector2.zero;
-            _body.transform.position = _startPos;
+            transform.position = _startPos;
             _body.simulated = false;
             _trailRenderer.Clear();
         }
