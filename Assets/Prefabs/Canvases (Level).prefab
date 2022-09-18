@@ -44,7 +44,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5436716367374129926, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
       propertyPath: m_text
-      value: wefawefaewf
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5436716367374129926, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
       propertyPath: m_sharedMaterial
