@@ -4846,6 +4846,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 377842042}
     m_Modifications:
+    - target: {fileID: 46605248, guid: 0f4d44dc76fb77f478e2fcb6e92a067d, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1807805052527326149, guid: 0f4d44dc76fb77f478e2fcb6e92a067d, type: 3}
       propertyPath: m_Name
       value: Peg (146)

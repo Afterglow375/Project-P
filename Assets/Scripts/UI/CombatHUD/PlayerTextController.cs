@@ -12,7 +12,8 @@ namespace UI.CombatHUD
         private int _playerMaxHp;
         private Coroutine _textAnimationCoroutine;
         private Color _origTextColor;
-        private readonly int _playerHealthChange = Animator.StringToHash("OnPlayerDamageTaken");
+        private readonly int _playerHealthChange = Animator.StringToHash("PlayerDamageTaken");
+        private readonly int _noPlayerHealthChange = Animator.StringToHash("NoPlayerDamageTaken");
 
         private void Awake()
         {
@@ -55,7 +56,8 @@ namespace UI.CombatHUD
         {
             UpdatePlayerHealthText(hp);
             UpdatePlayerHealthAnimationText(damageTaken);
-            _playerHealthChangeAnimator.SetTrigger(_playerHealthChange);
+            int trigger = damageTaken == 0 ? _noPlayerHealthChange : _playerHealthChange;
+            _playerHealthChangeAnimator.SetTrigger(trigger);
             StartCoroutine(CombatHUDHelper.AnimateDamageTaken(_playerHealthText, damageTaken));
         }
         
