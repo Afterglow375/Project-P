@@ -17,6 +17,7 @@ namespace Utilities
             { Scenes.Level1, Scenes.Level2 },
             { Scenes.Level2, Scenes.Level3 },
             { Scenes.Level3, Scenes.Level4 },
+            { Scenes.Level4, Scenes.Level5 },
             { Scenes.Level5, Scenes.Level6 },
             { Scenes.Level6, Scenes.BonusLevel1 },
             { Scenes.BonusLevel1, Scenes.BonusLevel2 }
