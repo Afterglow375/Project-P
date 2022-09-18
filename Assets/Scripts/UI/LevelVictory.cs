@@ -36,11 +36,33 @@ namespace UI
             GameManager.Instance.ChangeScene(SceneManager.GetActiveScene().name);
         }
 
-        // TODO: add level metadata so this function isn't terrible
+        // TODO: make this not terrible
         public void NextLevel()
         {
-            int currLvl = SceneManager.GetActiveScene().name[-1] - '0';
-            GameManager.Instance.ChangeScene("Level " + currLvl);
+            string currLevel = SceneManager.GetActiveScene().name;
+            string nextLevel = "";
+            if (currLevel == Scenes.Level1)
+            {
+                nextLevel = Scenes.Level2;
+            }
+            else if (currLevel == Scenes.Level2)
+            {
+                nextLevel = Scenes.Level3;
+            }
+            else if (currLevel == Scenes.Level3)
+            {
+                nextLevel = Scenes.Level4;
+            }
+            else if (currLevel == Scenes.Level4)
+            {
+                nextLevel = Scenes.Level5;
+            }
+            else if (currLevel == Scenes.Level5)
+            {
+                nextLevel = Scenes.Level6;
+            }
+            
+            GameManager.Instance.ChangeScene(nextLevel);
         }
 
         public void MainMenu()

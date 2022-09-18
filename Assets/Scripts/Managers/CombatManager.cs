@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using Gameplay;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using Utilities;
 using Random = UnityEngine.Random;
 
 namespace Managers
@@ -35,6 +37,7 @@ namespace Managers
         public static event Action EnemyTurnStartEvent;
         public static event Action EnemyTurnEndEvent;
         public static event Action LevelVictoryEvent;
+        public static event Action GameVictoryEvent;
         public static event Action LevelFailedEvent;
         
         private BallController _ballController;
@@ -100,8 +103,17 @@ namespace Managers
             yield return new WaitForSeconds(1);
             if (_currEnemyHp <= 0)
             {
-                GameManager.Instance.UpdateGameState(GameState.LevelVictory);
-                LevelVictoryEvent?.Invoke();
+                if (SceneManager.GetActiveScene().name != Scenes.Level6)
+                {
+                    GameManager.Instance.UpdateGameState(GameState.LevelVictory);
+                    LevelVictoryEvent?.Invoke();
+                }
+                else
+                {
+                    GameManager.Instance.UpdateGameState(GameState.GameVictory);
+                    GameVictoryEvent?.Invoke();
+                }
+                
                 yield break;
             }
             PlayerTurnEndEvent?.Invoke();
