@@ -1,3 +1,4 @@
+using System;
 using Gameplay;
 using UnityEditor;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource _effectsSource, _musicSource;
     private static AudioManager _instance;
+    public AudioClip _pegHitByBallClip;
     public static AudioManager Instance { get; private set; }
 
     void Awake()
@@ -31,13 +33,7 @@ public class AudioManager : MonoBehaviour
 
     private void PegHitByBall(int deletethis)
     {
-        PlaySoundByPath("Assets/Sounds/Effects/PegHitByBall.ogg");
-    }
-
-    private void PlaySoundByPath(string audioClipFilePath)
-    {
-        var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(audioClipFilePath);
-        Debug.Log($"Playing clip: {clip.name}");
-        _effectsSource.PlayOneShot(clip);
+        Debug.Log($"Playing clip: {_pegHitByBallClip.name}");
+        _effectsSource.PlayOneShot(_pegHitByBallClip);
     }
 }

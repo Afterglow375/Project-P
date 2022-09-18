@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effectsSource: {fileID: 4133193512134590435}
   _musicSource: {fileID: 1415469670500824921}
+  _pegHitByBallClip: {fileID: 8300000, guid: efe54410070d2ed4dacd4615acab9b87, type: 3}
 --- !u!1 &8036531356978525945
 GameObject:
   m_ObjectHideFlags: 0
