@@ -73,7 +73,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
@@ -226,7 +226,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c18de2c2c3569254f9af8e12b3dec811, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -304,7 +304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5642215582539508210
 Transform:
   m_ObjectHideFlags: 0
@@ -382,7 +382,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7250848614108818208}
   - component: {fileID: 1867185954}
-  - component: {fileID: 5438578261531446547}
   - component: {fileID: 3198235387248602668}
   m_Layer: 0
   m_Name: Launcher
@@ -420,20 +419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db102d0314dcf74cbdaf418f9f530b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5438578261531446547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7250848614108818211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8022d6b7b8051547a1642f7681e5794, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDuration: 1
-  timeStepInterval: 0.05
 --- !u!120 &3198235387248602668
 LineRenderer:
   m_ObjectHideFlags: 0
