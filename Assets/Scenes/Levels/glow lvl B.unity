@@ -955,7 +955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6681658735561293603, guid: 6e7928a7bc22b874a9f983d769a186b9, type: 3}
       propertyPath: _enemyMaxHp
-      value: 1
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 6681658735561293603, guid: 6e7928a7bc22b874a9f983d769a186b9, type: 3}
       propertyPath: _playerMaxHp

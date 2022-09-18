@@ -12,7 +12,7 @@ namespace UI
         // these functions are connected to the respective main menu buttons
         public void Play()
         {
-            GameManager.Instance.ChangeScene(level);
+            GameManager.Instance.ChangeScene(LevelsHelper.GetFurthestLevel());
         }
 
         public void LevelSelect()
