@@ -35,6 +35,7 @@ namespace Gameplay
         {
             _body.velocity = Vector2.zero;
             transform.position = _startPos;
+            transform.localRotation = Quaternion.identity;
             _body.simulated = false;
             _trailRenderer.Clear();
         }
