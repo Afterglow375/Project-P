@@ -3342,6 +3342,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers (Level)
       objectReference: {fileID: 0}
+    - target: {fileID: 6681658735561293603, guid: 7a24ba039d8407649a025293cd1b6920, type: 3}
+      propertyPath: _enemyMaxHp
+      value: 2300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6681658735561293603, guid: 7a24ba039d8407649a025293cd1b6920, type: 3}
+      propertyPath: _playerMaxHp
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6681658735561293603, guid: 7a24ba039d8407649a025293cd1b6920, type: 3}
+      propertyPath: _maxEnemyDamage
+      value: 99999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6681658735561293603, guid: 7a24ba039d8407649a025293cd1b6920, type: 3}
+      propertyPath: _minEnemyDamage
+      value: 99999999
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a24ba039d8407649a025293cd1b6920, type: 3}
 --- !u!1001 &341894288
