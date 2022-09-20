@@ -80,7 +80,6 @@ namespace Managers
         PlayerTurn,
         EnemyTurn,
         LevelVictory,
-        NextLevel,
         GameVictory,
         LevelFailed,
         Pause

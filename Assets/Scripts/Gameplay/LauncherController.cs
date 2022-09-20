@@ -10,7 +10,6 @@ namespace Gameplay
         private Vector3 _mousePos;
         private Camera _camera;
         private BallController _ballController;
-        private bool updateOnce = true;
         
         private void Start()
         {
@@ -21,11 +20,6 @@ namespace Gameplay
 
         void Update()
         {
-            if (updateOnce)
-            {
-                Debug.Log("stateee: " + GameManager.Instance.state);
-                updateOnce = false;
-            }
             if (GameManager.Instance.state == GameState.ReadyToShoot)
             {
                 

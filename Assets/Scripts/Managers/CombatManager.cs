@@ -49,12 +49,10 @@ namespace Managers
             if (_instance != null && _instance != this)
             {
                 Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
+                return;
             }
 
+            Instance = this;
             PegController.PegHitEvent += PegHitByBall;
         }
 

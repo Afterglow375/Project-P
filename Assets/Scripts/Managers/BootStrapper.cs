@@ -5,7 +5,7 @@ namespace Managers
     /// <summary>
     /// Creates any persistent singletons at runtime, before anything else happens.
     /// </summary>
-    public class BootStrapper
+    public static class BootStrapper
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void Execute()

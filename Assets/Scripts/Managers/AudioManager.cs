@@ -19,12 +19,9 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
         PegController.PegHitEvent += PegHitByBall;
     }
 
