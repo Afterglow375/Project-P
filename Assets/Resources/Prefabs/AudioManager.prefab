@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: -311833409599049485}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: EditorOnly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,9 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f630830443d2c64e9ce252d76b37abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effectsSource: {fileID: 4133193512134590435}
-  _musicSource: {fileID: 1415469670500824921}
-  _pegHitByBallClip: {fileID: 8300000, guid: efe54410070d2ed4dacd4615acab9b87, type: 3}
 --- !u!1 &8036531356978525945
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ namespace UI
 {
     public class LevelFailed : MonoBehaviour
     {
+        [SerializeField] private SceneLoader _sceneLoader;
         private GameObject _levelFailed;
 
         private void Awake()
@@ -33,12 +34,12 @@ namespace UI
 
         public void RetryLevel()
         {
-            SceneLoader.Instance.LoadScene(SceneManager.GetActiveScene().name);
+            _sceneLoader.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void MainMenu()
         {
-            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
+            _sceneLoader.LoadScene(Scenes.MainMenu);
         }
     }
 }

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField]
     private AudioSource _effectsSource, _musicSource;
+    private AudioClip _pegHitByBallClip;
+
     private static AudioManager _instance;
-    public AudioClip _pegHitByBallClip;
     public static AudioManager Instance { get; private set; }
 
     void Awake()
@@ -17,13 +17,22 @@ public class AudioManager : MonoBehaviour
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
+            return;
         }
         else
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         PegController.PegHitEvent += PegHitByBall;
+    }
+
+    private void Start()
+    {
+        _effectsSource = transform.GetChild(0).GetComponent<AudioSource>();
+        _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
+        _pegHitByBallClip = Resources.Load<AudioClip>("Audio/Effects/PegHitByBall");
     }
 
     private void OnDestroy()
@@ -33,7 +42,6 @@ public class AudioManager : MonoBehaviour
 
     private void PegHitByBall(int deletethis)
     {
-        Debug.Log($"Playing clip: {_pegHitByBallClip.name}");
         _effectsSource.PlayOneShot(_pegHitByBallClip);
     }
 }

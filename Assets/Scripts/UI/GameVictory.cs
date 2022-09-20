@@ -7,6 +7,7 @@ namespace UI
     public class GameVictory : MonoBehaviour
     {
         private GameObject _gameVictory;
+        [SerializeField] private SceneLoader _sceneLoader;
 
         private void Awake()
         {
@@ -31,7 +32,7 @@ namespace UI
 
         public void MainMenu()
         {
-            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
+            _sceneLoader.LoadScene(Scenes.MainMenu);
         }
     }
 }

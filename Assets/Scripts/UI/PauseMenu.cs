@@ -8,6 +8,8 @@ namespace UI
     {
         private GameState _previousState;
         private GameObject _pauseMenuUI;
+
+        [SerializeField] private SceneLoader _sceneLoader;
         
         private void Start()
         {
@@ -50,7 +52,7 @@ namespace UI
         public void MainMenu()
         {
             Time.timeScale = 1f;
-            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
+            _sceneLoader.LoadScene(Scenes.MainMenu);
         }
     }
 }

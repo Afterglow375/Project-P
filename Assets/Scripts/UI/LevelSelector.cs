@@ -9,6 +9,8 @@ namespace UI
 {
     public class LevelSelector : MonoBehaviour
     {
+        [SerializeField] private SceneLoader _sceneLoader;
+        
         private void Start()
         {
             Transform grid = transform.Find("LevelContainer/Grid");
@@ -26,7 +28,8 @@ namespace UI
 
         public void LoadLevel(string levelName)
         {
-            SceneLoader.Instance.LoadScene(levelName);
+            Debug.Log("Level select state: " + GameManager.Instance.state);
+            _sceneLoader.LoadScene(levelName);
         }
     }
 }

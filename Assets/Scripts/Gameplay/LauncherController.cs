@@ -10,17 +10,25 @@ namespace Gameplay
         private Vector3 _mousePos;
         private Camera _camera;
         private BallController _ballController;
-
+        private bool updateOnce = true;
+        
         private void Start()
         {
+            
             _camera = Camera.main;
             _ballController = transform.GetComponentInChildren<BallController>();
         }
 
         void Update()
         {
+            if (updateOnce)
+            {
+                Debug.Log("stateee: " + GameManager.Instance.state);
+                updateOnce = false;
+            }
             if (GameManager.Instance.state == GameState.ReadyToShoot)
             {
+                
                 _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
                 _shootDirection = (_mousePos - transform.position).normalized;
                 transform.up = _shootDirection;

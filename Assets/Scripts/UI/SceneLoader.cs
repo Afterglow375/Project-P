@@ -12,8 +12,8 @@ namespace UI
     /// </summary>
     public class SceneLoader : MonoBehaviour
     {
-        private static SceneLoader _instance;
-        public static SceneLoader Instance { get; private set; }
+        // private static SceneLoader _instance;
+        // public static SceneLoader Instance { get; private set; }
         
         public float transitionTime = 0.5f;
         public Animator transition;
@@ -21,15 +21,15 @@ namespace UI
         
         void Awake()
         {
-            // for safety, if there's a duplicate instance delete itself
-            if (_instance != null && _instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-            }
+            // // for safety, if there's a duplicate instance delete itself
+            // if (_instance != null && _instance != this)
+            // {
+            //     Destroy(gameObject);
+            // }
+            // else
+            // {
+            //     Instance = this;
+            // }
         }
 
         private void Start()
@@ -39,7 +39,6 @@ namespace UI
 
         public void LoadScene(string scene)
         {
-            GameManager.Instance.UpdateGameState(GameState.LoadingScene);
             StartCoroutine(LoadSceneTransition(scene));
         }
 
@@ -47,6 +46,7 @@ namespace UI
         {
             transition.SetTrigger(_startCrossfade);
             yield return new WaitForSeconds(transitionTime);
+            GameManager.Instance.UpdateGameState(GameState.LoadingScene);
             SceneManager.LoadScene(scene);
         }
     }

@@ -8,6 +8,8 @@ namespace UI
 {
     public class LevelVictory : MonoBehaviour
     {
+        [SerializeField] private SceneLoader _sceneLoader;
+        
         private GameObject _levelVictory;
 
         private void Awake()
@@ -33,7 +35,7 @@ namespace UI
 
         public void RetryLevel()
         {
-            SceneLoader.Instance.LoadScene(SceneManager.GetActiveScene().name);
+            _sceneLoader.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         // TODO: make this not terrible
@@ -62,12 +64,12 @@ namespace UI
                 nextLevel = Scenes.Level6;
             }
 
-            SceneLoader.Instance.LoadScene(nextLevel);
+            _sceneLoader.LoadScene(nextLevel);
         }
 
         public void MainMenu()
         {
-            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
+            _sceneLoader.LoadScene(Scenes.MainMenu);
         }
     }
 }

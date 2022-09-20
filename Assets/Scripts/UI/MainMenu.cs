@@ -7,17 +7,17 @@ namespace UI
 {
     public class MainMenu : MonoBehaviour
     {
-        public string level;
+        [SerializeField] private SceneLoader _sceneLoader;
     
         // these functions are connected to the respective main menu buttons
         public void Play()
         {
-            SceneLoader.Instance.LoadScene(LevelsHelper.GetFurthestLevel());
+            _sceneLoader.LoadScene(LevelsHelper.GetFurthestLevel());
         }
 
         public void LevelSelect()
         {
-            SceneLoader.Instance.LoadScene(Scenes.LevelSelect);
+            _sceneLoader.LoadScene(Scenes.LevelSelect);
         }
 
         public void Quit()
