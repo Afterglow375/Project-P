@@ -20,7 +20,8 @@ namespace Utilities
             { Scenes.Level4, Scenes.Level5 },
             { Scenes.Level5, Scenes.Level6 },
             { Scenes.Level6, Scenes.BonusLevel1 },
-            { Scenes.BonusLevel1, Scenes.BonusLevel2 }
+            { Scenes.BonusLevel1, Scenes.BonusLevel2 },
+            { Scenes.BonusLevel2, "" }
         };
 
         public static string GetFurthestLevel()
