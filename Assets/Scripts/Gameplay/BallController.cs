@@ -1,8 +1,6 @@
 using System;
 using Managers;
-using UI;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Gameplay
 {
@@ -15,6 +13,10 @@ namespace Gameplay
         private Vector3 _startPos;
         private TrailRenderer _trailRenderer;
 
+        private bool _shoot;
+        private Vector2 _shootDirection;
+        private bool _resetBall;
+
         void Start()
         {
             _body = GetComponent<Rigidbody2D>();
@@ -23,21 +25,48 @@ namespace Gameplay
             _startPos = transform.position;
         }
 
+        void OnCollisionExit2D()
+        {
+            _body.angularDrag = 100f;
+        }
+
+        // lower the drag for the ball to be able to roll on surfaces
+        void OnCollisionStay2D()
+        {
+            _body.angularDrag = 0.05f;
+        }
+
+        private void FixedUpdate()
+        {
+            if (_shoot)
+            {
+                GameManager.Instance.UpdateGameState(GameState.Shooting);
+                _body.simulated = true;
+                _body.constraints = RigidbodyConstraints2D.None;
+                _body.AddForce(_shootDirection.normalized * force);
+                _shoot = false;
+            }
+
+            if (_resetBall)
+            {
+                _body.velocity = Vector2.zero;
+                transform.position = _startPos;
+                transform.localRotation = Quaternion.identity;
+                _body.simulated = false;
+                _trailRenderer.Clear();
+                _resetBall = false;
+            }
+        }
+
         public void Shoot(Vector2 shootDirection)
         {
-            GameManager.Instance.UpdateGameState(GameState.Shooting);
-            _body.simulated = true;
-            _body.constraints = RigidbodyConstraints2D.None;
-            _body.AddForce(shootDirection.normalized * force);
+            _shoot = true;
+            _shootDirection = shootDirection;
         }
         
         public void ResetPos()
         {
-            _body.velocity = Vector2.zero;
-            transform.position = _startPos;
-            transform.localRotation = Quaternion.identity;
-            _body.simulated = false;
-            _trailRenderer.Clear();
+            _resetBall = true;
         }
     }
 }

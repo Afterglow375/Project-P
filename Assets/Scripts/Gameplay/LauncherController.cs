@@ -13,7 +13,6 @@ namespace Gameplay
         
         private void Start()
         {
-            
             _camera = Camera.main;
             _ballController = transform.GetComponentInChildren<BallController>();
         }
@@ -22,7 +21,6 @@ namespace Gameplay
         {
             if (GameManager.Instance.state == GameState.ReadyToShoot)
             {
-                
                 _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
                 _shootDirection = (_mousePos - transform.position).normalized;
                 transform.up = _shootDirection;

@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 526664876748759439}
   - component: {fileID: 3771453374526053386}
   - component: {fileID: 2292406741953592969}
-  - component: {fileID: 4443308500386198713}
+  - component: {fileID: 1829923783}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -178,7 +178,7 @@ Transform:
   m_GameObject: {fileID: 180183290994811205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 806728758778151275}
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b056cec3b8483a64981a16ff20b0d3d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 70000
+  force: 700
   trail: {fileID: 113722027310744298}
 --- !u!50 &2292406741953592969
 Rigidbody2D:
@@ -263,16 +263,16 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 100
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: e1b5e66511727fe47948566f1b63da30, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 2
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &4443308500386198713
+--- !u!58 &1829923783
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,7 +287,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.49999997
+  m_Radius: 0.16666667
 --- !u!1 &4545578700833981880
 GameObject:
   m_ObjectHideFlags: 0
