@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 627fa23f63bea2d4aa4d4de1ae29427c
   - enabled: 1
     path: Assets/Scenes/Levels/Glow lvl B.unity
-    guid: 839413c203437d54faef294ee495cebf
+    guid: 965a83ac975288244a07cbe3e83abfb1
   - enabled: 1
     path: Assets/Scenes/Levels/Glow lvl C.unity
     guid: 94d44d52bbacfc14a98a0be40b23efd4
