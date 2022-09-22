@@ -1,8 +1,5 @@
-using System;
 using Managers;
-using UI;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Gameplay
 {
@@ -21,6 +18,17 @@ namespace Gameplay
             _trailRenderer = trail.GetComponent<TrailRenderer>();
             _body.constraints = RigidbodyConstraints2D.FreezePosition;
             _startPos = transform.position;
+        }
+
+        void OnCollisionExit2D()
+        {
+            _body.angularDrag = 100f;
+        }
+
+        // lower the drag for the ball to be able to roll on surfaces
+        void OnCollisionStay2D()
+        {
+            _body.angularDrag = 0.05f;
         }
 
         public void Shoot(Vector2 shootDirection)
