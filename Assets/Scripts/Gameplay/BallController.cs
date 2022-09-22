@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using UnityEngine;
 
@@ -11,6 +12,10 @@ namespace Gameplay
         private Rigidbody2D _body;
         private Vector3 _startPos;
         private TrailRenderer _trailRenderer;
+
+        private bool _shoot;
+        private Vector2 _shootDirection;
+        private bool _resetBall;
 
         void Start()
         {
@@ -31,21 +36,37 @@ namespace Gameplay
             _body.angularDrag = 0.05f;
         }
 
+        private void FixedUpdate()
+        {
+            if (_shoot)
+            {
+                GameManager.Instance.UpdateGameState(GameState.Shooting);
+                _body.simulated = true;
+                _body.constraints = RigidbodyConstraints2D.None;
+                _body.AddForce(_shootDirection.normalized * force);
+                _shoot = false;
+            }
+
+            if (_resetBall)
+            {
+                _body.velocity = Vector2.zero;
+                transform.position = _startPos;
+                transform.localRotation = Quaternion.identity;
+                _body.simulated = false;
+                _trailRenderer.Clear();
+                _resetBall = false;
+            }
+        }
+
         public void Shoot(Vector2 shootDirection)
         {
-            GameManager.Instance.UpdateGameState(GameState.Shooting);
-            _body.simulated = true;
-            _body.constraints = RigidbodyConstraints2D.None;
-            _body.AddForce(shootDirection.normalized * force);
+            _shoot = true;
+            _shootDirection = shootDirection;
         }
         
         public void ResetPos()
         {
-            _body.velocity = Vector2.zero;
-            transform.position = _startPos;
-            transform.localRotation = Quaternion.identity;
-            _body.simulated = false;
-            _trailRenderer.Clear();
+            _resetBall = true;
         }
     }
 }
