@@ -12,7 +12,7 @@ namespace UI
         // these functions are connected to the respective main menu buttons
         public void Play()
         {
-            _sceneLoader.LoadScene(LevelsHelper.GetFurthestLevel());
+            _sceneLoader.LoadScene(Scenes.Playground);
         }
 
         public void LevelSelect()

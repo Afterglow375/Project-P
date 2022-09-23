@@ -12,27 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level Select.unity
     guid: ccbbaf24936c8874389b609c0e08e634
   - enabled: 1
-    path: Assets/Scenes/Levels/Glow lvl A.unity
-    guid: 627fa23f63bea2d4aa4d4de1ae29427c
-  - enabled: 1
-    path: Assets/Scenes/Levels/Glow lvl B.unity
-    guid: 965a83ac975288244a07cbe3e83abfb1
-  - enabled: 1
-    path: Assets/Scenes/Levels/Glow lvl C.unity
-    guid: 94d44d52bbacfc14a98a0be40b23efd4
-  - enabled: 1
-    path: Assets/Scenes/Levels/Glow lvl D.unity
-    guid: 637761d046bb20b478b42c200a88cfd1
-  - enabled: 1
-    path: Assets/Scenes/Levels/Glow lvl E.unity
-    guid: 720730f02877f284b8d7e8eca47951d2
-  - enabled: 1
-    path: Assets/Scenes/Levels/Glow lvl F.unity
-    guid: 758e518bb0fbd0b4785312d152a25ebd
-  - enabled: 1
-    path: Assets/Scenes/Levels/Glow lvl bonus.unity
-    guid: 37899402397f30f4890c8b73fb9dc237
-  - enabled: 1
-    path: Assets/Scenes/Levels/Glow lvl autism.unity
-    guid: 52bab6b32e183044c80bc22e947c34b2
+    path: Assets/Scenes/Levels/Playground.unity
+    guid: a8bf28c6042e45d49b8e85b9af3ff8b6
   m_configObjects: {}
