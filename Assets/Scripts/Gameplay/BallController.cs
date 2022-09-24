@@ -12,6 +12,7 @@ namespace Gameplay
         private Rigidbody2D _body;
         private Vector3 _startPos;
         private TrailRenderer _trailRenderer;
+        private PowerBarController _powerBarController;
 
         private bool _shoot;
         private Vector2 _shootDirection;
@@ -23,6 +24,7 @@ namespace Gameplay
             _trailRenderer = trail.GetComponent<TrailRenderer>();
             _body.constraints = RigidbodyConstraints2D.FreezePosition;
             _startPos = transform.position;
+            _powerBarController = GetComponentInParent<PowerBarController>();
         }
 
         void OnCollisionExit2D()
@@ -43,7 +45,7 @@ namespace Gameplay
                 GameManager.Instance.UpdateGameState(GameState.Shooting);
                 _body.simulated = true;
                 _body.constraints = RigidbodyConstraints2D.None;
-                _body.AddForce(_shootDirection.normalized * force);
+                _body.AddForce(_shootDirection.normalized * force * _powerBarController.shotPowerModifier);
                 _shoot = false;
             }
 
