@@ -29,11 +29,11 @@ namespace Managers
         private AbilityButtons _abilityButtons;
 
         private int _pegCount;
-        private int _pegScore;
+        private int _abilityPoints;
         private int _currPlayerHp;
         private int _currEnemyHp;
 
-        public static event Action<int> PegScoreUpdateEvent;
+        public static event Action<int> AbilityPointsUpdateEvent;
         public static event Action<int> PegBonusEvent;
         public static event Action<int, int> PlayerHealthChangeEvent;
         public static event Action<int, int> EnemyHealthChangeEvent;
@@ -80,14 +80,14 @@ namespace Managers
 
         private void PegHitByBall(int score)
         {
-            _pegScore += score;
+            _abilityPoints += score;
             _pegCount++;
-            PegScoreUpdateEvent?.Invoke(_pegScore);
+            AbilityPointsUpdateEvent?.Invoke(_abilityPoints);
             if (_pegCount % 5 == 0)
             {
-                _pegScore += _pegBonus;
+                _abilityPoints += _pegBonus;
                 PegBonusEvent?.Invoke(_pegBonus);
-                PegScoreUpdateEvent?.Invoke(_pegScore);
+                AbilityPointsUpdateEvent?.Invoke(_abilityPoints);
             }
         }
 
@@ -96,7 +96,7 @@ namespace Managers
         {
             GameManager.Instance.UpdateGameState(GameState.PlayerTurn);
             PlayerTurnStartEvent?.Invoke();
-            if (_pegScore < 10) // make player do 0 dmg if they can't afford an ability
+            if (_abilityPoints < 10) // make player do 0 dmg if they can't afford an ability
             {
                 DoPlayerAttack(0);
             }
@@ -108,8 +108,8 @@ namespace Managers
 
         public void DoPlayerAttack(int abilityPoints)
         {
-            _pegScore -= abilityPoints;
-            PegScoreUpdateEvent?.Invoke(_pegScore);
+            _abilityPoints -= abilityPoints;
+            AbilityPointsUpdateEvent?.Invoke(_abilityPoints);
             StartCoroutine(PlayerAttack(abilityPoints));
         }
 
@@ -170,7 +170,7 @@ namespace Managers
 
         public int GetAbilityPoints()
         {
-            return _pegScore;
+            return _abilityPoints;
         }
     }
 }
