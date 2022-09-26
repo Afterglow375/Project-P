@@ -1717,10 +1717,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 113084721624767651, guid: e2a075a84b711624998fe2139056c3ce, type: 3}
-      propertyPath: m_Name
-      value: AbilityPointsNumber
-      objectReference: {fileID: 0}
     - target: {fileID: 113084721942722089, guid: e2a075a84b711624998fe2139056c3ce, type: 3}
       propertyPath: m_Name
       value: Canvases (Level)
@@ -1840,14 +1836,6 @@ PrefabInstance:
     - target: {fileID: 3386129766220614367, guid: e2a075a84b711624998fe2139056c3ce, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5396114240406430954, guid: e2a075a84b711624998fe2139056c3ce, type: 3}
-      propertyPath: m_Name
-      value: AbilityPointsTextParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 5396114240451616224, guid: e2a075a84b711624998fe2139056c3ce, type: 3}
-      propertyPath: m_Name
-      value: AbilityPointsText
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a075a84b711624998fe2139056c3ce, type: 3}

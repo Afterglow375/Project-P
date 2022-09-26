@@ -14,6 +14,7 @@ namespace UI.CombatHUD
         private Color _origTextColor;
         private readonly int _enemyHealthChange = Animator.StringToHash("EnemyDamageTaken");
         private readonly int _noEnemyHealthChange = Animator.StringToHash("NoEnemyDamageTaken");
+        [SerializeField] private GameObject _enemyDamageAnimation;
 
         private void Awake()
         {
@@ -31,9 +32,9 @@ namespace UI.CombatHUD
 
         void Start()
         {
-            _enemyHealthText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            _enemyHealthChangeText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-            _enemyHealthChangeAnimator = transform.GetChild(1).GetComponent<Animator>();
+            _enemyHealthText = GetComponent<TextMeshProUGUI>();
+            _enemyHealthChangeText = _enemyDamageAnimation.GetComponent<TextMeshProUGUI>();
+            _enemyHealthChangeAnimator = _enemyDamageAnimation.GetComponent<Animator>();
             Debug.Assert(_enemyHealthText != null);
             Debug.Assert(_enemyHealthChangeText != null);
             Debug.Assert(_enemyHealthChangeAnimator != null);
@@ -44,7 +45,7 @@ namespace UI.CombatHUD
         
         private void UpdateEnemyHealthText(int hp)
         {
-            _enemyHealthText.text = $"Enemy health: {hp}/{_enemyMaxHp}";
+            _enemyHealthText.text = $"{hp}/{_enemyMaxHp}";
         }
 
         private void UpdateEnemyHealthAnimationText(int hpChange)
@@ -64,14 +65,12 @@ namespace UI.CombatHUD
         private void OnEnemyTurnStart()
         {
             _textAnimationCoroutine = StartCoroutine(CombatHUDHelper.AnimateTurnText(_enemyHealthText));
-            _enemyHealthText.fontSize += 10;
         }
 
         private void OnEnemyTurnEnd()
         {
             StopCoroutine(_textAnimationCoroutine);
             _enemyHealthText.color = _origTextColor;
-            _enemyHealthText.fontSize -= 10;
         }
     }
 }

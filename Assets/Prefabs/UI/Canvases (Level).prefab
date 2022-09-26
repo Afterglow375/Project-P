@@ -43,6 +43,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 113084721942722102}
     m_Modifications:
+    - target: {fileID: 375964067, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
+      propertyPath: m_Name
+      value: AbilityPointsNumber
+      objectReference: {fileID: 0}
     - target: {fileID: 5436716367498850728, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -130,6 +134,14 @@ PrefabInstance:
     - target: {fileID: 5436716367498850732, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
       propertyPath: m_Name
       value: Combat HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436716367699327466, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
+      propertyPath: m_Name
+      value: AbilityPointsTextParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436716367780020448, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
+      propertyPath: m_Name
+      value: AbilityPointsText
       objectReference: {fileID: 0}
     - target: {fileID: 5436716368717002982, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
       propertyPath: m_SizeDelta.y
