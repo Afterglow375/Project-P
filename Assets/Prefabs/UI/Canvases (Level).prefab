@@ -47,6 +47,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityPointsNumber
       objectReference: {fileID: 0}
+    - target: {fileID: 375964068, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 375964068, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
     - target: {fileID: 5436716367498850728, guid: b78dcfa46cc5629438e4ba83a757947d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
