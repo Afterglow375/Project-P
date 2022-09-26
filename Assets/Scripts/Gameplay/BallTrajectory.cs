@@ -9,6 +9,7 @@ namespace Gameplay
         private LineRenderer _lineRenderer;
         private Rigidbody2D _ballRb;
         private BallController _ballController;
+        private PowerBarController _powerBarController;
         private float _force;
         private float _mass;
         private float _vel;
@@ -21,6 +22,7 @@ namespace Gameplay
             _lineRenderer = GetComponent<LineRenderer>();
             _ballController = GetComponentInChildren<BallController>();
             _ballRb = GetComponentInChildren<Rigidbody2D>();
+            _powerBarController = GetComponent<PowerBarController>();
 
             _mass = _ballRb.mass;
             _force = _ballController.force;
@@ -63,7 +65,7 @@ namespace Gameplay
             {
                 //Remember f(t) = (x0 + x*t, y0 + y*t - 9.81t²/2)
                 //calculatedPosition = Origin + (transform.up * (speed * which step * the length of a step);
-                Vector2 calculatedPosition = launchPosition + directionVector * _vel * i * timeStepInterval; //Move both X and Y at a constant speed per Interval
+                Vector2 calculatedPosition = launchPosition + directionVector * _vel * i * timeStepInterval * _powerBarController.shotPowerModifier; //Move both X and Y at a constant speed per Interval
                 calculatedPosition.y += Physics2D.gravity.y / 2 * Mathf.Pow(i * timeStepInterval, 2); //Subtract Gravity from Y
 
                 lineRendererPoints.Add(calculatedPosition); //Add this to the next entry on the list
