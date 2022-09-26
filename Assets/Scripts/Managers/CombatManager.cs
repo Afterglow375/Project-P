@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Gameplay;
 using UI;
+using UI.CombatHUD;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -17,12 +18,15 @@ namespace Managers
     {
         private static CombatManager _instance;
         public static CombatManager Instance { get; private set; }
-        
+
         [SerializeField] private int _pegBonus = 10;
         [SerializeField] private int _playerMaxHp;
         [SerializeField] private int _enemyMaxHp;
         [SerializeField] private int _minEnemyDamage = 0;
         [SerializeField] private int _maxEnemyDamage = 30;
+
+        private Coroutine _playerTurnAnimation;
+        private AbilityButtons _abilityButtons;
 
         private int _pegCount;
         private int _pegScore;
@@ -40,7 +44,7 @@ namespace Managers
         public static event Action LevelVictoryEvent;
         public static event Action GameVictoryEvent;
         public static event Action LevelFailedEvent;
-        
+
         private BallController _ballController;
 
         void Awake()
@@ -66,8 +70,9 @@ namespace Managers
             _currPlayerHp = _playerMaxHp;
             _currEnemyHp = _enemyMaxHp;
             _ballController = GameObject.FindWithTag("Ball").GetComponent<BallController>();
+            _abilityButtons = GameObject.Find("AbilityButtons").GetComponent<AbilityButtons>();
             Debug.Assert(_ballController != null, "GameManager could not find BallController component");
-            
+
             // make enemy damage a multiple of 5
             _minEnemyDamage /= 5;
             _maxEnemyDamage /= 5;
@@ -86,19 +91,35 @@ namespace Managers
             }
         }
 
+        // change state to player's turn and wait for player to click ability
         public void DoCombat()
-        {
-            StartCoroutine(PlayerTurn());
-        }
-
-        private IEnumerator PlayerTurn()
         {
             GameManager.Instance.UpdateGameState(GameState.PlayerTurn);
             PlayerTurnStartEvent?.Invoke();
+            if (_pegScore < 10) // make player do 0 dmg if they can't afford an ability
+            {
+                DoPlayerAttack(0);
+            }
+            else
+            {
+                _abilityButtons.ActivateButtons();
+            }
+        }
+
+        public void DoPlayerAttack(int abilityPoints)
+        {
+            _pegScore -= abilityPoints;
+            PegScoreUpdateEvent?.Invoke(_pegScore);
+            StartCoroutine(PlayerAttack(abilityPoints));
+        }
+
+        // for now ability points will just be damage
+        private IEnumerator PlayerAttack(int abilityPoints)
+        {
             yield return new WaitForSeconds(1);
-            Debug.Log($"Pegs hit: {_pegCount}, Peg score (player attack damage): {_pegScore}");
-            _currEnemyHp -= _pegScore;
-            EnemyHealthChangeEvent?.Invoke(_currEnemyHp, _pegScore);
+            Debug.Log($"Player damage: {abilityPoints}");
+            _currEnemyHp -= abilityPoints;
+            EnemyHealthChangeEvent?.Invoke(_currEnemyHp, abilityPoints);
             yield return new WaitForSeconds(1);
             if (_currEnemyHp <= 0)
             {
@@ -134,7 +155,6 @@ namespace Managers
         {
             GameManager.Instance.UpdateGameState(GameState.ResettingBall);
             _ballController.ResetPos();
-            ResetPegScore();
             GameManager.Instance.UpdateGameState(GameState.ReadyToShoot);
         }
 
@@ -148,11 +168,9 @@ namespace Managers
             return _enemyMaxHp;
         }
 
-        private void ResetPegScore()
+        public int GetAbilityPoints()
         {
-            _pegScore = 0;
-            _pegCount = 0;
-            PegScoreUpdateEvent?.Invoke(_pegScore);
+            return _pegScore;
         }
     }
 }

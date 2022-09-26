@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 6451961382000911231}
   - component: {fileID: 2358883832700423115}
   m_Layer: 5
-  m_Name: Button
+  m_Name: AbilityButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,11 +409,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 6451961382000911231}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 395469222924393306}
+        m_TargetAssemblyTypeName: UI.CombatHUD.AbilityButtons, Assembly-CSharp
+        m_MethodName: ButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2788287931338971439
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +439,7 @@ GameObject:
   - component: {fileID: 4156431697319069457}
   - component: {fileID: 1396946696902545879}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: AbilityButton (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,11 +544,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 4156431697319069457}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 395469222924393306}
+        m_TargetAssemblyTypeName: UI.CombatHUD.AbilityButtons, Assembly-CSharp
+        m_MethodName: ButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 50
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2924914944349826536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,7 +1857,7 @@ GameObject:
   - component: {fileID: 1781343544944255843}
   - component: {fileID: 298396431542762891}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: AbilityButton (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1938,11 +1962,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1781343544944255843}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 395469222924393306}
+        m_TargetAssemblyTypeName: UI.CombatHUD.AbilityButtons, Assembly-CSharp
+        m_MethodName: ButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 30
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6836524535441206337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,7 +1992,7 @@ GameObject:
   - component: {fileID: 6255883629326905283}
   - component: {fileID: 5178702307994978878}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: AbilityButton (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2061,11 +2097,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 6255883629326905283}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 395469222924393306}
+        m_TargetAssemblyTypeName: UI.CombatHUD.AbilityButtons, Assembly-CSharp
+        m_MethodName: ButtonClicked
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 100
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7007104560116393458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,8 +2202,9 @@ GameObject:
   - component: {fileID: 5203075344567226203}
   - component: {fileID: 8892600042020070152}
   - component: {fileID: 8728771510190823689}
+  - component: {fileID: 395469222924393306}
   m_Layer: 5
-  m_Name: AttackButtons
+  m_Name: AbilityButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2247,6 +2296,18 @@ MonoBehaviour:
   m_Spacing: {x: 40, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &395469222924393306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7270901230826101611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef00563595e04e95977b873cbea943eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7271462638615545403
 GameObject:
   m_ObjectHideFlags: 0
