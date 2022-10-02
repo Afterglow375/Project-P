@@ -4,48 +4,42 @@ namespace Gameplay
 {
     public class RubyController : MonoBehaviour
     {
-        public int maxHealth = 5;
-        int currentHealth;
-        Animator animator;
-        Vector2 lookDirection = new Vector2(1,0);
-    
-        Rigidbody2D rigidbody2D;
-        private float horizontal;
-        private float vertical;
+        private Animator _animator;
+        private Vector2 _lookDirection = new Vector2(1,0);
+        private Rigidbody2D _rigidbody2D;
+        private float _horizontal;
+        private float _vertical;
 
-        // Start is called before the first frame update
         void Start()
         {
-            rigidbody2D = GetComponent<Rigidbody2D>();
-            currentHealth = maxHealth;
-            animator = GetComponent<Animator>();
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
         }
 
-        // Update is called once per frame
         void Update()
         {
-            horizontal = Input.GetAxis("Horizontal");
-            vertical = Input.GetAxis("Vertical");
+            _horizontal = Input.GetAxis("Horizontal");
+            _vertical = Input.GetAxis("Vertical");
                 
-            Vector2 move = new Vector2(horizontal, vertical);
+            Vector2 move = new Vector2(_horizontal, _vertical);
         
             if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
             {
-                lookDirection.Set(move.x, move.y);
-                lookDirection.Normalize();
+                _lookDirection.Set(move.x, move.y);
+                _lookDirection.Normalize();
             }
         
-            animator.SetFloat("Look X", lookDirection.x);
-            animator.SetFloat("Look Y", lookDirection.y);
-            animator.SetFloat("Speed", move.magnitude);
+            _animator.SetFloat("Look X", _lookDirection.x);
+            _animator.SetFloat("Look Y", _lookDirection.y);
+            _animator.SetFloat("Speed", move.magnitude);
         }
 
         private void FixedUpdate()
         {
-            Vector2 position = rigidbody2D.position;
-            position.x += 3.0f * horizontal * Time.deltaTime;
-            position.y += 3.0f * vertical * Time.deltaTime;
-            rigidbody2D.MovePosition(position);
+            Vector2 position = _rigidbody2D.position;
+            position.x += 3.0f * _horizontal * Time.deltaTime;
+            position.y += 3.0f * _vertical * Time.deltaTime;
+            _rigidbody2D.MovePosition(position);
         }
     }
 }
