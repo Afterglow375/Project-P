@@ -14,6 +14,7 @@ namespace Gameplay
         {
             if (collision.gameObject.CompareTag("Ball"))
             {
+                CombatManager.Instance.SpawnDamageNumber(points, transform);
                 gameObject.SetActive(false);
                 PegHitEvent?.Invoke(points);
             }

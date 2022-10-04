@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Gameplay;
+using TMPro;
 using UI;
 using UI.CombatHUD;
 using UnityEngine;
@@ -32,6 +33,8 @@ namespace Managers
         private int _abilityPoints;
         private int _currPlayerHp;
         private int _currEnemyHp;
+
+        private GameObject _damageNumberPrefab;
 
         public static event Action<int> AbilityPointsUpdateEvent;
         public static event Action<int> PegBonusEvent;
@@ -76,6 +79,8 @@ namespace Managers
             // make enemy damage a multiple of 5
             _minEnemyDamage /= 5;
             _maxEnemyDamage /= 5;
+            
+            _damageNumberPrefab = Resources.Load("Prefabs/DamageNumber") as GameObject;
         }
 
         private void PegHitByBall(int score)
@@ -171,6 +176,12 @@ namespace Managers
         public int GetAbilityPoints()
         {
             return _abilityPoints;
+        }
+
+        public void SpawnDamageNumber(int damage, Transform parentTransform)
+        {
+            GameObject damageNumber = Instantiate(_damageNumberPrefab, parentTransform.position, Quaternion.identity);
+            damageNumber.GetComponentInChildren<TextMeshPro>().SetText(damage.ToString());
         }
     }
 }
