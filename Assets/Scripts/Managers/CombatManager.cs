@@ -20,7 +20,7 @@ namespace Managers
         private static CombatManager _instance;
         public static CombatManager Instance { get; private set; }
 
-        [SerializeField] private int _pegBonus = 10;
+        [SerializeField] private int _comboBonus = 10;
         [SerializeField] private int _playerMaxHp;
         [SerializeField] private int _enemyMaxHp;
         [SerializeField] private int _minEnemyDamage = 0;
@@ -29,7 +29,7 @@ namespace Managers
         private Coroutine _playerTurnAnimation;
         private AbilityButtons _abilityButtons;
 
-        private int _pegCount;
+        private int _componentsHit;
         private int _abilityPoints;
         private int _currPlayerHp;
         private int _currEnemyHp;
@@ -37,7 +37,7 @@ namespace Managers
         private GameObject _damageNumberPrefab;
 
         public static event Action<int> AbilityPointsUpdateEvent;
-        public static event Action<int> PegBonusEvent;
+        public static event Action<int> ComboBonusEvent;
         public static event Action<int, int> PlayerHealthChangeEvent;
         public static event Action<int, int> EnemyHealthChangeEvent;
         public static event Action PlayerTurnStartEvent;
@@ -60,12 +60,14 @@ namespace Managers
             }
 
             Instance = this;
-            PegController.PegHitEvent += PegHitByBall;
+            PegController.PegHitEvent += ComponentHitByBall;
+            BigPegController.BigPegHitEvent += ComponentHitByBall;
         }
 
         private void OnDestroy()
         {
-            PegController.PegHitEvent -= PegHitByBall;
+            PegController.PegHitEvent -= ComponentHitByBall;
+            BigPegController.BigPegHitEvent -= ComponentHitByBall;
         }
 
         private void Start()
@@ -83,15 +85,15 @@ namespace Managers
             _damageNumberPrefab = Resources.Load("Prefabs/DamageNumber") as GameObject;
         }
 
-        private void PegHitByBall(int score)
+        private void ComponentHitByBall(int score)
         {
             _abilityPoints += score;
-            _pegCount++;
+            _componentsHit++;
             AbilityPointsUpdateEvent?.Invoke(_abilityPoints);
-            if (_pegCount % 5 == 0)
+            if (_componentsHit % 5 == 0)
             {
-                _abilityPoints += _pegBonus;
-                PegBonusEvent?.Invoke(_pegBonus);
+                _abilityPoints += _comboBonus;
+                ComboBonusEvent?.Invoke(_comboBonus);
                 AbilityPointsUpdateEvent?.Invoke(_abilityPoints);
             }
         }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 375964070}
   - component: {fileID: 375964072}
   m_Layer: 5
-  m_Name: PegBonusNumber
+  m_Name: ComboBonusText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 5436716367699327467}
   - component: {fileID: 5436716368092657952}
   m_Layer: 5
-  m_Name: PegScoreTextParent
+  m_Name: AbilityPointsParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 5436716367780021022}
   - component: {fileID: 297093568337034333}
   m_Layer: 5
-  m_Name: PegScoreText
+  m_Name: AbiliityPointsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

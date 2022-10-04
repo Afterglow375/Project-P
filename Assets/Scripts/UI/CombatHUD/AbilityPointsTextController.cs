@@ -7,20 +7,20 @@ namespace UI.CombatHUD
     public class AbilityPointsTextController : MonoBehaviour
     {
         private TextMeshProUGUI _abilityPointsText;
-        private TextMeshProUGUI _pegBonusText;
+        private TextMeshProUGUI _comboBonusText;
         private Animator _abilityPointsAnimator;
-        private Animator _pegBonusAnimator;
-        private readonly int _onPegBonus = Animator.StringToHash("OnPegBonus");
+        private Animator _comboBonusAnimator;
+        private readonly int _onComboBonus = Animator.StringToHash("OnComboBonus");
 
         private void Awake()
         {
-            CombatManager.PegBonusEvent += OnPegBonusEvent;
+            CombatManager.ComboBonusEvent += OnComboBonusEvent;
             CombatManager.AbilityPointsUpdateEvent += UpdateAbilityPointsText;
         }
 
         private void OnDestroy()
         {
-            CombatManager.PegBonusEvent -= OnPegBonusEvent;
+            CombatManager.ComboBonusEvent -= OnComboBonusEvent;
             CombatManager.AbilityPointsUpdateEvent -= UpdateAbilityPointsText;
         }
 
@@ -28,12 +28,12 @@ namespace UI.CombatHUD
         {
             _abilityPointsText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             _abilityPointsAnimator = transform.GetChild(0).GetComponent<Animator>();
-            _pegBonusText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-            _pegBonusAnimator = transform.GetChild(1).GetComponent<Animator>();
+            _comboBonusText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            _comboBonusAnimator = transform.GetChild(1).GetComponent<Animator>();
             Debug.Assert(_abilityPointsText != null);
             Debug.Assert(_abilityPointsAnimator != null);
-            Debug.Assert(_pegBonusText != null);
-            Debug.Assert(_pegBonusAnimator != null);
+            Debug.Assert(_comboBonusText != null);
+            Debug.Assert(_comboBonusAnimator != null);
             UpdateAbilityPointsText(0);
         }
         
@@ -42,16 +42,16 @@ namespace UI.CombatHUD
             _abilityPointsText.text = $"AP: {abilityPoints}";
         }
         
-        private void UpdatePegBonusText(int pegBonus)
+        private void UpdateComboBonusText(int comboBonus)
         {
-            _pegBonusText.text = $"+{pegBonus}";
+            _comboBonusText.text = $"+{comboBonus}";
         }
 
-        private void OnPegBonusEvent(int pegBonus)
+        private void OnComboBonusEvent(int comboBonus)
         {
-            _abilityPointsAnimator.SetTrigger(_onPegBonus);
-            UpdatePegBonusText(pegBonus);
-            _pegBonusAnimator.SetTrigger(_onPegBonus);
+            _abilityPointsAnimator.SetTrigger(_onComboBonus);
+            UpdateComboBonusText(comboBonus);
+            _comboBonusAnimator.SetTrigger(_onComboBonus);
         }
     }
 }
