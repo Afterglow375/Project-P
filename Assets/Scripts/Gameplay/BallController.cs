@@ -8,11 +8,14 @@ namespace Gameplay
     {
         public int force = 50;
         public GameObject trail;
-    
+        public float ballDuration = 5f;
+
         private Rigidbody2D _body;
         private Vector3 _startPos;
         private TrailRenderer _trailRenderer;
         private PowerBarController _powerBarController;
+        private float _ballDurationTimer;
+        private bool _isShooting;
 
         private bool _shoot;
         private Vector2 _shootDirection;
@@ -25,6 +28,7 @@ namespace Gameplay
             _body.constraints = RigidbodyConstraints2D.FreezePosition;
             _startPos = transform.position;
             _powerBarController = GetComponentInParent<PowerBarController>();
+            _ballDurationTimer = ballDuration;
         }
 
         void OnCollisionExit2D()
@@ -36,6 +40,12 @@ namespace Gameplay
         void OnCollisionStay2D()
         {
             _body.angularDrag = 0.05f;
+        }
+
+        // start ball duration timer on first collision
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            _isShooting = true;
         }
 
         private void FixedUpdate()
@@ -57,6 +67,19 @@ namespace Gameplay
                 _body.simulated = false;
                 _trailRenderer.Clear();
                 _resetBall = false;
+            }
+
+            if (_isShooting)
+            {
+                _ballDurationTimer -= Time.deltaTime;
+                if (_ballDurationTimer <= 0)
+                {
+                    _isShooting = false;
+                    _ballDurationTimer = ballDuration;
+                    ResetPos();
+                    _body.constraints = RigidbodyConstraints2D.FreezePosition;
+                    CombatManager.Instance.DoCombat();
+                }
             }
         }
 
