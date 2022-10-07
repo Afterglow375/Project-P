@@ -49,4 +49,14 @@ public class AudioManager : MonoBehaviour
     {
         _effectsSource.PlayOneShot(_forceComponentHitByBallClip);
     }
+
+    public void ChangeEffectsVolume(float value)
+    {
+        _effectsSource.volume = value;
+    }
+
+    public void ChangeMusicVolume(float value)
+    {
+        _musicSource.volume = value;
+    }
 }

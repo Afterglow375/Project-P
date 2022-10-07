@@ -9,10 +9,15 @@ namespace UI
         private GameState _previousState;
         private GameObject _pauseMenuUI;
 
-        [SerializeField] private SceneLoader _sceneLoader;
-        
+        [SerializeField]
+        private SceneLoader _sceneLoader;
+        [SerializeField]
+        private GameObject _settingsMenuParent;
+        private SettingsManager _settingsManager;
+
         private void Start()
         {
+            _settingsManager = _settingsMenuParent.GetComponent<SettingsManager>();
             _pauseMenuUI = transform.GetChild(0).gameObject;
             _pauseMenuUI.SetActive(false);
         }
@@ -37,6 +42,7 @@ namespace UI
             Debug.Log("Resume: " + _previousState);
             Time.timeScale = 1f;
             _pauseMenuUI.SetActive(false);
+            _settingsManager.CloseSettingsMenuUI();
             GameManager.Instance.state = _previousState;
         }
 
@@ -53,6 +59,18 @@ namespace UI
         {
             Time.timeScale = 1f;
             _sceneLoader.LoadScene(Scenes.MainMenu);
+        }
+
+        public void SettingsMenu()
+        {
+            TogglePauseMenuUI();
+            Debug.Log("open settings");
+            _settingsManager.ToggleSettingsMenuUI();
+        }
+
+        public void TogglePauseMenuUI()
+        {
+            _pauseMenuUI.SetActive(!_pauseMenuUI.activeSelf);
         }
     }
 }
