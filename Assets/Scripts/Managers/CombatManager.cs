@@ -61,13 +61,13 @@ namespace Managers
 
             Instance = this;
             PegController.PegHitEvent += ComponentHitByBall;
-            BigPegController.BigPegHitEvent += ComponentHitByBall;
+            ForceComponentController.ComponentHitEvent += ComponentHitByBall;
         }
 
         private void OnDestroy()
         {
             PegController.PegHitEvent -= ComponentHitByBall;
-            BigPegController.BigPegHitEvent -= ComponentHitByBall;
+            ForceComponentController.ComponentHitEvent -= ComponentHitByBall;
         }
 
         private void Start()

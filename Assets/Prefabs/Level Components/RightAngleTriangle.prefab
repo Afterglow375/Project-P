@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5296503527129419087}
   - component: {fileID: 5296503527129419084}
-  - component: {fileID: 5296503527129419086}
   - component: {fileID: 5296503527129419081}
   - component: {fileID: 5296503527129419080}
+  - component: {fileID: 3283941685522000646}
   m_Layer: 0
   m_Name: RightAngleTriangle
   m_TagString: Untagged
@@ -87,20 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5296503527129419086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5296503527129419085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4e9a39954f34119996d50583e01bd2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _points: 5
-  _force: 65
 --- !u!60 &5296503527129419081
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -149,3 +135,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3283941685522000646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5296503527129419085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99995c272a24e2fb0789709d21cf313, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _points: 5
+  _force: 65

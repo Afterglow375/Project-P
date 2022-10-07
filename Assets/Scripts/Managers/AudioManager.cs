@@ -6,7 +6,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     private AudioSource _effectsSource, _musicSource;
-    private AudioClip _pegHitByBallClip, _bigPegHitByBallClip;
+    private AudioClip _pegHitByBallClip, _forceComponentHitByBallClip;
 
     private static AudioManager _instance;
     public static AudioManager Instance { get; private set; }
@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         PegController.PegHitEvent += PegHitByBall;
-        BigPegController.BigPegHitEvent += BigPegHitByBall;
+        ForceComponentController.ComponentHitEvent += ComponentHitByBall;
     }
 
     private void Start()
@@ -31,13 +31,13 @@ public class AudioManager : MonoBehaviour
         _effectsSource = transform.GetChild(0).GetComponent<AudioSource>();
         _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
         _pegHitByBallClip = Resources.Load<AudioClip>("Audio/Effects/PegHitByBall");
-        _bigPegHitByBallClip = Resources.Load<AudioClip>("Audio/Effects/Click");
+        _forceComponentHitByBallClip = Resources.Load<AudioClip>("Audio/Effects/Click");
     }
 
     private void OnDestroy()
     {
         PegController.PegHitEvent -= PegHitByBall;
-        BigPegController.BigPegHitEvent -= BigPegHitByBall;
+        ForceComponentController.ComponentHitEvent -= ComponentHitByBall;
     }
 
     private void PegHitByBall(int deletethis)
@@ -45,8 +45,8 @@ public class AudioManager : MonoBehaviour
         _effectsSource.PlayOneShot(_pegHitByBallClip);
     }
     
-    private void BigPegHitByBall(int deletethis)
+    private void ComponentHitByBall(int deletethis)
     {
-        _effectsSource.PlayOneShot(_bigPegHitByBallClip);
+        _effectsSource.PlayOneShot(_forceComponentHitByBallClip);
     }
 }
