@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public class BigPegController : MonoBehaviour
+    public class TriangleController : MonoBehaviour
     {
         [SerializeField] private int _points;
         [SerializeField] private int _force;
-        public static event Action<int> BigPegHitEvent;
+        public static event Action<int> TriangleHitEvent;
         private Animator _animator;
-        private readonly int _bigPegHit = Animator.StringToHash("BigPegHit");
+        private readonly int _triangleHit = Animator.StringToHash("BigPegHit");
 
         private void Start()
         {
@@ -23,9 +23,9 @@ namespace Gameplay
             if (collision.gameObject.CompareTag("Ball"))
             {
                 collision.rigidbody.AddForce(collision.GetContact(0).normal * _force, ForceMode2D.Impulse);
-                _animator.SetTrigger(_bigPegHit);
+                _animator.SetTrigger(_triangleHit);
                 CombatManager.Instance.SpawnDamageNumber(_points, transform);
-                BigPegHitEvent?.Invoke(_points);
+                TriangleHitEvent?.Invoke(_points);
             }
         }
     }
