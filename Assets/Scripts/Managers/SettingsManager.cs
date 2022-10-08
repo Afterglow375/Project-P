@@ -21,6 +21,8 @@ public class SettingsManager : MonoBehaviour
     {
         _settingsMenuUI = transform.GetChild(0).gameObject;
         _settingsMenuUI.SetActive(false);
+        _sfxVolumeSlider.value = AudioManager.Instance.GetEffectsVolume();
+        _musicVolumeSlider.value = AudioManager.Instance.GetMusicVolume();
         _sfxVolumeSlider.onValueChanged.AddListener(val => AudioManager.Instance.ChangeEffectsVolume(val));
         _musicVolumeSlider.onValueChanged.AddListener(val => AudioManager.Instance.ChangeMusicVolume(val));
 
