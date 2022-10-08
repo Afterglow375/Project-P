@@ -933,17 +933,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5888686984489895922, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
   m_PrefabInstance: {fileID: 1202848471}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &271696277 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4332757872695543156, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-  m_PrefabInstance: {fileID: 1202848471}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 271696275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f2798d5f0c4eb24b95e8eca3a027ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &283638757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3030,85 +3019,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 585628458}
     m_Modifications:
-    - target: {fileID: 436846147457486328, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 436846147457486328, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 436846147457486328, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 747694599250911424, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 747694599250911424, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1674455607810316993, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3185599042599163115, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3185599042599163115, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4332757872695543156, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
       propertyPath: _pauseMenuParent
       value: 
       objectReference: {fileID: 992700149}
-    - target: {fileID: 5333652567855880987, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5333652567855880987, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5333652567855880987, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 271696277}
-    - target: {fileID: 5333652567855880987, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5333652567855880987, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BackButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5333652567855880987, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SettingsManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5333652567855880987, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5888686984489895922, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
       propertyPath: m_Name
       value: Settings Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105387028359761350, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105387028359761350, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105387028359761350, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8139811726255793790, guid: 1190baa381a9189499e706a4e4e7ad17, type: 3}
       propertyPath: m_Pivot.x

@@ -64,7 +64,6 @@ namespace UI
         public void SettingsMenu()
         {
             TogglePauseMenuUI();
-            Debug.Log("open settings");
             _settingsManager.ToggleSettingsMenuUI();
         }
 

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Managers;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -15,20 +14,36 @@ public class SettingsManager : MonoBehaviour
     private PauseMenu _pauseMenu;
 
     private GameObject _settingsMenuUI;
+    private Image _settingsMenuBackground;
 
     // Start is called before the first frame update
     void Start()
     {
-        _pauseMenu = _pauseMenuParent.GetComponent<PauseMenu>();
         _settingsMenuUI = transform.GetChild(0).gameObject;
         _settingsMenuUI.SetActive(false);
         _sfxVolumeSlider.onValueChanged.AddListener(val => AudioManager.Instance.ChangeEffectsVolume(val));
         _musicVolumeSlider.onValueChanged.AddListener(val => AudioManager.Instance.ChangeMusicVolume(val));
+
+        if (_pauseMenuParent != null)
+        {
+            _pauseMenu = _pauseMenuParent.GetComponent<PauseMenu>();
+        }
+
+        if (GameManager.Instance.state == GameState.MainMenu) // Set background to not be transparent in main menu
+        {
+            _settingsMenuBackground = _settingsMenuUI.GetComponent<Image>();
+            var newColor = _settingsMenuBackground.color;
+            newColor.a = 1f;
+            _settingsMenuBackground.color = newColor;
+        }
     }
 
     public void BackButton()
     {
-        _pauseMenu.TogglePauseMenuUI();
+        if (_pauseMenu != null)
+        {
+            _pauseMenu.TogglePauseMenuUI();
+        }
         ToggleSettingsMenuUI();
     }
 
