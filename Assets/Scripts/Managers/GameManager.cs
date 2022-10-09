@@ -1,4 +1,5 @@
 using System;
+using Gameplay;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ namespace Managers
         private static GameManager _instance;
         public static GameManager Instance { get; private set; }
         public GameState state;
+        private Vector3 _levelSelectPosition = new Vector3(0, -2, 0);
 
         void Awake()
         {
@@ -60,12 +62,24 @@ namespace Managers
             }
             else if (sceneName.Equals(Scenes.LevelSelect))
             {
+                SetRubyPosition();
                 UpdateGameState(GameState.LevelSelect);
             }
             else // we're in a level scene
             {
                 UpdateGameState(GameState.ReadyToShoot);
             }
+        }
+
+        public void SaveRubyPosition(Vector3 position)
+        {
+            _levelSelectPosition = position;
+        }
+
+        private void SetRubyPosition()
+        {
+            RubyController ruby = GameObject.Find("Ruby").GetComponent<RubyController>();
+            ruby.transform.position = _levelSelectPosition;
         }
     }
 

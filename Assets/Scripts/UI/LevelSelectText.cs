@@ -1,3 +1,4 @@
+using Managers;
 using TMPro;
 using UnityEngine;
 using Utilities;
@@ -41,6 +42,7 @@ namespace UI
             {
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
+                    GameManager.Instance.SaveRubyPosition(transform.position);
                     _sceneLoader.LoadScene(Scenes.Playground);
                 }
             }

@@ -38,9 +38,9 @@ namespace UI
             _sceneLoader.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        public void NextLevel()
+        public void LevelSelect()
         {
-            // _sceneLoader.LoadScene(nextLevel);
+            _sceneLoader.LoadScene(Scenes.LevelSelect);
         }
 
         public void MainMenu()
