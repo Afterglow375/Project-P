@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Gameplay;
 using UI;
 using UnityEngine;
@@ -16,8 +17,9 @@ namespace Managers
         public static GameManager Instance { get; private set; }
         public GameState state;
         private Vector3 _levelSelectPosition = new Vector3(0, -2, 0);
+        private HashSet<string> _activeLevels = new HashSet<string> {"Playground", "gebo lvl A"};
 
-        void Awake()
+    void Awake()
         {
             // for safety, delete duplicate instance if it exists in the scene
             if (_instance != null && _instance != this)
@@ -80,6 +82,16 @@ namespace Managers
         {
             RubyController ruby = GameObject.Find("Ruby").GetComponent<RubyController>();
             ruby.transform.position = _levelSelectPosition;
+        }
+
+        public void LevelComplete(string level)
+        {
+            _activeLevels.Add(level);
+        }
+
+        private void activateCompletedLevels()
+        {
+            
         }
     }
 

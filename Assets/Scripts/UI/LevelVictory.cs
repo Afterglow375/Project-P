@@ -31,6 +31,7 @@ namespace UI
         private void OnLevelVictory()
         {
             _levelVictory.SetActive(true);
+            GameManager.Instance.LevelComplete(SceneManager.GetActiveScene().name);
         }
 
         public void RetryLevel()

@@ -746,22 +746,22 @@ Transform:
   - {fileID: 1736965122}
   - {fileID: 40809745}
   - {fileID: 578405621}
+  - {fileID: 1635105906}
   - {fileID: 1128177017}
   - {fileID: 1994563928}
-  - {fileID: 1635105906}
-  - {fileID: 1990428616}
   - {fileID: 1872135844}
   - {fileID: 1486653577}
+  - {fileID: 1990428616}
   - {fileID: 1773107025}
   - {fileID: 599430471}
   - {fileID: 1663676502}
   - {fileID: 1884196499}
   - {fileID: 1993308272}
   - {fileID: 1832892469}
+  - {fileID: 858460274}
   - {fileID: 208087808}
   - {fileID: 2107381806}
   - {fileID: 636874552}
-  - {fileID: 858460274}
   - {fileID: 1881914381}
   - {fileID: 1566115159}
   m_Father: {fileID: 397458098}
@@ -3659,6 +3659,14 @@ PrefabInstance:
     - target: {fileID: 5009032585197616623, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
       propertyPath: m_Name
       value: LauncherContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986518575048512517, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986518575048512517, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6535452885814854538, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
       propertyPath: m_RootOrder
