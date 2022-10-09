@@ -5,21 +5,22 @@ using UnityEngine;
 
 namespace Gameplay.Balls
 {
-    public class Ball : MonoBehaviour
+    public abstract class Ball : MonoBehaviour
     {
         public int force;
         public float ballDuration;
         public static event Action<float> BallTimerChange;
         
-        private Rigidbody2D _body;
-        private Vector3 _startPos;
-        private TrailRenderer _trailRenderer;
-        private PowerBarController _powerBarController;
-        private float _ballDurationTimer;
-        private bool _ballTimerStarted;
-        private bool _shoot;
-        private Vector2 _shootDirection;
-        private bool _resetBall;
+        protected Rigidbody2D _body;
+        protected Vector3 _startPos;
+        protected TrailRenderer _trailRenderer;
+        protected PowerBarController _powerBarController;
+        protected float _ballDurationTimer;
+        protected bool _ballTimerStarted;
+        protected bool _firstCollision;
+        protected bool _shoot;
+        protected Vector2 _shootDirection;
+        protected bool _resetBall;
         
         protected virtual void Start()
         {
@@ -34,6 +35,10 @@ namespace Gameplay.Balls
         protected virtual void OnCollisionExit2D()
         {
             _body.angularDrag = 100f;
+            if (_firstCollision)
+            {
+                FirstCollisionExit();
+            }
         }
 
         // lower the drag for the ball to be able to roll on surfaces
@@ -47,7 +52,7 @@ namespace Gameplay.Balls
         {
             if (!_ballTimerStarted)
             {
-                FirstBallBounce();
+                FirstCollisionEnter();
             }
         }
         
@@ -81,9 +86,15 @@ namespace Gameplay.Balls
             }
         }
 
-        protected virtual void FirstBallBounce()
+        protected virtual void FirstCollisionEnter()
         {
             StartCoroutine(StartBallTimer());
+            _firstCollision = true;
+        }
+        
+        protected virtual void FirstCollisionExit()
+        {
+            _firstCollision = false;
         }
         
         protected virtual void ShootBall()

@@ -3,12 +3,21 @@ using UnityEngine;
 
 namespace Gameplay.Balls
 {
+    /// <summary>
+    /// TODO: TriBall splits into 3 smaller balls on first collision.
+    /// </summary>
     public class TriBall : Ball
     {
-        // the first bounce of the TriBall splits it into 3 smaller ones
-        protected override void FirstBallBounce()
+        protected override void FirstCollisionExit()
         {
-            base.FirstBallBounce();
+            base.FirstCollisionExit();
+            transform.localScale *= .5f;
+        }
+
+        protected override void ResetBallPosition()
+        {
+            base.ResetBallPosition();
+            transform.localScale *= 2f;
         }
     }
 }
