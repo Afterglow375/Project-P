@@ -49,8 +49,6 @@ namespace Managers
         public static event Action GameVictoryEvent;
         public static event Action LevelFailedEvent;
 
-        private BasicBall _basicBall;
-
         void Awake()
         {
             // for safety, if there's a duplicate instance delete itself
@@ -75,9 +73,7 @@ namespace Managers
         {
             _currPlayerHp = _playerMaxHp;
             _currEnemyHp = _enemyMaxHp;
-            _basicBall = GameObject.FindWithTag("Ball").GetComponent<BasicBall>();
             _abilityButtons = GameObject.Find("AbilityButtons").GetComponent<AbilityButtons>();
-            Debug.Assert(_basicBall != null, "GameManager could not find BallController component");
 
             // make enemy damage a multiple of 5
             _minEnemyDamage /= 5;
@@ -156,13 +152,6 @@ namespace Managers
                 yield break;
             }
             EnemyTurnEndEvent?.Invoke();
-            ResetBall();
-        }
-
-        private void ResetBall()
-        {
-            // GameManager.Instance.UpdateGameState(GameState.ResettingBall);
-            // _basicBallController.ResetPos();
             GameManager.Instance.UpdateGameState(GameState.ReadyToShoot);
         }
 

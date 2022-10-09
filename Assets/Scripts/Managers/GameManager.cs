@@ -76,7 +76,6 @@ namespace Managers
         LoadingScene,
         ReadyToShoot,
         Shooting,
-        ResettingBall,
         PlayerTurn,
         EnemyTurn,
         LevelVictory,

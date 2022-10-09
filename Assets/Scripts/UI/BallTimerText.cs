@@ -11,12 +11,12 @@ namespace UI
 
         private void Awake()
         {
-            BasicBall.BallTimerChange += UpdateBallTimer;
+            Ball.BallTimerChange += UpdateBallTimer;
         }
 
         private void OnDestroy()
         {
-            BasicBall.BallTimerChange -= UpdateBallTimer;
+            Ball.BallTimerChange -= UpdateBallTimer;
         }
         
         private void Start()
