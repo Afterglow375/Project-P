@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
 using Gameplay;
-using Managers;
+using Gameplay.Balls;
 using TMPro;
 using UnityEngine;
 
@@ -13,12 +11,12 @@ namespace UI
 
         private void Awake()
         {
-            BasicBallController.BallTimerChange += UpdateBallTimer;
+            BasicBall.BallTimerChange += UpdateBallTimer;
         }
 
         private void OnDestroy()
         {
-            BasicBallController.BallTimerChange -= UpdateBallTimer;
+            BasicBall.BallTimerChange -= UpdateBallTimer;
         }
         
         private void Start()

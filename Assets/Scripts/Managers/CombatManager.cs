@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Gameplay;
+using Gameplay.Balls;
 using TMPro;
 using UI;
 using UI.CombatHUD;
@@ -48,7 +49,7 @@ namespace Managers
         public static event Action GameVictoryEvent;
         public static event Action LevelFailedEvent;
 
-        private BasicBallController _basicBallController;
+        private BasicBall _basicBall;
 
         void Awake()
         {
@@ -74,9 +75,9 @@ namespace Managers
         {
             _currPlayerHp = _playerMaxHp;
             _currEnemyHp = _enemyMaxHp;
-            _basicBallController = GameObject.FindWithTag("Ball").GetComponent<BasicBallController>();
+            _basicBall = GameObject.FindWithTag("Ball").GetComponent<BasicBall>();
             _abilityButtons = GameObject.Find("AbilityButtons").GetComponent<AbilityButtons>();
-            Debug.Assert(_basicBallController != null, "GameManager could not find BallController component");
+            Debug.Assert(_basicBall != null, "GameManager could not find BallController component");
 
             // make enemy damage a multiple of 5
             _minEnemyDamage /= 5;

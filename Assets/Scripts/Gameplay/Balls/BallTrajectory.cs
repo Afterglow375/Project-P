@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Balls
 {
     public class BallTrajectory : MonoBehaviour
     {
         private LineRenderer _lineRenderer;
         private Rigidbody2D _ballRb;
-        private BasicBallController _basicBallController;
+        private Ball _ball;
         private PowerBarController _powerBarController;
         private float _force;
         private float _mass;
@@ -20,12 +20,12 @@ namespace Gameplay
         void Start()
         {
             _lineRenderer = GetComponent<LineRenderer>();
-            _basicBallController = GetComponentInChildren<BasicBallController>();
+            _ball = GetComponentInChildren<Ball>();
             _ballRb = GetComponentInChildren<Rigidbody2D>();
             _powerBarController = GetComponent<PowerBarController>();
 
             _mass = _ballRb.mass;
-            _force = _basicBallController.force;
+            _force = _ball.force;
             _vel = _force / _mass * Time.fixedDeltaTime;
         }
 
@@ -63,7 +63,7 @@ namespace Gameplay
 
             for (int i = 0; i < maxSteps; ++i)
             {
-                //Remember f(t) = (x0 + x*t, y0 + y*t - 9.81t²/2)
+                //Remember f(t) = (x0 + x*t, y0 + y*t - 9.81t?/2)
                 //calculatedPosition = Origin + (transform.up * (speed * which step * the length of a step);
                 Vector2 calculatedPosition = launchPosition + directionVector * _vel * i * timeStepInterval * _powerBarController.shotPowerModifier; //Move both X and Y at a constant speed per Interval
                 calculatedPosition.y += Physics2D.gravity.y / 2 * Mathf.Pow(i * timeStepInterval, 2); //Subtract Gravity from Y
