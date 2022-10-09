@@ -42,7 +42,7 @@ namespace UI
 
         private string FormatTimer(float f)
         {
-            return f.ToString("0.00");
+            return f.ToString("0.0");
         }
 
         private void BallSwitched(float duration)
