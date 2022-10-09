@@ -21,7 +21,7 @@ namespace Managers
         private static CombatManager _instance;
         public static CombatManager Instance { get; private set; }
 
-        [SerializeField] private int _comboBonus = 10;
+        [SerializeField] private int _comboBonus = 1;
         [SerializeField] private int _playerMaxHp;
         [SerializeField] private int _enemyMaxHp;
         [SerializeField] private int _minEnemyDamage = 0;
