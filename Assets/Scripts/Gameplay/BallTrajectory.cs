@@ -8,7 +8,7 @@ namespace Gameplay
     {
         private LineRenderer _lineRenderer;
         private Rigidbody2D _ballRb;
-        private BallController _ballController;
+        private BasicBallController _basicBallController;
         private PowerBarController _powerBarController;
         private float _force;
         private float _mass;
@@ -20,12 +20,12 @@ namespace Gameplay
         void Start()
         {
             _lineRenderer = GetComponent<LineRenderer>();
-            _ballController = GetComponentInChildren<BallController>();
+            _basicBallController = GetComponentInChildren<BasicBallController>();
             _ballRb = GetComponentInChildren<Rigidbody2D>();
             _powerBarController = GetComponent<PowerBarController>();
 
             _mass = _ballRb.mass;
-            _force = _ballController.force;
+            _force = _basicBallController.force;
             _vel = _force / _mass * Time.fixedDeltaTime;
         }
 

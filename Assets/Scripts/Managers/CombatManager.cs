@@ -48,7 +48,7 @@ namespace Managers
         public static event Action GameVictoryEvent;
         public static event Action LevelFailedEvent;
 
-        private BallController _ballController;
+        private BasicBallController _basicBallController;
 
         void Awake()
         {
@@ -74,9 +74,9 @@ namespace Managers
         {
             _currPlayerHp = _playerMaxHp;
             _currEnemyHp = _enemyMaxHp;
-            _ballController = GameObject.FindWithTag("Ball").GetComponent<BallController>();
+            _basicBallController = GameObject.FindWithTag("Ball").GetComponent<BasicBallController>();
             _abilityButtons = GameObject.Find("AbilityButtons").GetComponent<AbilityButtons>();
-            Debug.Assert(_ballController != null, "GameManager could not find BallController component");
+            Debug.Assert(_basicBallController != null, "GameManager could not find BallController component");
 
             // make enemy damage a multiple of 5
             _minEnemyDamage /= 5;
@@ -160,8 +160,8 @@ namespace Managers
 
         private void ResetBall()
         {
-            GameManager.Instance.UpdateGameState(GameState.ResettingBall);
-            _ballController.ResetPos();
+            // GameManager.Instance.UpdateGameState(GameState.ResettingBall);
+            // _basicBallController.ResetPos();
             GameManager.Instance.UpdateGameState(GameState.ReadyToShoot);
         }
 

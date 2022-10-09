@@ -9,12 +9,12 @@ namespace Gameplay
         private Vector2 _shootDirection;
         private Vector3 _mousePos;
         private Camera _camera;
-        private BallController _ballController;
+        private BasicBallController _basicBallController;
         
         private void Start()
         {
             _camera = Camera.main;
-            _ballController = transform.GetComponentInChildren<BallController>();
+            _basicBallController = transform.GetComponentInChildren<BasicBallController>();
         }
 
         void Update()
@@ -26,7 +26,7 @@ namespace Gameplay
                 transform.up = _shootDirection;
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    _ballController.Shoot(_shootDirection);
+                    _basicBallController.Shoot(_shootDirection);
                 }
             }
         }

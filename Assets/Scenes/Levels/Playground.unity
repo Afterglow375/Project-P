@@ -252,6 +252,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1807805052527326150, guid: 0f4d44dc76fb77f478e2fcb6e92a067d, type: 3}
   m_PrefabInstance: {fileID: 328012626}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &37192995 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9142884873830971587, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
+  m_PrefabInstance: {fileID: 9184538174519314285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &78538652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1621,6 +1626,7 @@ GameObject:
   - component: {fileID: 635878945}
   - component: {fileID: 635878947}
   - component: {fileID: 635878946}
+  - component: {fileID: 635878948}
   m_Layer: 0
   m_Name: Ball Timer Text
   m_TagString: Untagged
@@ -1745,6 +1751,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635878944}
   m_CullTransparentMesh: 1
+--- !u!114 &635878948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635878944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d6228e74294424b6854528b6488cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &641792814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5431,6 +5449,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 484510036}
     m_Modifications:
+    - target: {fileID: 5296503527129419084, guid: b5dd896bc7a46e041a44444bc414d6d3, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5296503527129419085, guid: b5dd896bc7a46e041a44444bc414d6d3, type: 3}
       propertyPath: m_Name
       value: RightAngleTriangle
@@ -5606,18 +5628,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LauncherContainer
       objectReference: {fileID: 0}
-    - target: {fileID: 5413586315856897571, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
-      propertyPath: ballDuration
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5413586315856897571, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
-      propertyPath: ballTimerText
-      value: 
-      objectReference: {fileID: 635878946}
-    - target: {fileID: 6076696561683889472, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 6535452885814854538, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -5662,9 +5672,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9184538174063399406, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
-      propertyPath: m_Radius
-      value: 0.15
+    - target: {fileID: 7839966162554369837, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
+      propertyPath: force
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839966162554369837, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
+      propertyPath: trail
+      value: 
+      objectReference: {fileID: 37192995}
+    - target: {fileID: 9076489864554666860, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
