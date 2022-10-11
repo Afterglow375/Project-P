@@ -1,12 +1,13 @@
 using System;
 using Gameplay;
+using Managers;
 using UnityEditor;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     private AudioSource _effectsSource, _musicSource;
-    private AudioClip _pegHitByBallClip, _forceComponentHitByBallClip;
+    private AudioClip _pegHitByBallClip, _forceComponentHitByBallClip, _attackHitClip;
 
     private static AudioManager _instance;
     public static AudioManager Instance { get; private set; }
@@ -24,6 +25,7 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         PegController.PegHitEvent += PegHitByBall;
         ForceComponentController.ComponentHitEvent += ComponentHitByBall;
+        CombatManager.TargetHitEvent += TargetHit;
     }
 
     private void Start()
@@ -32,12 +34,14 @@ public class AudioManager : MonoBehaviour
         _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
         _pegHitByBallClip = Resources.Load<AudioClip>("Audio/Effects/PegHitByBall");
         _forceComponentHitByBallClip = Resources.Load<AudioClip>("Audio/Effects/Click");
+        _attackHitClip = Resources.Load<AudioClip>("Audio/Effects/AttackHit");
     }
 
     private void OnDestroy()
     {
         PegController.PegHitEvent -= PegHitByBall;
         ForceComponentController.ComponentHitEvent -= ComponentHitByBall;
+        CombatManager.TargetHitEvent -= TargetHit;
     }
 
     private void PegHitByBall(int deletethis)
@@ -48,6 +52,11 @@ public class AudioManager : MonoBehaviour
     private void ComponentHitByBall(int deletethis)
     {
         _effectsSource.PlayOneShot(_forceComponentHitByBallClip);
+    }
+
+    private void TargetHit()
+    {
+            _effectsSource.PlayOneShot(_attackHitClip);
     }
 
     public void ChangeEffectsVolume(float value)

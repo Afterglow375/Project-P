@@ -48,6 +48,7 @@ namespace Managers
         public static event Action LevelVictoryEvent;
         public static event Action GameVictoryEvent;
         public static event Action LevelFailedEvent;
+        public static event Action TargetHitEvent;
 
         void Awake()
         {
@@ -126,6 +127,7 @@ namespace Managers
             Debug.Log($"Player damage: {abilityPoints}");
             _currEnemyHp -= abilityPoints;
             EnemyHealthChangeEvent?.Invoke(_currEnemyHp, abilityPoints);
+            TargetHitEvent?.Invoke();
             yield return new WaitForSeconds(1);
             if (_currEnemyHp <= 0)
             {
@@ -146,6 +148,7 @@ namespace Managers
             Debug.Log($"Enemy damage: {enemyDamage}");
             _currPlayerHp -= enemyDamage;
             PlayerHealthChangeEvent?.Invoke(_currPlayerHp, enemyDamage);
+            TargetHitEvent?.Invoke();
             yield return new WaitForSeconds(1);
             if (_currPlayerHp <= 0)
             {
