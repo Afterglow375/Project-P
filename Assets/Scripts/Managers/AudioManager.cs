@@ -44,19 +44,19 @@ public class AudioManager : MonoBehaviour
         CombatManager.TargetHitEvent -= TargetHit;
     }
 
-    private void PegHitByBall(int deletethis)
+    private void PegHitByBall(int damage)
     {
         _effectsSource.PlayOneShot(_pegHitByBallClip);
     }
     
-    private void ComponentHitByBall(int deletethis)
+    private void ComponentHitByBall(int damage)
     {
         _effectsSource.PlayOneShot(_forceComponentHitByBallClip);
     }
 
     private void TargetHit()
     {
-            _effectsSource.PlayOneShot(_attackHitClip);
+        _effectsSource.PlayOneShot(_attackHitClip, 0.3f);
     }
 
     public void ChangeEffectsVolume(float value)
