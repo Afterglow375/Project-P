@@ -1,5 +1,6 @@
 ﻿using Managers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utilities;
 
 namespace UI
@@ -28,6 +29,7 @@ namespace UI
         private void OnGameVictory()
         {
             _gameVictory.SetActive(true);
+            GameManager.Instance.LevelCompleted(SceneManager.GetActiveScene().name);
         }
 
         public void MainMenu()

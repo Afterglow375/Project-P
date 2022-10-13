@@ -6,8 +6,8 @@ namespace Managers
     {
         public static void Execute()
         {
-            Instantiate(Resources.Load("Prefabs/GameManager", typeof(GameObject)));
-            Instantiate(Resources.Load("Prefabs/AudioManager", typeof(GameObject)));
+            Instantiate(Resources.Load<GameObject>("Prefabs/GameManager"));
+            Instantiate(Resources.Load<GameObject>("Prefabs/AudioManager"));
             Debug.Log("GameManager and AudioManager created");
         }
     }

@@ -16,10 +16,12 @@ namespace Managers
         private static GameManager _instance;
         public static GameManager Instance { get; private set; }
         public GameState state;
-        private Vector3 _levelSelectPosition = new Vector3(0, -2, 0);
-        private HashSet<string> _activeLevels = new HashSet<string> {"Playground", "gebo lvl A"};
+        private Vector2 _levelSelectPosition = new Vector2(0, -2);
+        private Dictionary<string, Level> _levels = new();
+        private bool _levelsInitialized;
+        private string _lastLvl;
 
-    void Awake()
+        void Awake()
         {
             // for safety, delete duplicate instance if it exists in the scene
             if (_instance != null && _instance != this)
@@ -49,6 +51,7 @@ namespace Managers
             state = newState;
         }
 
+        // this method is called AFTER Awake but BEFORE Start
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             string sceneName = scene.name;
@@ -65,6 +68,7 @@ namespace Managers
             else if (sceneName.Equals(Scenes.LevelSelect))
             {
                 SetRubyPosition();
+                SetupLevels();
                 UpdateGameState(GameState.LevelSelect);
             }
             else // we're in a level scene
@@ -73,7 +77,7 @@ namespace Managers
             }
         }
 
-        public void SaveRubyPosition(Vector3 position)
+        public void SaveRubyPosition(Vector2 position)
         {
             _levelSelectPosition = position;
         }
@@ -84,14 +88,51 @@ namespace Managers
             ruby.transform.position = _levelSelectPosition;
         }
 
-        public void LevelComplete(string level)
+        // TODO this func should read from save file
+        private void SetupLevels()
         {
-            _activeLevels.Add(level);
+            if (!LevelsInitialized())
+            {
+                foreach (var level in _levels.Values)
+                {
+                    if (level.lastLvl)
+                    {
+                        _lastLvl = level.name;
+                    }
+                    
+                    foreach (var nextLevel in level.nextLevelNames)
+                    {
+                        level.AddNextLevel(_levels[nextLevel]);
+                    }
+                }
+
+                _levelsInitialized = true;
+            }
         }
 
-        private void activateCompletedLevels()
+        public void LevelCompleted(string levelName)
         {
-            
+            _levels[levelName].LevelCompleted();
+        }
+        
+        public void AddLevel(Level level)
+        {
+            _levels.Add(level.name, level);
+        }
+        
+        public LevelStatus GetLevelStatus(string levelName)
+        {
+            return _levels[levelName].status;
+        }
+
+        public bool LevelsInitialized()
+        {
+            return _levelsInitialized;
+        }
+
+        public bool IsLastLevel()
+        {
+            return _lastLvl == SceneManager.GetActiveScene().name;
         }
     }
 

@@ -131,8 +131,16 @@ namespace Managers
             yield return new WaitForSeconds(1);
             if (_currEnemyHp <= 0)
             {
-                GameManager.Instance.UpdateGameState(GameState.LevelVictory);
-                LevelVictoryEvent?.Invoke();
+                if (GameManager.Instance.IsLastLevel())
+                {
+                    GameManager.Instance.UpdateGameState(GameState.GameVictory);
+                    GameVictoryEvent?.Invoke();
+                }
+                else
+                {
+                    GameManager.Instance.UpdateGameState(GameState.LevelVictory);
+                    LevelVictoryEvent?.Invoke();
+                }
                 yield break;
             }
             PlayerTurnEndEvent?.Invoke();

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace UI
 {
     /// <summary>
-    /// The class is responsible for the transition between scenes, it should be present in every scene.
+    /// This class is responsible for the transition between scenes, it should be present in every scene.
     /// </summary>
     public class SceneLoader : MonoBehaviour
     {
