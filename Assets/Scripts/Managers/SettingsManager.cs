@@ -1,61 +1,59 @@
-using Managers;
 using UI;
+using UI.Shared;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsManager : MonoBehaviour
+namespace Managers
 {
-    [SerializeField]
-    private Slider _sfxVolumeSlider;
-    [SerializeField]
-    private Slider _musicVolumeSlider;
-    [SerializeField]
-    private GameObject _pauseMenuParent;
-    private PauseMenu _pauseMenu;
-
-    private GameObject _settingsMenuUI;
-    private Image _settingsMenuBackground;
-
-    // Start is called before the first frame update
-    void Start()
+    public class SettingsManager : MonoBehaviour
     {
-        _settingsMenuUI = transform.GetChild(0).gameObject;
-        _settingsMenuUI.SetActive(false);
-        _sfxVolumeSlider.value = AudioManager.Instance.GetEffectsVolume();
-        _musicVolumeSlider.value = AudioManager.Instance.GetMusicVolume();
-        _sfxVolumeSlider.onValueChanged.AddListener(val => AudioManager.Instance.ChangeEffectsVolume(val));
-        _musicVolumeSlider.onValueChanged.AddListener(val => AudioManager.Instance.ChangeMusicVolume(val));
+        [SerializeField] private Slider _sfxVolumeSlider;
+        [SerializeField] private Slider _musicVolumeSlider;
+        [SerializeField] private GameObject _pauseMenuParent;
+        private PauseMenuUI _pauseMenuUI;
+        private GameObject _settingsMenuUI;
+        private Image _settingsMenuBackground;
 
-        if (_pauseMenuParent != null)
+        void Start()
         {
-            _pauseMenu = _pauseMenuParent.GetComponent<PauseMenu>();
+            _settingsMenuUI = transform.GetChild(0).gameObject;
+            _settingsMenuUI.SetActive(false);
+            _sfxVolumeSlider.value = AudioManager.Instance.GetEffectsVolume();
+            _musicVolumeSlider.value = AudioManager.Instance.GetMusicVolume();
+            _sfxVolumeSlider.onValueChanged.AddListener(val => AudioManager.Instance.ChangeEffectsVolume(val));
+            _musicVolumeSlider.onValueChanged.AddListener(val => AudioManager.Instance.ChangeMusicVolume(val));
+
+            if (_pauseMenuParent != null)
+            {
+                _pauseMenuUI = _pauseMenuParent.GetComponent<PauseMenuUI>();
+            }
+
+            if (GameManager.Instance.state == GameState.MainMenu) // Set background to not be transparent in main menu
+            {
+                _settingsMenuBackground = _settingsMenuUI.GetComponent<Image>();
+                var newColor = _settingsMenuBackground.color;
+                newColor.a = 1f;
+                _settingsMenuBackground.color = newColor;
+            }
         }
 
-        if (GameManager.Instance.state == GameState.MainMenu) // Set background to not be transparent in main menu
+        public void BackButton()
         {
-            _settingsMenuBackground = _settingsMenuUI.GetComponent<Image>();
-            var newColor = _settingsMenuBackground.color;
-            newColor.a = 1f;
-            _settingsMenuBackground.color = newColor;
+            if (_pauseMenuUI != null)
+            {
+                _pauseMenuUI.TogglePauseMenuUI();
+            }
+            ToggleSettingsMenuUI();
         }
-    }
 
-    public void BackButton()
-    {
-        if (_pauseMenu != null)
+        public void ToggleSettingsMenuUI()
         {
-            _pauseMenu.TogglePauseMenuUI();
+            _settingsMenuUI.SetActive(!_settingsMenuUI.activeSelf);
         }
-        ToggleSettingsMenuUI();
-    }
 
-    public void ToggleSettingsMenuUI()
-    {
-        _settingsMenuUI.SetActive(!_settingsMenuUI.activeSelf);
-    }
-
-    public void CloseSettingsMenuUI()
-    {
-        _settingsMenuUI.SetActive(false);
+        public void CloseSettingsMenuUI()
+        {
+            _settingsMenuUI.SetActive(false);
+        }
     }
 }

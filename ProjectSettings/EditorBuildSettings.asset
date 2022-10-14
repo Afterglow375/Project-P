@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 14bdd6ef0695bfc4ebf01530d8b215a5
   - enabled: 1
-    path: Assets/Scenes/Level Select.unity
+    path: Assets/Scenes/Overworld.unity
     guid: ccbbaf24936c8874389b609c0e08e634
   - enabled: 1
     path: Assets/Scenes/Levels/Playground.unity

@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4351506037685716406, guid: 1678114bedae29649b14fdd1789580e5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4351506038883306714, guid: 1678114bedae29649b14fdd1789580e5, type: 3}
       propertyPath: m_Name
       value: SceneLoader
@@ -390,11 +394,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849819, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LevelSelect
+      value: Overworld
       objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849819, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainMenu, Assembly-CSharp
+      value: UI.Shared.MainMenuUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849819, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -410,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849820, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849820, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_AnchorMax.x
@@ -653,7 +657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849820, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849820, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1134,7 +1138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849820, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4497681819207849820, guid: 7da2380ff977f7f4b9ddfb04513a94cf, type: 3}
       propertyPath: m_AnchorMax.x

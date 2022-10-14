@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Gameplay;
+using Gameplay.Levels;
 using TMPro;
 using UI.CombatHUD;
 using UnityEngine;
@@ -32,9 +32,13 @@ namespace Managers
 
         private GameObject _damageNumberPrefab;
 
+        // params: total player ability points
         public static event Action<int> AbilityPointsUpdateEvent;
+        // params: combo bonus
         public static event Action<int> ComboBonusEvent;
+        // params: player hp after taking dmg, enemy damage
         public static event Action<int, int> PlayerHealthChangeEvent;
+        // params: enemy hp after taking dmg, player damage
         public static event Action<int, int> EnemyHealthChangeEvent;
         public static event Action PlayerTurnStartEvent;
         public static event Action PlayerTurnEndEvent;

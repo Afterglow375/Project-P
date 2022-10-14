@@ -1,11 +1,12 @@
 using Managers;
+using UI.Shared;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
 
-namespace UI
+namespace UI.Levels
 {
-    public class LevelVictory : MonoBehaviour
+    public class LevelVictoryUI : MonoBehaviour
     {
         [SerializeField] private SceneLoader _sceneLoader;
         
@@ -38,9 +39,9 @@ namespace UI
             _sceneLoader.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        public void LevelSelect()
+        public void Overworld()
         {
-            _sceneLoader.LoadScene(Scenes.LevelSelect);
+            _sceneLoader.LoadScene(Scenes.Overworld);
         }
 
         public void MainMenu()

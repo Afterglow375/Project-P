@@ -1,11 +1,12 @@
 using Managers;
 using TMPro;
+using UI.Shared;
 using UnityEngine;
 using Utilities;
 
-namespace UI
+namespace UI.Overworld
 {
-    public class LevelSelectText : MonoBehaviour
+    public class OverworldLevelText : MonoBehaviour
     {
         [SerializeField] private GameObject[] _nextLevelObjects;
         [SerializeField] private bool _firstLvl;
@@ -26,7 +27,7 @@ namespace UI
         {
             _text = transform.GetComponentInChildren<TextMeshProUGUI>();
             _lvlName = _text.text;
-            // on first overworld load, create Level objects
+            // on first Overworld load, create Level objects
             if (!GameManager.Instance.LevelsInitialized())
             {
                 

@@ -3,7 +3,7 @@ using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UI
+namespace UI.Shared
 {
     /// <summary>
     /// This class is responsible for the transition between scenes, it should be present in every scene.

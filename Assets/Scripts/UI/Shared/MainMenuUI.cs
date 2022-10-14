@@ -1,9 +1,10 @@
+using Managers;
 using UnityEngine;
 using Utilities;
 
-namespace UI
+namespace UI.Shared
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenuUI : MonoBehaviour
     {
         [SerializeField] private SceneLoader _sceneLoader;
         [SerializeField] private SettingsManager _settingsManager;
@@ -14,9 +15,9 @@ namespace UI
             _sceneLoader.LoadScene(Scenes.Playground);
         }
 
-        public void LevelSelect()
+        public void Overworld()
         {
-            _sceneLoader.LoadScene(Scenes.LevelSelect);
+            _sceneLoader.LoadScene(Scenes.Overworld);
         }
 
         public void Settings()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4351506037685716405}
   - component: {fileID: 4351506037685716404}
   - component: {fileID: 4351506037685716407}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &4351506037685716405
 MonoBehaviour:
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4351506038792465618}
   - component: {fileID: 4351506038792465617}
   - component: {fileID: 4351506038792465619}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4351506038883306715}
   - component: {fileID: 624245195739539206}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SceneLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}

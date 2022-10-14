@@ -6,6 +6,7 @@ namespace UI.CombatHUD
 {
     public class PlayerTextController : MonoBehaviour
     {
+        [SerializeField] private GameObject _playerDamageAnimation;
         private TextMeshProUGUI _playerHealthText;
         private TextMeshProUGUI _playerHealthChangeText;
         private Animator _playerHealthChangeAnimator;
@@ -14,7 +15,6 @@ namespace UI.CombatHUD
         private Color _origTextColor;
         private readonly int _playerHealthChange = Animator.StringToHash("PlayerDamageTaken");
         private readonly int _noPlayerHealthChange = Animator.StringToHash("NoPlayerDamageTaken");
-        [SerializeField] private GameObject _playerDamageAnimation;
 
         private void Awake()
         {

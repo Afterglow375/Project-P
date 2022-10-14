@@ -2,7 +2,7 @@ using System;
 using Managers;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Levels
 {
     public class PegController : MonoBehaviour
     {

@@ -2,8 +2,9 @@
 using Managers;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Levels
 {
+    // Reset teleports are unused for now
     public class ResetTeleportController : MonoBehaviour
     {
         private Rigidbody2D _ballRigidBody;

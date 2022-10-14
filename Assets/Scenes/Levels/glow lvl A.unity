@@ -548,9 +548,9 @@ Transform:
   - {fileID: 898573441}
   - {fileID: 1862986155}
   - {fileID: 947015246}
+  - {fileID: 1635105906}
   - {fileID: 1826883153}
   - {fileID: 1192635477}
-  - {fileID: 1635105906}
   - {fileID: 1447527916}
   - {fileID: 1626828627}
   - {fileID: 1248758148}
@@ -799,6 +799,10 @@ PrefabInstance:
     - target: {fileID: 113084721942722102, guid: e2a075a84b711624998fe2139056c3ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309041768995004153, guid: e2a075a84b711624998fe2139056c3ce, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a075a84b711624998fe2139056c3ce, type: 3}

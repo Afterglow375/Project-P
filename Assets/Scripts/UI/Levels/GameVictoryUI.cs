@@ -1,11 +1,12 @@
 ﻿using Managers;
+using UI.Shared;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
 
-namespace UI
+namespace UI.Levels
 {
-    public class GameVictory : MonoBehaviour
+    public class GameVictoryUI : MonoBehaviour
     {
         private GameObject _gameVictory;
         [SerializeField] private SceneLoader _sceneLoader;

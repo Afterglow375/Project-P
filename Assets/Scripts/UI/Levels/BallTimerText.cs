@@ -2,7 +2,7 @@ using Gameplay.Balls;
 using TMPro;
 using UnityEngine;
 
-namespace UI
+namespace UI.Levels
 {
     public class BallTimerText : MonoBehaviour
     {
@@ -39,9 +39,9 @@ namespace UI
             }
         }
 
-        private string FormatTimer(float f)
+        private string FormatTimer(float time)
         {
-            return f.ToString("0.0");
+            return time.ToString("0.0");
         }
 
         private void BallSwitched(float duration)

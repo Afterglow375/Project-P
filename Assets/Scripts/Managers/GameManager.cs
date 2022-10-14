@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Gameplay;
+using Gameplay.Overworld;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
@@ -14,7 +15,7 @@ namespace Managers
         private static GameManager _instance;
         public static GameManager Instance { get; private set; }
         public GameState state;
-        private Vector2 _levelSelectPosition = new Vector2(0, -2);
+        private Vector2 _overworldPosition = new Vector2(0, -2);
         private Dictionary<string, Level> _levels = new();
         private bool _levelsInitialized;
         private string _lastLvl;
@@ -63,11 +64,11 @@ namespace Managers
             {
                 UpdateGameState(GameState.MainMenu);
             }
-            else if (sceneName.Equals(Scenes.LevelSelect))
+            else if (sceneName.Equals(Scenes.Overworld))
             {
                 SetRubyPosition();
                 SetupLevels();
-                UpdateGameState(GameState.LevelSelect);
+                UpdateGameState(GameState.Overworld);
             }
             else // we're in a level scene
             {
@@ -77,13 +78,13 @@ namespace Managers
 
         public void SaveRubyPosition(Vector2 position)
         {
-            _levelSelectPosition = position;
+            _overworldPosition = position;
         }
 
         private void SetRubyPosition()
         {
             RubyController ruby = GameObject.Find("Ruby").GetComponent<RubyController>();
-            ruby.transform.position = _levelSelectPosition;
+            ruby.transform.position = _overworldPosition;
         }
 
         // TODO this func should read from save file
@@ -137,7 +138,7 @@ namespace Managers
     public enum GameState
     {
         MainMenu,
-        LevelSelect,
+        Overworld,
         LoadingScene,
         ReadyToShoot,
         Shooting,

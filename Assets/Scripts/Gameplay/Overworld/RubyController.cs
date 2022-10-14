@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Overworld
 {
     public class RubyController : MonoBehaviour
     {
@@ -23,7 +23,7 @@ namespace Gameplay
                 
             Vector2 move = new Vector2(_horizontal, _vertical);
         
-            if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+            if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
             {
                 _lookDirection.Set(move.x, move.y);
                 _lookDirection.Normalize();

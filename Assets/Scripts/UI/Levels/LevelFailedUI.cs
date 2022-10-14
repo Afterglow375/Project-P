@@ -1,11 +1,12 @@
 using Managers;
+using UI.Shared;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
 
-namespace UI
+namespace UI.Levels
 {
-    public class LevelFailed : MonoBehaviour
+    public class LevelFailedUI : MonoBehaviour
     {
         [SerializeField] private SceneLoader _sceneLoader;
         private GameObject _levelFailed;

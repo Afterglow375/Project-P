@@ -12,7 +12,7 @@ namespace Managers
         {
             var obj = new GameObject("BootStrapper");
             obj.AddComponent<ManagerBootStrapper>();
-            ManagerBootStrapper.Execute();
+            obj.GetComponent<ManagerBootStrapper>().Execute();
         }
     }
 }

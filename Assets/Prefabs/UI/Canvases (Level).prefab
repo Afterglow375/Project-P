@@ -543,22 +543,6 @@ PrefabInstance:
       propertyPath: _sceneLoader
       value: 
       objectReference: {fileID: 2801452894168923209}
-    - target: {fileID: 5840339265283046771, guid: 91750991744bd8b4286126efe31fd951, type: 3}
-      propertyPath: m_Name
-      value: LevelVictory_LevelSelectl
-      objectReference: {fileID: 0}
-    - target: {fileID: 5840339265283046773, guid: 91750991744bd8b4286126efe31fd951, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LevelSelect
-      objectReference: {fileID: 0}
-    - target: {fileID: 5840339265949939758, guid: 91750991744bd8b4286126efe31fd951, type: 3}
-      propertyPath: m_Name
-      value: LevelSelectl
-      objectReference: {fileID: 0}
-    - target: {fileID: 5840339265949939760, guid: 91750991744bd8b4286126efe31fd951, type: 3}
-      propertyPath: m_text
-      value: Level Select
-      objectReference: {fileID: 0}
     - target: {fileID: 7520771092086343801, guid: 91750991744bd8b4286126efe31fd951, type: 3}
       propertyPath: m_Name
       value: Level Victory
@@ -890,21 +874,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 113084721942722102}
     m_Modifications:
-    - target: {fileID: 4351506037685716402, guid: 1678114bedae29649b14fdd1789580e5, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4351506038792465631, guid: 1678114bedae29649b14fdd1789580e5, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4351506038883306714, guid: 1678114bedae29649b14fdd1789580e5, type: 3}
       propertyPath: m_Name
       value: SceneLoader
-      objectReference: {fileID: 0}
-    - target: {fileID: 4351506038883306714, guid: 1678114bedae29649b14fdd1789580e5, type: 3}
-      propertyPath: m_Layer
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4351506038883306715, guid: 1678114bedae29649b14fdd1789580e5, type: 3}
       propertyPath: m_RootOrder
