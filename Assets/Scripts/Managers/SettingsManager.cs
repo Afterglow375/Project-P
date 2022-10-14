@@ -1,7 +1,7 @@
+using Managers;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
-using Managers;
 
 public class SettingsManager : MonoBehaviour
 {

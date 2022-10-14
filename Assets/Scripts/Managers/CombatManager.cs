@@ -1,14 +1,9 @@
 using System;
 using System.Collections;
 using Gameplay;
-using Gameplay.Balls;
 using TMPro;
-using UI;
 using UI.CombatHUD;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using Utilities;
 using Random = UnityEngine.Random;
 
 namespace Managers

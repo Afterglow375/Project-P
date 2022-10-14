@@ -1,6 +1,4 @@
-using Managers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Utilities;
 
 namespace UI

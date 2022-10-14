@@ -1,4 +1,3 @@
-using Gameplay;
 using Gameplay.Balls;
 using TMPro;
 using UnityEngine;

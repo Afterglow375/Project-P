@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Managers;
 using UnityEngine;
-using UnityEngine.UI;
-using Utilities;
 
 namespace UI
 {
