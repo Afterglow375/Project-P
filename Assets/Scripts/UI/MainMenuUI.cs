@@ -1,8 +1,9 @@
 using Managers;
+using UI.Shared;
 using UnityEngine;
 using Utilities;
 
-namespace UI.Shared
+namespace UI
 {
     public class MainMenuUI : MonoBehaviour
     {
