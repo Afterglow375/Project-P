@@ -2,7 +2,7 @@ using System;
 using Managers;
 using UnityEngine;
 
-namespace Gameplay.Levels
+namespace Gameplay.BallArena
 {
     public class PegController : MonoBehaviour
     {

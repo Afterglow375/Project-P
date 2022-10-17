@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Gameplay.Levels;
+using Gameplay.BallArena;
 using TMPro;
 using UI.CombatHUD;
 using UnityEngine;

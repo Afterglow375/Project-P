@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UI.Levels
+namespace UI.BallArena
 {
     public class DamageNumber : MonoBehaviour
     {

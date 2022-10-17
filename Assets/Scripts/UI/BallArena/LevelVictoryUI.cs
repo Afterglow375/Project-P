@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
 
-namespace UI.Levels
+namespace UI.BallArena
 {
     public class LevelVictoryUI : MonoBehaviour
     {

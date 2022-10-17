@@ -2,7 +2,7 @@
 using Managers;
 using UnityEngine;
 
-namespace Gameplay.Levels
+namespace Gameplay.BallArena
 {
     // Reset teleports are unused for now
     public class ResetTeleportController : MonoBehaviour

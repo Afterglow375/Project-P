@@ -2,7 +2,7 @@ using Gameplay.Balls;
 using TMPro;
 using UnityEngine;
 
-namespace UI.Levels
+namespace UI.BallArena
 {
     public class BallTimerText : MonoBehaviour
     {
