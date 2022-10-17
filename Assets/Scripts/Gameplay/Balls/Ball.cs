@@ -73,6 +73,10 @@ namespace Gameplay.Balls
         
         protected virtual void FixedUpdate()
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ExplodeBall();
+            }
             if (_shoot)
             {
                 ShootBall();
@@ -123,6 +127,15 @@ namespace Gameplay.Balls
         public void StartResettingBallPosition()
         {
             _resetBall = true;
+        }
+
+        protected virtual void ExplodeBall()
+        {
+            var items = Physics2D.OverlapCircleAll(transform.position, 10);
+            foreach(var item in items)
+            {
+                Debug.Log($"exploded: {item.name}");
+            }
         }
     }
 }

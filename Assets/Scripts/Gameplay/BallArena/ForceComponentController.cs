@@ -4,11 +4,9 @@ using UnityEngine;
 
 namespace Gameplay.BallArena
 {
-    public class ForceComponentController : MonoBehaviour
+    public class ForceComponentController : APComponent
     {
-        [SerializeField] private int _points;
         [SerializeField] private int _force;
-        public static event Action<int> ComponentHitEvent;
         private Animator _animator;
         private readonly int _componentHit = Animator.StringToHash("ForceComponentHit");
 
@@ -17,14 +15,14 @@ namespace Gameplay.BallArena
             _animator = GetComponent<Animator>();
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        protected override void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Ball"))
             {
                 collision.rigidbody.AddForce(collision.GetContact(0).normal * _force, ForceMode2D.Impulse);
                 _animator.SetTrigger(_componentHit);
-                CombatManager.Instance.SpawnDamageNumber(_points, transform);
-                ComponentHitEvent?.Invoke(_points);
+
+                this.ComponentHit();
             }
         }
     }

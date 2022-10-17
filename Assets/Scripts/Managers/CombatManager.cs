@@ -49,9 +49,7 @@ namespace Managers
 
         private void OnDestroy()
         {
-            PegController.PegHitEvent -= ComponentHitByBall;
-            ForceComponentController.ComponentHitEvent -= ComponentHitByBall;
-            DiamondController.DiamondHitEvent -= ComponentHitByBall;
+            APComponent.HitEvent -= ComponentHitByBall;
         }
 
         private void Start()
@@ -71,7 +69,7 @@ namespace Managers
             _damageNumberPrefab = Resources.Load("Prefabs/DamageNumber") as GameObject;
         }
 
-        private void ComponentHitByBall(int score)
+        private void ComponentHitByBall(int score, string componentType)
         {
             _abilityPoints += score;
             _componentsHit++;

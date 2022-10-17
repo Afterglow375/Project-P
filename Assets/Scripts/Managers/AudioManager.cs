@@ -1,4 +1,5 @@
 using Gameplay.BallArena;
+using System;
 using UnityEngine;
 using Utilities;
 
@@ -23,19 +24,23 @@ namespace Managers
 
         private void OnDestroy()
         {
-            PegController.PegHitEvent -= PegHitByBall;
-            ForceComponentController.ComponentHitEvent -= ComponentHitByBall;
+            APComponent.HitEvent -= ComponentHitByBall;
             CombatManager.TargetHitEvent -= TargetHit;
         }
-
-        private void PegHitByBall(int damage)
-        {
-            _effectsSource.PlayOneShot(_pegHitByBallClip);
-        }
     
-        private void ComponentHitByBall(int damage)
+        private void ComponentHitByBall(int damage, string componentType)
         {
-            _effectsSource.PlayOneShot(_forceComponentHitByBallClip);
+            Debug.Log($"component hit: {componentType}");
+            Debug.Log(nameof(PegController));
+            switch (componentType)
+            {
+                case nameof(PegController):
+                    _effectsSource.PlayOneShot(_pegHitByBallClip);
+                    break;
+                case nameof(ForceComponentController):
+                    _effectsSource.PlayOneShot(_forceComponentHitByBallClip);
+                    break;
+            }
         }
 
         private void TargetHit()
