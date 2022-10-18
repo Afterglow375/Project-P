@@ -10,29 +10,13 @@ namespace Managers
     /// <summary>
     /// The GameManager is a persistent singleton which stores high level data and handles GameState changes.
     /// </summary>
-    public class GameManager : MonoBehaviour
+    public class GameManager : PersistentSingleton<GameManager>
     {
-        private static GameManager _instance;
-        public static GameManager Instance { get; private set; }
         public GameState state;
         private Vector2 _overworldPosition = new Vector2(0, -2);
         private Dictionary<string, Level> _levels = new();
         private bool _levelsInitialized;
         private string _lastLvl;
-
-        void Awake()
-        {
-            // for safety, delete duplicate instance if it exists in the scene
-            if (_instance != null && _instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-        }
 
         private void OnEnable()
         {

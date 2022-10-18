@@ -4,6 +4,7 @@ using Gameplay.BallArena;
 using TMPro;
 using UI.CombatHUD;
 using UnityEngine;
+using Utilities;
 using Random = UnityEngine.Random;
 
 namespace Managers
@@ -11,11 +12,8 @@ namespace Managers
     /// <summary>
     /// The combat manager is a singleton which stores data on the gameplay taking place (player health, enemy health, peg score, etc).
     /// </summary>
-    public class CombatManager : MonoBehaviour
+    public class CombatManager : Singleton<CombatManager>
     {
-        private static CombatManager _instance;
-        public static CombatManager Instance { get; private set; }
-
         [SerializeField] private int _comboBonus = 1;
         [SerializeField] private int _playerMaxHp;
         [SerializeField] private int _enemyMaxHp;
@@ -49,21 +47,6 @@ namespace Managers
         public static event Action LevelFailedEvent;
         public static event Action TargetHitEvent;
 
-        void Awake()
-        {
-            // for safety, if there's a duplicate instance delete itself
-            if (_instance != null && _instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-            PegController.PegHitEvent += ComponentHitByBall;
-            ForceComponentController.ComponentHitEvent += ComponentHitByBall;
-            DiamondController.DiamondHitEvent += ComponentHitByBall;
-        }
-
         private void OnDestroy()
         {
             PegController.PegHitEvent -= ComponentHitByBall;
@@ -73,6 +56,10 @@ namespace Managers
 
         private void Start()
         {
+            PegController.PegHitEvent += ComponentHitByBall;
+            ForceComponentController.ComponentHitEvent += ComponentHitByBall;
+            DiamondController.DiamondHitEvent += ComponentHitByBall;
+            
             _currPlayerHp = _playerMaxHp;
             _currEnemyHp = _enemyMaxHp;
             _abilityButtons = GameObject.Find("AbilityButtons").GetComponent<AbilityButtons>();

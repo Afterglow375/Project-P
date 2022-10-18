@@ -1,34 +1,19 @@
 using Gameplay.BallArena;
 using UnityEngine;
+using Utilities;
 
 namespace Managers
 {
-    public class AudioManager : MonoBehaviour
+    public class AudioManager : PersistentSingleton<AudioManager>
     {
         private AudioSource _effectsSource, _musicSource;
         private AudioClip _pegHitByBallClip, _forceComponentHitByBallClip, _attackHitClip;
 
-        private static AudioManager _instance;
-        public static AudioManager Instance { get; private set; }
-
-        void Awake()
+        private void Start()
         {
-            // for safety, delete duplicate instance if it exists in the scene
-            if (_instance != null && _instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-        
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
             PegController.PegHitEvent += PegHitByBall;
             ForceComponentController.ComponentHitEvent += ComponentHitByBall;
             CombatManager.TargetHitEvent += TargetHit;
-        }
-
-        private void Start()
-        {
             _effectsSource = transform.GetChild(0).GetComponent<AudioSource>();
             _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
             _pegHitByBallClip = Resources.Load<AudioClip>("Audio/Effects/PegHitByBall");
