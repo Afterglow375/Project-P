@@ -12,7 +12,6 @@ namespace Gameplay.Balls
         public float ballDuration;
         public static event Action<float> BallTimerChange;
         public int explosionRadius;
-        public ParticleSystem explosionParticle;
         
         protected Rigidbody2D _body;
         protected Vector3 _startPos;
@@ -24,7 +23,8 @@ namespace Gameplay.Balls
         protected bool _shoot;
         protected Vector2 _shootDirection;
         protected bool _resetBall;
-        
+        protected ParticleSystem _explosionParticle;
+
         protected virtual void Start()
         {
             _body = GetComponent<Rigidbody2D>();
@@ -33,6 +33,7 @@ namespace Gameplay.Balls
             _startPos = transform.position;
             _powerBarController = GetComponentInParent<PowerBarController>();
             _ballDurationTimer = ballDuration;
+            _explosionParticle = GetComponentInChildren<ParticleSystem>();
         }
         
         protected virtual void OnCollisionExit2D()
@@ -140,7 +141,7 @@ namespace Gameplay.Balls
         protected virtual void ExplodeBall()
         {
             var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-            explosionParticle.Play();
+            _explosionParticle.Play();
             _ballDurationTimer = 0;
             foreach(var collider in colliders)
             {

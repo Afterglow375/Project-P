@@ -253,7 +253,7 @@ MonoBehaviour:
   force: 700
   ballDuration: 5
   explosionRadius: 0
-  explosionParticle: {fileID: 0}
+  explosionParticle: {fileID: 719912358464259943}
 --- !u!50 &2292406741953592969
 Rigidbody2D:
   serializedVersion: 4
@@ -602,6 +602,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0746ab0bb2fcc6499abf07d04c47a97, type: 3}
+--- !u!198 &719912358464259943 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8561637315505169513, guid: d0746ab0bb2fcc6499abf07d04c47a97, type: 3}
+  m_PrefabInstance: {fileID: 9163892577433756430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4244292472631541240 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5028953135471009526, guid: d0746ab0bb2fcc6499abf07d04c47a97, type: 3}
