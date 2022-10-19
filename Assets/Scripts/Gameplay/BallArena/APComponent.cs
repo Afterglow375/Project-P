@@ -11,15 +11,19 @@ public abstract class APComponent : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            this.ComponentHit();
+            this.ComponentHit(collision);
         }
     }
 
     public virtual void ComponentHit()
     {
         CombatManager.Instance.SpawnDamageNumber(_points, transform);
-        gameObject.SetActive(false);
         InvokeHitEvent();
+    }
+
+    public virtual void ComponentHit(Collision2D collision)
+    {
+        ComponentHit();
     }
 
     public void InvokeHitEvent()
