@@ -54,10 +54,8 @@ namespace Managers
 
         private void Start()
         {
-            PegController.PegHitEvent += ComponentHitByBall;
-            ForceComponentController.ComponentHitEvent += ComponentHitByBall;
-            DiamondController.DiamondHitEvent += ComponentHitByBall;
-            
+            APComponent.HitEvent += ComponentHitByBall;
+
             _currPlayerHp = _playerMaxHp;
             _currEnemyHp = _enemyMaxHp;
             _abilityButtons = GameObject.Find("AbilityButtons").GetComponent<AbilityButtons>();

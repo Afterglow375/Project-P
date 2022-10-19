@@ -12,8 +12,7 @@ namespace Managers
 
         private void Start()
         {
-            PegController.PegHitEvent += PegHitByBall;
-            ForceComponentController.ComponentHitEvent += ComponentHitByBall;
+            APComponent.HitEvent += ComponentHitByBall;
             CombatManager.TargetHitEvent += TargetHit;
             _effectsSource = transform.GetChild(0).GetComponent<AudioSource>();
             _musicSource = transform.GetChild(1).GetComponent<AudioSource>();
