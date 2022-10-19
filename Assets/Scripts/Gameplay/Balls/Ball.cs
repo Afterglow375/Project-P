@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Gameplay.BallArena;
 using Managers;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Gameplay.Balls
         public int force;
         public float ballDuration;
         public static event Action<float> BallTimerChange;
+        public int explosionRadius;
+        public ParticleSystem explosionParticle;
         
         protected Rigidbody2D _body;
         protected Vector3 _startPos;
@@ -65,18 +68,23 @@ namespace Gameplay.Balls
                 _ballDurationTimer -= Time.deltaTime;
                 yield return null;
             }
-            
+
+            ExplodeBall();
             BallTimerChange?.Invoke(0);
             StartResettingBallPosition();
             CombatManager.Instance.DoCombat();
         }
         
-        protected virtual void FixedUpdate()
+        protected virtual void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (_ballTimerStarted && Input.GetKeyDown(KeyCode.Space))
             {
                 ExplodeBall();
             }
+        }
+
+        protected virtual void FixedUpdate()
+        {
             if (_shoot)
             {
                 ShootBall();
@@ -131,10 +139,16 @@ namespace Gameplay.Balls
 
         protected virtual void ExplodeBall()
         {
-            var items = Physics2D.OverlapCircleAll(transform.position, 10);
-            foreach(var item in items)
+            var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+            explosionParticle.Play();
+            _ballDurationTimer = 0;
+            foreach(var collider in colliders)
             {
-                Debug.Log($"exploded: {item.name}");
+                var component = collider.GetComponent<APComponent>();
+                if (component)
+                {
+                    component.ComponentHit();
+                }
             }
         }
     }

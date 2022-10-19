@@ -22,8 +22,14 @@ namespace Gameplay.BallArena
                 collision.rigidbody.AddForce(collision.GetContact(0).normal * _force, ForceMode2D.Impulse);
                 _animator.SetTrigger(_componentHit);
 
-                this.ComponentHit();
+                ComponentHit();
             }
+        }
+
+        public override void ComponentHit()
+        {
+            CombatManager.Instance.SpawnDamageNumber(_points, transform);
+            InvokeHitEvent();
         }
     }
 }
