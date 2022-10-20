@@ -6,9 +6,11 @@ namespace Managers
     {
         public void Execute()
         {
-            Instantiate(Resources.Load<GameObject>("Prefabs/GameManager"));
-            Instantiate(Resources.Load<GameObject>("Prefabs/AudioManager"));
-            Debug.Log("GameManager and AudioManager created");
+            string prefix = "Prefabs/Global Objects/";
+            Instantiate(Resources.Load<GameObject>(prefix + "GameManager"));
+            Instantiate(Resources.Load<GameObject>(prefix + "AudioManager"));
+            Instantiate(Resources.Load<GameObject>(prefix + "SceneLoader"));
+            Debug.Log("GameManager, AudioManager, SceneLoader created");
             // destroy since we no longer need it
             Destroy(this);
         }

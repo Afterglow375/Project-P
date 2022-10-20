@@ -11,7 +11,7 @@ namespace UI.Overworld
         [SerializeField] private GameObject[] _nextLevelObjects;
         [SerializeField] private bool _firstLvl;
         [SerializeField] private bool _lastLvl;
-        [SerializeField] private SceneLoader _sceneLoader;
+        
         private LevelStatus _status;
         private TextMeshProUGUI _text;
         private string _lvlName;
@@ -99,10 +99,10 @@ namespace UI.Overworld
         {
             if (IsLevelPlayable() && _isPlayerColliding)
             {
-                if (Input.GetKey(KeyCode.Mouse0))
+                if (GameManager.Instance.state == GameState.Overworld && Input.GetKey(KeyCode.Mouse0))
                 {
                     GameManager.Instance.SaveRubyPosition(transform.position);
-                    _sceneLoader.LoadScene(_text.text);
+                    SceneLoader.Instance.LoadScene(_text.text);
                 }
             }
         }

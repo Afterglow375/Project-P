@@ -8,7 +8,6 @@ namespace UI.BallArena
 {
     public class LevelFailedUI : MonoBehaviour
     {
-        [SerializeField] private SceneLoader _sceneLoader;
         private GameObject _levelFailed;
 
         private void Awake()
@@ -34,12 +33,12 @@ namespace UI.BallArena
 
         public void RetryLevel()
         {
-            _sceneLoader.LoadScene(SceneManager.GetActiveScene().name);
+            SceneLoader.Instance.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void MainMenu()
         {
-            _sceneLoader.LoadScene(Scenes.MainMenu);
+            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
         }
     }
 }

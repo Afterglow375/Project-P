@@ -6,9 +6,8 @@ namespace UI.Shared
 {
     public class PauseMenuUI : MonoBehaviour
     {
-        [SerializeField] private SceneLoader _sceneLoader;
-        [SerializeField] private GameObject _settingsMenuParent;
         
+        [SerializeField] private GameObject _settingsMenuParent;
         private GameState _previousState;
         private GameObject _pauseMenuUI;
         private SettingsManager _settingsManager;
@@ -56,7 +55,7 @@ namespace UI.Shared
         public void MainMenu()
         {
             Time.timeScale = 1f;
-            _sceneLoader.LoadScene(Scenes.MainMenu);
+            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
         }
 
         public void SettingsMenu()

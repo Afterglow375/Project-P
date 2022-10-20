@@ -7,18 +7,17 @@ namespace UI
 {
     public class MainMenuUI : MonoBehaviour
     {
-        [SerializeField] private SceneLoader _sceneLoader;
         [SerializeField] private SettingsManager _settingsManager;
     
         // these functions are connected to the respective main menu buttons
         public void Play()
         {
-            _sceneLoader.LoadScene(Scenes.Playground);
+            SceneLoader.Instance.LoadScene(Scenes.Playground);
         }
 
         public void Overworld()
         {
-            _sceneLoader.LoadScene(Scenes.Overworld);
+            SceneLoader.Instance.LoadScene(Scenes.Overworld);
         }
 
         public void Settings()

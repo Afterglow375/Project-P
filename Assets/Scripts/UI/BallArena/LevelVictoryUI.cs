@@ -8,8 +8,6 @@ namespace UI.BallArena
 {
     public class LevelVictoryUI : MonoBehaviour
     {
-        [SerializeField] private SceneLoader _sceneLoader;
-        
         private GameObject _levelVictory;
 
         private void Awake()
@@ -36,17 +34,17 @@ namespace UI.BallArena
 
         public void RetryLevel()
         {
-            _sceneLoader.LoadScene(SceneManager.GetActiveScene().name);
+            SceneLoader.Instance.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void Overworld()
         {
-            _sceneLoader.LoadScene(Scenes.Overworld);
+            SceneLoader.Instance.LoadScene(Scenes.Overworld);
         }
 
         public void MainMenu()
         {
-            _sceneLoader.LoadScene(Scenes.MainMenu);
+            SceneLoader.Instance.LoadScene(Scenes.MainMenu);
         }
     }
 }

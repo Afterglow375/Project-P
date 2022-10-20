@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Gameplay;
 using Gameplay.Overworld;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,7 +17,7 @@ namespace Managers
         private bool _levelsInitialized;
         private string _lastLvl;
 
-        private void OnEnable()
+        private void Start()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
@@ -38,7 +37,8 @@ namespace Managers
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             string sceneName = scene.name;
-            Debug.Log("Scene loaded: " + sceneName);
+            string sceneMode = mode == LoadSceneMode.Single ? "as single" : "additively";
+            Debug.Log($"Scene loaded {sceneMode}: {sceneName}");
             UpdateStateBasedOnScene(sceneName);
         }
 
