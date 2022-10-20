@@ -29,8 +29,6 @@ namespace Managers
     
         private void ComponentHitByBall(int damage, string componentType)
         {
-            Debug.Log($"component hit: {componentType}");
-            Debug.Log(nameof(PegController));
             switch (componentType)
             {
                 case nameof(PegController):

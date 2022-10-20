@@ -15,10 +15,17 @@ namespace Gameplay.BallArena
             _animator = GetComponent<Animator>();
         }
 
-        public override void ComponentHit(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            CombatManager.Instance.SpawnDamageNumber(_points, transform);
-            InvokeHitEvent();
+            if (IsBallCollided(collision.gameObject))
+            {
+                ComponentHit(collision);
+            }
+        }
+
+        protected override void ComponentHit(Collision2D collision)
+        {
+            base.ComponentHit(collision);
             collision.rigidbody.AddForce(collision.GetContact(0).normal * _force, ForceMode2D.Impulse);
             _animator.SetTrigger(_componentHit);
         }

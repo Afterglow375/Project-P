@@ -8,7 +8,16 @@ namespace Gameplay.BallArena
     {
         private void OnTriggerEnter2D(Collider2D col)
         {
-            ComponentHit();
+            if (IsBallCollided(col.gameObject))
+            {
+                ComponentHit();
+            }
+        }
+        
+        public override void ComponentHit()
+        {
+            base.ComponentHit();
+            gameObject.SetActive(false);
         }
     }
 }

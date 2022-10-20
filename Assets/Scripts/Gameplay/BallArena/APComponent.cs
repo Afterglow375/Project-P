@@ -1,33 +1,28 @@
-using Managers;
 using System;
+using Managers;
 using UnityEngine;
 
-public abstract class APComponent : MonoBehaviour
+namespace Gameplay.BallArena
 {
-    [SerializeField] protected int _points;
-    public static event Action<int, string> HitEvent;
-
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    public abstract class APComponent : MonoBehaviour
     {
-        if (collision.gameObject.CompareTag("Ball"))
+        [SerializeField] protected int _points;
+        public static event Action<int, string> HitEvent;
+
+        protected bool IsBallCollided(GameObject other)
         {
-            this.ComponentHit(collision);
+            return other.gameObject.CompareTag("Ball");
         }
-    }
 
-    public virtual void ComponentHit()
-    {
-        CombatManager.Instance.SpawnDamageNumber(_points, transform);
-        InvokeHitEvent();
-    }
+        public virtual void ComponentHit()
+        {
+            CombatManager.Instance.SpawnDamageNumber(_points, transform);
+            HitEvent?.Invoke(_points, GetType().Name);
+        }
 
-    public virtual void ComponentHit(Collision2D collision)
-    {
-        ComponentHit();
-    }
-
-    public void InvokeHitEvent()
-    {
-        HitEvent?.Invoke(_points, this.GetType().Name);
+        protected virtual void ComponentHit(Collision2D collision)
+        {
+            ComponentHit();
+        }
     }
 }
