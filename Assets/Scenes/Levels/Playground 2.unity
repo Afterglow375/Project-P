@@ -259,10 +259,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1272310433, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 825735468}
     - target: {fileID: 106141214083224664, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
       propertyPath: m_Name
       value: System
@@ -281,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 106141214083224665, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.14632651
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 106141214083224665, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1413,11 +1409,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6048358534604895335, guid: c56533fde1329074fbf4d6af5fa53f70, type: 3}
   m_PrefabInstance: {fileID: 6048358534322160548}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &825735468 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4801287658189056573, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
-  m_PrefabInstance: {fileID: 9184538174519314285}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &839877291
 PrefabInstance:
