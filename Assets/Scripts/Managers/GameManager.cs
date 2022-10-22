@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Gameplay.Overworld;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
@@ -20,6 +21,7 @@ namespace Managers
         private void Start()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
+            UpdateStateBasedOnScene(SceneManager.GetActiveScene().name);
         }
 
         private void OnDisable()
