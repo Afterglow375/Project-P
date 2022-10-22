@@ -86,6 +86,11 @@ namespace Gameplay.Balls
 
         protected virtual void FixedUpdate()
         {
+            if (GameManager.Instance.state == GameState.Shooting)
+            {
+                transform.up = _body.velocity.normalized;
+            }
+            
             if (_shoot)
             {
                 ShootBall();
