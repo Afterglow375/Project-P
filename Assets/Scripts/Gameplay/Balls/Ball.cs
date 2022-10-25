@@ -11,8 +11,8 @@ namespace Gameplay.Balls
         public int force;
         public float duration;
         public int explosionRadius;
-        public static event Action<float> BallTimerChange;
-        public static event Action BallExplosion;
+        public static event Action<float> BallTimerChangeEvent;
+        public static event Action BallExplosionEvent;
         
         protected Rigidbody2D _body;
         protected Vector3 _startPos;
@@ -83,7 +83,7 @@ namespace Gameplay.Balls
             _ballTimerStarted = true;
             while (_ballDurationTimer > 0)
             {
-                BallTimerChange?.Invoke(_ballDurationTimer);
+                BallTimerChangeEvent?.Invoke(_ballDurationTimer);
                 _ballDurationTimer -= Time.deltaTime;
                 yield return null;
             }
@@ -175,12 +175,12 @@ namespace Gameplay.Balls
         private IEnumerator ExplodeBall()
         {
             _ballDurationTimer = 0;
-            BallTimerChange?.Invoke(_ballDurationTimer);
+            BallTimerChangeEvent?.Invoke(_ballDurationTimer);
             GameManager.Instance.UpdateGameState(GameState.BallExploding);
             _body.constraints = RigidbodyConstraints2D.FreezeAll;
             _body.simulated = false;
             HideBall();
-            BallExplosion?.Invoke();
+            BallExplosionEvent?.Invoke();
             _explosionParticle.Play();
             var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
             foreach (var collider in colliders)

@@ -11,13 +11,13 @@ namespace UI.BallArena
 
         private void Awake()
         {
-            Ball.BallTimerChange += UpdateBallTimer;
+            Ball.BallTimerChangeEvent += UpdateBallTimer;
             LauncherController.BallSwitched += BallSwitched;
         }
 
         private void OnDestroy()
         {
-            Ball.BallTimerChange -= UpdateBallTimer;
+            Ball.BallTimerChangeEvent -= UpdateBallTimer;
             LauncherController.BallSwitched -= BallSwitched;
         }
         
