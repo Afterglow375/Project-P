@@ -106,7 +106,7 @@ namespace Gameplay.Balls
                 _body.angularVelocity = 0;
                 transform.up = _body.velocity.normalized;
             }
-            
+
             if (_shoot)
             {
                 ShootBall();
@@ -134,6 +134,7 @@ namespace Gameplay.Balls
         protected virtual void ShootBall()
         {
             GameManager.Instance.UpdateGameState(GameState.Shooting);
+            _body.simulated = true;
             _body.constraints = RigidbodyConstraints2D.None;
             _body.AddForce(_shootDirection.normalized * force * _powerBarController.shotPowerModifier);
             _shoot = false;
@@ -177,6 +178,7 @@ namespace Gameplay.Balls
             BallTimerChange?.Invoke(_ballDurationTimer);
             GameManager.Instance.UpdateGameState(GameState.BallExploding);
             _body.constraints = RigidbodyConstraints2D.FreezeAll;
+            _body.simulated = false;
             HideBall();
             BallExplosion?.Invoke();
             _explosionParticle.Play();
