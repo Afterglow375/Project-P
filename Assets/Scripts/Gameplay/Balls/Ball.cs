@@ -11,11 +11,13 @@ namespace Gameplay.Balls
         public int force;
         public float ballDuration;
         public static event Action<float> BallTimerChange;
+        public static event Action BallExplosion;
         public int explosionRadius;
         
         protected Rigidbody2D _body;
         protected Vector3 _startPos;
         protected TrailRenderer _trailRenderer;
+        protected SpriteRenderer _spriteRenderer;
         protected PowerBarController _powerBarController;
         protected float _ballDurationTimer;
         protected bool _ballTimerStarted;
@@ -24,18 +26,33 @@ namespace Gameplay.Balls
         protected Vector2 _shootDirection;
         protected bool _resetBall;
         protected ParticleSystem _explosionParticle;
+        protected float _explosionDuration;
+
+        private Color _origColor;
+        private Color _transparentColor;
 
         protected virtual void Start()
         {
             _body = GetComponent<Rigidbody2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _origColor = _transparentColor = _spriteRenderer.color;
+            _transparentColor.a = 0f;
             _trailRenderer = GetComponentInChildren<TrailRenderer>();
             _body.constraints = RigidbodyConstraints2D.FreezePosition;
             _startPos = transform.position;
             _powerBarController = GetComponentInParent<PowerBarController>();
             _ballDurationTimer = ballDuration;
             _explosionParticle = GetComponentInChildren<ParticleSystem>();
+            _explosionDuration = _explosionParticle.main.duration;
+            
+            CombatManager.CombatEndEvent += TriggerBallReset;
         }
-        
+
+        private void OnDestroy()
+        {
+            CombatManager.CombatEndEvent += TriggerBallReset;
+        }
+
         protected virtual void OnCollisionExit2D()
         {
             _body.angularDrag = 100f;
@@ -70,17 +87,14 @@ namespace Gameplay.Balls
                 yield return null;
             }
 
-            ExplodeBall();
-            BallTimerChange?.Invoke(0);
-            StartResettingBallPosition();
-            CombatManager.Instance.DoCombat();
+            yield return ExplodeBall();
         }
-        
+
         protected virtual void Update()
         {
             if (_ballTimerStarted && Input.GetKeyDown(KeyCode.Space))
             {
-                ExplodeBall();
+                StartCoroutine(ExplodeBall());
             }
         }
 
@@ -125,6 +139,7 @@ namespace Gameplay.Balls
 
         protected virtual void ResetBallPosition()
         {
+            ShowBall();
             _body.constraints = RigidbodyConstraints2D.FreezePosition;
             transform.position = _startPos;
             transform.localRotation = Quaternion.identity;
@@ -132,23 +147,39 @@ namespace Gameplay.Balls
             _resetBall = false;
         }
         
-        public void StartShooting(Vector2 shootDirection)
+        public void TriggerShoot(Vector2 shootDirection)
         {
             _shoot = true;
             _shootDirection = shootDirection;
         }
         
-        public void StartResettingBallPosition()
+        public void TriggerBallReset()
         {
+            GameManager.Instance.UpdateGameState(GameState.ResettingBall);
             _resetBall = true;
         }
 
-        protected virtual void ExplodeBall()
+        private void HideBall()
         {
-            var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-            _explosionParticle.Play();
+            _spriteRenderer.color = _transparentColor;
+        }
+
+        private void ShowBall()
+        {
+            _spriteRenderer.color = _origColor;
+        }
+
+        private IEnumerator ExplodeBall()
+        {
             _ballDurationTimer = 0;
-            foreach(var collider in colliders)
+            BallTimerChange?.Invoke(_ballDurationTimer);
+            GameManager.Instance.UpdateGameState(GameState.BallExploding);
+            _body.constraints = RigidbodyConstraints2D.FreezePosition;
+            HideBall();
+            BallExplosion?.Invoke();
+            _explosionParticle.Play();
+            var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+            foreach (var collider in colliders)
             {
                 var component = collider.GetComponent<APComponent>();
                 if (component)
@@ -156,6 +187,9 @@ namespace Gameplay.Balls
                     component.ComponentHit();
                 }
             }
+            
+            yield return new WaitForSeconds(_explosionDuration);
+            CombatManager.Instance.DoCombat();
         }
     }
 }

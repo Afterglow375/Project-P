@@ -46,6 +46,7 @@ namespace Managers
         public static event Action GameVictoryEvent;
         public static event Action LevelFailedEvent;
         public static event Action TargetHitEvent;
+        public static event Action CombatEndEvent;
 
         private void OnDestroy()
         {
@@ -147,7 +148,7 @@ namespace Managers
                 yield break;
             }
             EnemyTurnEndEvent?.Invoke();
-            GameManager.Instance.UpdateGameState(GameState.ReadyToShoot);
+            CombatEndEvent?.Invoke();
         }
 
         public int GetMaxPlayerHp()

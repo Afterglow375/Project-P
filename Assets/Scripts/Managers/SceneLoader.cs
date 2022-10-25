@@ -14,8 +14,6 @@ namespace Managers
         [SerializeField] private GameObject _canvasObject;
         [SerializeField] private CanvasGroup _canvasGroup;
         private float _transitionTime = .25f;
-        private readonly int _sceneFadeout = Animator.StringToHash("Scene Fadeout");
-        private readonly int _sceneFadein = Animator.StringToHash("Scene Fadein");
         
         private void Start()
         {

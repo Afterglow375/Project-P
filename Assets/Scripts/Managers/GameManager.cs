@@ -128,6 +128,8 @@ namespace Managers
         LoadingScene,
         ReadyToShoot,
         Shooting,
+        BallExploding,
+        ResettingBall,
         PlayerTurn,
         EnemyTurn,
         LevelVictory,

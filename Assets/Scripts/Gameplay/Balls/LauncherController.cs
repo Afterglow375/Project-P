@@ -34,7 +34,7 @@ namespace Gameplay.Balls
                 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    _ball.StartShooting(_shootDirection);
+                    _ball.TriggerShoot(_shootDirection);
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha1) && _ball is not BasicBall)
                 {
