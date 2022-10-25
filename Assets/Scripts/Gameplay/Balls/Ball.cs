@@ -9,10 +9,10 @@ namespace Gameplay.Balls
     public abstract class Ball : MonoBehaviour
     {
         public int force;
-        public float ballDuration;
+        public float duration;
+        public int explosionRadius;
         public static event Action<float> BallTimerChange;
         public static event Action BallExplosion;
-        public int explosionRadius;
         
         protected Rigidbody2D _body;
         protected Vector3 _startPos;
@@ -42,7 +42,7 @@ namespace Gameplay.Balls
             _body.constraints = RigidbodyConstraints2D.FreezePosition;
             _startPos = transform.position;
             _powerBarController = GetComponentInParent<PowerBarController>();
-            _ballDurationTimer = ballDuration;
+            _ballDurationTimer = duration;
             _explosionParticle = GetComponentInChildren<ParticleSystem>();
             _explosionDuration = _explosionParticle.main.duration;
             
@@ -51,7 +51,7 @@ namespace Gameplay.Balls
 
         private void OnDestroy()
         {
-            CombatManager.CombatEndEvent += TriggerBallReset;
+            CombatManager.CombatEndEvent -= TriggerBallReset;
         }
 
         protected virtual void OnCollisionExit2D()
@@ -115,7 +115,7 @@ namespace Gameplay.Balls
             if (_resetBall)
             {
                 _ballTimerStarted = false;
-                _ballDurationTimer = ballDuration;
+                _ballDurationTimer = duration;
                 ResetBallPosition();
             }
         }

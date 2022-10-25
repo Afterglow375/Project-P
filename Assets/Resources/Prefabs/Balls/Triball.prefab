@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 700
-  ballDuration: 5
+  duration: 7
   explosionRadius: 1
 --- !u!1001 &2289768452990435467
 PrefabInstance:

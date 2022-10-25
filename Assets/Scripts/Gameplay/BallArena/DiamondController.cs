@@ -17,7 +17,7 @@ namespace Gameplay.BallArena
         public override void ComponentHit()
         {
             base.ComponentHit();
-            gameObject.SetActive(false);
+            HideComponent();
         }
     }
 }

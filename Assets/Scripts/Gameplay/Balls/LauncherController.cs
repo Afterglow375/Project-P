@@ -13,8 +13,8 @@ namespace Gameplay.Balls
         private Vector3 _ballLocation;
         private Ball _ball;
         
-        // params: ball duration
-        public static event Action<float> BallSwitched;
+        // params: ball
+        public static event Action<Ball> BallSwitched;
         
         private void Start()
         {
@@ -55,7 +55,7 @@ namespace Gameplay.Balls
             _ballPrefab.transform.position = _ballLocation;
             _ballPrefab.transform.localRotation = rotation;
             _ball = _ballPrefab.GetComponent<Ball>();
-            BallSwitched?.Invoke(_ball.ballDuration);
+            BallSwitched?.Invoke(_ball);
             Debug.Log("Ball switched: " + ball);
         }
     }

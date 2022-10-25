@@ -48,11 +48,6 @@ namespace Managers
         public static event Action TargetHitEvent;
         public static event Action CombatEndEvent;
 
-        private void OnDestroy()
-        {
-            APComponent.HitEvent -= ComponentHitByBall;
-        }
-
         private void Start()
         {
             APComponent.HitEvent += ComponentHitByBall;
@@ -66,6 +61,11 @@ namespace Managers
             _maxEnemyDamage /= 5;
             
             _damageNumberPrefab = Resources.Load("Prefabs/DamageNumber") as GameObject;
+        }
+        
+        private void OnDestroy()
+        {
+            APComponent.HitEvent -= ComponentHitByBall;
         }
 
         private void ComponentHitByBall(int score, string componentType)
@@ -169,22 +169,20 @@ namespace Managers
         public void SpawnDamageNumber(int damage, Transform parentTransform)
         {
             GameObject damageNumber;
-            int currDmg;
             if (parentTransform.childCount == 0)
             {
                 damageNumber = Instantiate(_damageNumberPrefab, parentTransform.position, Quaternion.identity);
                 damageNumber.transform.parent = parentTransform;
-                currDmg = 0;
             }
             else // stack dmg number if it's already there
             {
                 damageNumber = parentTransform.GetChild(0).gameObject;
-                currDmg = Int32.Parse(damageNumber.GetComponentInChildren<TextMeshPro>().text);
+                damage = Int32.Parse(damageNumber.GetComponentInChildren<TextMeshPro>().text) + damage;
                 // re-start animation to just before the halfway mark
                 damageNumber.GetComponentInChildren<Animator>().Play("Damage Text", -1, .4f);
             }
             
-            damageNumber.GetComponentInChildren<TextMeshPro>().SetText((damage + currDmg).ToString());
+            damageNumber.GetComponentInChildren<TextMeshPro>().SetText(damage.ToString());
         }
     }
 }

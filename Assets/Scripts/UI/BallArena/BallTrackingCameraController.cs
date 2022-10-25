@@ -17,6 +17,7 @@ namespace UI.BallArena
         private void Start()
         {
             Ball.BallExplosion += BallExplosion;
+            LauncherController.BallSwitched += BallSwitched;
             _vCam = GetComponent<CinemachineVirtualCamera>();
             Debug.Assert(_vCam.Follow != null, "Must set the Follow of BallOriginCameraController to be the ball");
             _composer = _vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -27,6 +28,7 @@ namespace UI.BallArena
         private void OnDestroy()
         {
             Ball.BallExplosion -= BallExplosion;
+            LauncherController.BallSwitched -= BallSwitched;
         }
 
         // center on ball when it explodes via removing dead zone
@@ -42,6 +44,11 @@ namespace UI.BallArena
             _composer.m_DeadZoneWidth = _origDeadZoneWidth;
             _composer.m_DeadZoneHeight = _origDeadZoneHeight;
             _composer.m_UnlimitedSoftZone = false;       
+        }
+
+        private void BallSwitched(Ball ball)
+        {
+            _vCam.Follow = ball.transform;
         }
     }
 }

@@ -44,9 +44,9 @@ namespace UI.BallArena
             return time.ToString("0.0");
         }
 
-        private void BallSwitched(float duration)
+        private void BallSwitched(Ball ball)
         {
-            _ballDuration = duration;
+            _ballDuration = ball.duration;
             _ballTimerText.SetText(FormatTimer(_ballDuration));
         }
     }

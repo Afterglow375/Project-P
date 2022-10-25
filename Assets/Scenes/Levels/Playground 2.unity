@@ -3428,6 +3428,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 806268260}
     m_Modifications:
+    - target: {fileID: 1624489426627552916, guid: b9ffe01b93db5014687a765f4a40e375, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1624489426627552917, guid: b9ffe01b93db5014687a765f4a40e375, type: 3}
       propertyPath: m_Name
       value: Diamond (1)
@@ -3475,6 +3479,10 @@ PrefabInstance:
     - target: {fileID: 1624489426627552918, guid: b9ffe01b93db5014687a765f4a40e375, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624489426627552919, guid: b9ffe01b93db5014687a765f4a40e375, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9ffe01b93db5014687a765f4a40e375, type: 3}

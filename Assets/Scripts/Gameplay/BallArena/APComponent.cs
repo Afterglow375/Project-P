@@ -24,5 +24,11 @@ namespace Gameplay.BallArena
         {
             ComponentHit();
         }
+
+        protected void HideComponent()
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+        }
     }
 }
