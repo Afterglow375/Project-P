@@ -23,6 +23,7 @@ namespace Gameplay.Balls
         protected bool _ballTimerStarted;
         protected bool _firstCollision;
         protected bool _shoot;
+        protected bool _onCollisionStay;
         protected Vector2 _shootDirection;
         protected bool _resetBall;
         protected ParticleSystem _explosionParticle;
@@ -55,7 +56,7 @@ namespace Gameplay.Balls
 
         protected virtual void OnCollisionExit2D()
         {
-            _body.angularDrag = 100f;
+            _onCollisionStay = false;
             if (_firstCollision)
             {
                 FirstCollisionExit();
@@ -65,7 +66,7 @@ namespace Gameplay.Balls
         // lower the drag for the ball to be able to roll on surfaces
         protected virtual void OnCollisionStay2D()
         {
-            _body.angularDrag = 0.05f;
+            _onCollisionStay = true;
         }
 
         // start ball duration timer on first collision
@@ -100,8 +101,9 @@ namespace Gameplay.Balls
 
         protected virtual void FixedUpdate()
         {
-            if (GameManager.Instance.state == GameState.Shooting)
+            if (GameManager.Instance.state == GameState.Shooting && !_onCollisionStay)
             {
+                _body.angularVelocity = 0;
                 transform.up = _body.velocity.normalized;
             }
             
@@ -174,7 +176,7 @@ namespace Gameplay.Balls
             _ballDurationTimer = 0;
             BallTimerChange?.Invoke(_ballDurationTimer);
             GameManager.Instance.UpdateGameState(GameState.BallExploding);
-            _body.constraints = RigidbodyConstraints2D.FreezePosition;
+            _body.constraints = RigidbodyConstraints2D.FreezeAll;
             HideBall();
             BallExplosion?.Invoke();
             _explosionParticle.Play();
