@@ -18,7 +18,7 @@ namespace UI.BallArena
         {
             Ball.BallExplosion += BallExplosion;
             _vCam = GetComponent<CinemachineVirtualCamera>();
-            Debug.Assert(_vCam.Follow != null);
+            Debug.Assert(_vCam.Follow != null, "Must set the Follow of BallOriginCameraController to be the ball");
             _composer = _vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
             _origDeadZoneWidth = _composer.m_DeadZoneWidth;
             _origDeadZoneHeight = _composer.m_DeadZoneHeight;

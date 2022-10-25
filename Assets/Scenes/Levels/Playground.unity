@@ -575,12 +575,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1272310433, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 5
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 472773703}
+    - target: {fileID: 1272310434, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.25
       objectReference: {fileID: 0}
-    - target: {fileID: 106141213425723289, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
-      propertyPath: orthographic size
-      value: 5
+    - target: {fileID: 1839731873, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839731876, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 472773703}
+    - target: {fileID: 106141213425723238, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 106141214083224664, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
       propertyPath: m_Name
@@ -1369,6 +1381,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f4d44dc76fb77f478e2fcb6e92a067d, type: 3}
+--- !u!4 &472773703 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4801287658189056573, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
+  m_PrefabInstance: {fileID: 9184538174519314285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &474353373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1807805052527326150, guid: 0f4d44dc76fb77f478e2fcb6e92a067d, type: 3}

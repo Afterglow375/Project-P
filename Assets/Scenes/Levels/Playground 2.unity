@@ -263,22 +263,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1486379357}
-    - target: {fileID: 1272310434, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1839731876, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1486379357}
-    - target: {fileID: 1897169182, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
-      propertyPath: m_DeadZoneWidth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1897169182, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
-      propertyPath: m_DeadZoneHeight
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 106141214083224664, guid: b87f79785d228344b98ccfe57bba8d08, type: 3}
       propertyPath: m_Name
       value: System
