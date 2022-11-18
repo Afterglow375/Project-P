@@ -123,8 +123,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2344691858724474013}
-        m_TargetAssemblyTypeName: UI.PauseMenu, Assembly-CSharp
-        m_MethodName: ResumeGame
+        m_TargetAssemblyTypeName: UI.Shared.PauseMenuUI, Assembly-CSharp
+        m_MethodName: SettingsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -383,7 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce56cb0872e64f479aabb330bf36d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneLoader: {fileID: 0}
   _settingsMenuParent: {fileID: 0}
 --- !u!1 &5975091877619315494
 GameObject:
@@ -402,7 +401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5975091877619315493
 RectTransform:
   m_ObjectHideFlags: 0
