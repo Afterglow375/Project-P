@@ -136,7 +136,7 @@ namespace Gameplay.Balls
             GameManager.Instance.UpdateGameState(GameState.Shooting);
             _body.simulated = true;
             _body.constraints = RigidbodyConstraints2D.None;
-            _body.AddForce(_shootDirection.normalized * force * _powerBarController.shotPowerModifier);
+            _body.AddForce(_shootDirection.normalized * force * _powerBarController.GetPowerModifier());
             _shoot = false;
         }
 

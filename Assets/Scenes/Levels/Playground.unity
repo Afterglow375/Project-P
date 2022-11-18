@@ -5182,7 +5182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6535452885814854538, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6535452885814854538, guid: b526efeb683e60c42a5c50413ef95118, type: 3}
       propertyPath: m_LocalPosition.x

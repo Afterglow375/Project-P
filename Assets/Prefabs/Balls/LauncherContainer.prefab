@@ -259,8 +259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _powerBar: {fileID: 9000108290530709659}
-  shotPowerModifier: 0
-  scrollIncrement: 0.05
+  _powerBarCanvas: {fileID: 2401671304822035091}
+  powerBarChangeIncrement: 0.05
 --- !u!1 &2401671304822035091
 GameObject:
   m_ObjectHideFlags: 0

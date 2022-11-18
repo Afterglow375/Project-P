@@ -7,37 +7,47 @@ namespace Gameplay.Balls
     public class PowerBarController : MonoBehaviour
     {
         [SerializeField] private Image _powerBar;
-        private GameObject _powerBarCanvas;
-
-        public float shotPowerModifier;
-        public float scrollIncrement = 0.05f;
-
-        void Start()
-        {
-            _powerBarCanvas = GameObject.Find("PowerBarCanvas");
-        }
+        [SerializeField] private GameObject _powerBarCanvas;
+        [SerializeField] private float powerBarChangeIncrement = 0.05f;
+        private float _timeHeld;
 
         void Update()
         {
-            shotPowerModifier = _powerBar.fillAmount;
-
             if (GameManager.Instance.state == GameState.ReadyToShoot)
             {
-                _powerBarCanvas.SetActive(true);
+                if (!_powerBarCanvas.activeSelf) _powerBarCanvas.SetActive(true);
 
-                if (Input.mouseScrollDelta.y > 0)
+                if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.W))
                 {
-                    _powerBar.fillAmount += scrollIncrement;
+                    _timeHeld = 0;
                 }
-                else if (Input.mouseScrollDelta.y < 0)
+                
+                if (Input.GetKey(KeyCode.Q))
                 {
-                    _powerBar.fillAmount -= scrollIncrement;
+                    UpdatePowerBar(-powerBarChangeIncrement);
                 }
+                else if (Input.GetKey(KeyCode.W))
+                {
+                    UpdatePowerBar(powerBarChangeIncrement);
+                }
+
             }
-            else
+            else if (_powerBarCanvas.activeSelf)
             {
                 _powerBarCanvas.SetActive(false);
             }
+
+        }
+
+        private void UpdatePowerBar(float powerBarIncrement)
+        {
+            _timeHeld += Time.deltaTime;
+            _powerBar.fillAmount += powerBarIncrement * (_timeHeld / 4);
+        }
+
+        public float GetPowerModifier()
+        {
+            return _powerBar.fillAmount;
         }
     }
 }

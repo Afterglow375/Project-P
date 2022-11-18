@@ -65,7 +65,7 @@ namespace Gameplay.Balls
             {
                 //Remember f(t) = (x0 + x*t, y0 + y*t - 9.81t?/2)
                 //calculatedPosition = Origin + (transform.up * (speed * which step * the length of a step);
-                Vector2 calculatedPosition = launchPosition + directionVector * _vel * i * timeStepInterval * _powerBarController.shotPowerModifier; //Move both X and Y at a constant speed per Interval
+                Vector2 calculatedPosition = launchPosition + directionVector * _vel * i * timeStepInterval * _powerBarController.GetPowerModifier(); //Move both X and Y at a constant speed per Interval
                 calculatedPosition.y += Physics2D.gravity.y / 2 * Mathf.Pow(i * timeStepInterval, 2); //Subtract Gravity from Y
 
                 lineRendererPoints.Add(calculatedPosition); //Add this to the next entry on the list
