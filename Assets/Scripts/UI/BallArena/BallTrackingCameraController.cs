@@ -16,6 +16,7 @@ namespace UI.BallArena
         private Vector3 _origCameraPosition;
         private float _origDeadZoneWidth;
         private float _origDeadZoneHeight;
+        private bool _resetBall;
 
         private void Start()
         {
@@ -47,13 +48,14 @@ namespace UI.BallArena
             _composer.m_DeadZoneWidth = _origDeadZoneWidth;
             _composer.m_DeadZoneHeight = _origDeadZoneHeight;
             _composer.m_UnlimitedSoftZone = false;
+            _vCam.Follow = _ballTransform;
         }
 
         private void BallSwitched(Ball ball)
         {
             _vCam.Follow = ball.transform;
         }
-        
+
         void Update()
         {
             float horizontal = Input.GetAxis("Horizontal");
@@ -69,6 +71,7 @@ namespace UI.BallArena
             
             if (Input.GetKeyDown(KeyCode.C))
             {
+                Input.ResetInputAxes();
                 _vCam.Follow = _ballTransform;
             }
         }
