@@ -17,7 +17,7 @@ namespace Gameplay.Balls
             {
                 if (!_powerBarCanvas.activeSelf) _powerBarCanvas.SetActive(true);
 
-                if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.W))
+                if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
                 {
                     _timeHeld = 0;
                 }
@@ -26,7 +26,7 @@ namespace Gameplay.Balls
                 {
                     UpdatePowerBar(-powerBarChangeIncrement);
                 }
-                else if (Input.GetKey(KeyCode.W))
+                else if (Input.GetKey(KeyCode.E))
                 {
                     UpdatePowerBar(powerBarChangeIncrement);
                 }

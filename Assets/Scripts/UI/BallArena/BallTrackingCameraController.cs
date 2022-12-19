@@ -8,6 +8,8 @@ namespace UI.BallArena
 {
     public class BallTrackingCameraController : MonoBehaviour
     {
+        [SerializeField] private float _cameraMoveSpeed;
+        
         private CinemachineVirtualCamera _vCam;
         private CinemachineFramingTransposer _composer;
         private Vector3 _origCameraPosition;
@@ -19,7 +21,7 @@ namespace UI.BallArena
             Ball.BallExplosionEvent += BallExplosionEvent;
             LauncherController.BallSwitched += BallSwitched;
             _vCam = GetComponent<CinemachineVirtualCamera>();
-            Debug.Assert(_vCam.Follow != null, "Must set the Follow of BallOriginCameraController to be the ball");
+            Debug.Assert(_vCam.Follow != null, "Must set the Follow of BallTrackingCameraController to be the ball");
             _composer = _vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
             _origDeadZoneWidth = _composer.m_DeadZoneWidth;
             _origDeadZoneHeight = _composer.m_DeadZoneHeight;
@@ -43,12 +45,25 @@ namespace UI.BallArena
         {
             _composer.m_DeadZoneWidth = _origDeadZoneWidth;
             _composer.m_DeadZoneHeight = _origDeadZoneHeight;
-            _composer.m_UnlimitedSoftZone = false;       
+            _composer.m_UnlimitedSoftZone = false;
         }
 
         private void BallSwitched(Ball ball)
         {
             _vCam.Follow = ball.transform;
+        }
+        
+        void Update()
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+
+            if (horizontal != 0 || vertical != 0)
+            {
+                _vCam.Follow = null;
+                Vector3 direction = new Vector3(horizontal, vertical, 0);
+                transform.position += direction * _cameraMoveSpeed * Time.deltaTime;
+            }
         }
     }
 }
