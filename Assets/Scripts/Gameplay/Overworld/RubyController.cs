@@ -37,8 +37,8 @@ namespace Gameplay.Overworld
         private void FixedUpdate()
         {
             Vector2 position = _rigidbody2D.position;
-            position.x += 4.0f * _horizontal * Time.deltaTime;
-            position.y += 4.0f * _vertical * Time.deltaTime;
+            position.x += 4.0f * _horizontal * Time.fixedDeltaTime;
+            position.y += 4.0f * _vertical * Time.fixedDeltaTime;
             _rigidbody2D.MovePosition(position);
         }
     }
