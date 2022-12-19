@@ -11,6 +11,7 @@ namespace UI.BallArena
         [SerializeField] private float _cameraMoveSpeed;
         
         private CinemachineVirtualCamera _vCam;
+        private Transform _ballTransform;
         private CinemachineFramingTransposer _composer;
         private Vector3 _origCameraPosition;
         private float _origDeadZoneWidth;
@@ -60,9 +61,15 @@ namespace UI.BallArena
 
             if (horizontal != 0 || vertical != 0)
             {
+                if (_ballTransform == null) _ballTransform = _vCam.Follow;
                 _vCam.Follow = null;
                 Vector3 direction = new Vector3(horizontal, vertical, 0);
                 transform.position += direction * _cameraMoveSpeed * Time.deltaTime;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                _vCam.Follow = _ballTransform;
             }
         }
     }
