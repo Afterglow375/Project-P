@@ -34,9 +34,12 @@ namespace UI.BallArena
                         _ballOriginCameraController.gameObject.SetActive(true);
                     }
                 }
-                else
+                else if (!_blendStarted)
                 {
                     _blendStarted = true;
+                    float orthoSize = _ballTrackingCameraController.GetCamOrthoSize();
+                    // set ortho size and posiition of ball origin cam to match zoom level of ball tracking cam 
+                    _ballOriginCameraController.AdjustCameraPosition(orthoSize);
                 }
             }
         }

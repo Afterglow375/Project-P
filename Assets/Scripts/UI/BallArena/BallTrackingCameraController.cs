@@ -27,6 +27,7 @@ namespace UI.BallArena
             _composer = _vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
             _origDeadZoneWidth = _composer.m_DeadZoneWidth;
             _origDeadZoneHeight = _composer.m_DeadZoneHeight;
+            _ballTransform = _vCam.Follow;
         }
 
         private void OnDestroy()
@@ -53,7 +54,7 @@ namespace UI.BallArena
 
         private void BallSwitched(Ball ball)
         {
-            _vCam.Follow = ball.transform;
+            _ballTransform = _vCam.Follow = ball.transform;
         }
 
         void Update()
@@ -63,7 +64,6 @@ namespace UI.BallArena
 
             if (horizontal != 0 || vertical != 0)
             {
-                if (_ballTransform == null) _ballTransform = _vCam.Follow;
                 _vCam.Follow = null;
                 Vector3 direction = new Vector3(horizontal, vertical, 0);
                 transform.position += direction * _cameraMoveSpeed * Time.deltaTime;
@@ -74,6 +74,22 @@ namespace UI.BallArena
                 Input.ResetInputAxes();
                 _vCam.Follow = _ballTransform;
             }
+            
+            float zoom = Input.GetAxis("Mouse ScrollWheel");
+
+            if (zoom != 0)
+            {
+                // prevent zoom in past 1.0f orthographic cam size
+                if (zoom > 0 && _vCam.m_Lens.OrthographicSize < 1.01f) return;
+
+                _vCam.m_Lens.OrthographicSize -= zoom;
+                _composer.ForceCameraPosition(transform.position + new Vector3(0f, -0.25f * zoom, 0f), Quaternion.identity);
+            }
+        }
+        
+        public float GetCamOrthoSize()
+        {
+            return _vCam.m_Lens.OrthographicSize;
         }
     }
 }
