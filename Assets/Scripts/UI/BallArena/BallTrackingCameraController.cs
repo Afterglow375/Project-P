@@ -17,6 +17,12 @@ namespace UI.BallArena
         private float _origDeadZoneWidth;
         private float _origDeadZoneHeight;
         private bool _resetBall;
+        private float _cameraSensitivity = 3;
+        private float _cameraGravity = 2;
+        private float _horizontalAxis;
+        private float _verticalAxis;
+        private Vector3 _mouseDragOrigin;
+        private Camera _cam;
 
         private void Start()
         {
@@ -28,6 +34,7 @@ namespace UI.BallArena
             _origDeadZoneWidth = _composer.m_DeadZoneWidth;
             _origDeadZoneHeight = _composer.m_DeadZoneHeight;
             _ballTransform = _vCam.Follow;
+            _cam = Camera.main;
         }
 
         private void OnDestroy()
@@ -42,6 +49,19 @@ namespace UI.BallArena
             {
                 float horizontal = Input.GetAxisRaw("Horizontal");
                 float vertical = Input.GetAxisRaw("Vertical");
+                // GetSmoothRawAxis(horizontal, ref _horizontalAxis);
+                // GetSmoothRawAxis(vertical, ref _verticalAxis);
+                // camera panning when holding middle mouse and dragging
+                if (Input.GetMouseButtonDown(2))
+                {
+                    _vCam.Follow = null;
+                    _mouseDragOrigin = _cam.ScreenToWorldPoint(Input.mousePosition);
+                }
+                if (Input.GetMouseButton(2))
+                {
+                    Vector3 difference = _mouseDragOrigin - _cam.ScreenToWorldPoint(Input.mousePosition);
+                    transform.position += difference;
+                }
                 if (horizontal != 0 || vertical != 0) // camera panning with WASD
                 {
                     _vCam.Follow = null;
@@ -49,7 +69,7 @@ namespace UI.BallArena
                     Debug.Log(direction);
                     transform.position += direction * _cameraMoveSpeed * Time.deltaTime;
                 }
-                else if (Input.GetMouseButtonDown(2)) // camera panning when holding middle mouse and dragging
+                else if (Input.GetMouseButtonDown(2)) 
                 {
                     _vCam.Follow = null;
                     // Debug.Log(Input.GetAxis("Mouse X") + " " + Input.GetAxis("Mouse Y"));
@@ -100,6 +120,22 @@ namespace UI.BallArena
             _composer.m_DeadZoneHeight = _origDeadZoneHeight;
             _composer.m_UnlimitedSoftZone = false;
             _vCam.Follow = _ballTransform;
+        }
+        
+        private void GetSmoothRawAxis(float r, ref float axis, float limit = 1f)
+        {
+            if (r != 0)
+            {
+                if (Mathf.Sign(r) != Mathf.Sign(axis))
+                {
+                    axis = 0;
+                }
+                axis = Mathf.Clamp(axis + r * _cameraSensitivity * Time.deltaTime, -limit, limit);
+            }
+            else
+            {
+                axis = Mathf.Clamp01(Mathf.Abs(axis) - _cameraGravity * Time.deltaTime) * Mathf.Sign(axis);
+            }
         }
 
         private Vector2 CalculateEdgePanDirection(Vector2 mousePos)
