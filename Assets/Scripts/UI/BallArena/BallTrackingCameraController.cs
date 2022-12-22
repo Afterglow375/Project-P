@@ -69,14 +69,6 @@ namespace UI.BallArena
                     Debug.Log(direction);
                     transform.position += direction * _cameraMoveSpeed * Time.deltaTime;
                 }
-                else if (Input.GetMouseButtonDown(2)) 
-                {
-                    _vCam.Follow = null;
-                    // Debug.Log(Input.GetAxis("Mouse X") + " " + Input.GetAxis("Mouse Y"));
-                    float mouseX = Input.GetAxis("Mouse X");
-                    float mouseY = Input.GetAxis("Mouse Y");
-                    transform.position += new Vector3(mouseX, mouseY, 0) * _cameraMoveSpeed * Time.deltaTime;
-                }
                 else { // camera panning when mousing on edge of screen
                     Vector2 panDirection = CalculateEdgePanDirection(Input.mousePosition);
                     if (panDirection != Vector2.zero)
