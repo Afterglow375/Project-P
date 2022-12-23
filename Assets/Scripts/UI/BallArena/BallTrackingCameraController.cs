@@ -50,8 +50,8 @@ namespace UI.BallArena
             {
                 _panDirection.x = Input.GetAxisRaw("Horizontal");
                 _panDirection.y = Input.GetAxisRaw("Vertical");
-                CalculateEdgePanDirection(Input.mousePosition);
-                Debug.Log(_panDirection);
+                // TODO: uncomment this for release
+                // CalculateEdgePanDirection(Input.mousePosition);
                 GetSmoothRawAxis(_panDirection.x, ref _horizontalAxis);
                 GetSmoothRawAxis(_panDirection.y, ref _verticalAxis);
                 
