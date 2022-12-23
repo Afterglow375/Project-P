@@ -22,7 +22,7 @@ namespace UI.BallArena
         private float _horizontalAxis;
         private float _verticalAxis;
         private Vector3 _mouseDragOrigin;
-        private Vector2 _panDirection = Vector2.zero;
+        private Vector3 _panDirection = Vector3.zero;
         private Camera _cam;
 
         private void Start()
@@ -48,13 +48,6 @@ namespace UI.BallArena
         {
             if (GameManager.Instance.state != GameState.ResettingBall && GameManager.Instance.state != GameState.Pause)
             {
-                _panDirection.x = Input.GetAxisRaw("Horizontal");
-                _panDirection.y = Input.GetAxisRaw("Vertical");
-                // TODO: uncomment this for release
-                // CalculateEdgePanDirection(Input.mousePosition);
-                GetSmoothRawAxis(_panDirection.x, ref _horizontalAxis);
-                GetSmoothRawAxis(_panDirection.y, ref _verticalAxis);
-                
                 // camera panning when holding middle mouse and dragging
                 if (Input.GetMouseButtonDown(2))
                 {
@@ -66,11 +59,21 @@ namespace UI.BallArena
                     Vector3 difference = _mouseDragOrigin - _cam.ScreenToWorldPoint(Input.mousePosition);
                     transform.position += difference;
                 }
-                else if (_horizontalAxis != 0 || _verticalAxis != 0)
+                else
                 {
-                    _vCam.Follow = null;
-                    Vector3 direction = new Vector3(_horizontalAxis, _verticalAxis, 0);
-                    transform.position += direction * _cameraMoveSpeed * Time.deltaTime;
+                    _horizontalAxis = Input.GetAxisRaw("Horizontal");
+                    _verticalAxis = Input.GetAxisRaw("Vertical");
+                    // TODO: uncomment this for release
+                    // CalculateEdgePanDirection(Input.mousePosition);
+                    _panDirection.x = GetSmoothAxis(_horizontalAxis, _panDirection.x);
+                    _panDirection.y = GetSmoothAxis(_verticalAxis, _panDirection.y);
+                    
+                    // camera panning w/ WASD or edge panning
+                    if (_panDirection != Vector3.zero)
+                    {
+                        _vCam.Follow = null;
+                        transform.position += _panDirection * _cameraMoveSpeed * Time.deltaTime;
+                    }
                 }
 
                 // zoom in/out with mousewheel
@@ -87,8 +90,7 @@ namespace UI.BallArena
                 if (Input.GetKeyDown(KeyCode.C))
                 {
                     Input.ResetInputAxes();
-                    _horizontalAxis = 0;
-                    _verticalAxis = 0;
+                    _panDirection = Vector3.zero;
                     _vCam.Follow = _ballTransform;
                 }
             }
@@ -110,7 +112,7 @@ namespace UI.BallArena
             _vCam.Follow = _ballTransform;
         }
         
-        private void GetSmoothRawAxis(float r, ref float axis, float limit = 1f)
+        private float GetSmoothAxis(float r, float axis, float limit = 1f)
         {
             if (r != 0)
             {
@@ -124,25 +126,27 @@ namespace UI.BallArena
             {
                 axis = Mathf.Clamp01(Mathf.Abs(axis) - _cameraGravity * Time.deltaTime) * Mathf.Sign(axis);
             }
+
+            return axis;
         }
 
         private void CalculateEdgePanDirection(Vector2 mousePos)
         {
-            if (mousePos.y >= Screen.height * .999f && _panDirection.y < 1)
+            if (mousePos.y >= Screen.height * .999f && _verticalAxis < 1)
             {
-                _panDirection.y += 1;
+                _verticalAxis += 1;
             }
-            else if (mousePos.y <= .001f && _panDirection.y > -1)
+            else if (mousePos.y <= .001f && _verticalAxis > -1)
             {
-                _panDirection.y -= 1;
+                _verticalAxis -= 1;
             }
-            if (mousePos.x >= Screen.width * .999f && _panDirection.x < 1)
+            if (mousePos.x >= Screen.width * .999f && _horizontalAxis < 1)
             {
-                _panDirection.x += 1;
+                _horizontalAxis += 1;
             }
-            else if (mousePos.x <= .001f && _panDirection.x > -1)
+            else if (mousePos.x <= .001f && _horizontalAxis > -1)
             {
-                _panDirection.x -= 1;
+                _horizontalAxis -= 1;
             }
         }
 
