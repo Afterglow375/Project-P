@@ -17,11 +17,12 @@ namespace UI.BallArena
         private float _origDeadZoneWidth;
         private float _origDeadZoneHeight;
         private bool _resetBall;
-        private float _cameraSensitivity = 3;
-        private float _cameraGravity = 2;
+        private float _cameraSensitivity = 10;
+        private float _cameraGravity = 5;
         private float _horizontalAxis;
         private float _verticalAxis;
         private Vector3 _mouseDragOrigin;
+        private Vector2 _panDirection = Vector2.zero;
         private Camera _cam;
 
         private void Start()
@@ -47,10 +48,13 @@ namespace UI.BallArena
         {
             if (GameManager.Instance.state != GameState.ResettingBall && GameManager.Instance.state != GameState.Pause)
             {
-                float horizontal = Input.GetAxisRaw("Horizontal");
-                float vertical = Input.GetAxisRaw("Vertical");
-                // GetSmoothRawAxis(horizontal, ref _horizontalAxis);
-                // GetSmoothRawAxis(vertical, ref _verticalAxis);
+                _panDirection.x = Input.GetAxisRaw("Horizontal");
+                _panDirection.y = Input.GetAxisRaw("Vertical");
+                CalculateEdgePanDirection(Input.mousePosition);
+                Debug.Log(_panDirection);
+                GetSmoothRawAxis(_panDirection.x, ref _horizontalAxis);
+                GetSmoothRawAxis(_panDirection.y, ref _verticalAxis);
+                
                 // camera panning when holding middle mouse and dragging
                 if (Input.GetMouseButtonDown(2))
                 {
@@ -62,37 +66,29 @@ namespace UI.BallArena
                     Vector3 difference = _mouseDragOrigin - _cam.ScreenToWorldPoint(Input.mousePosition);
                     transform.position += difference;
                 }
-                if (horizontal != 0 || vertical != 0) // camera panning with WASD
+                else if (_horizontalAxis != 0 || _verticalAxis != 0)
                 {
                     _vCam.Follow = null;
-                    Vector3 direction = new Vector3(horizontal, vertical, 0);
-                    Debug.Log(direction);
+                    Vector3 direction = new Vector3(_horizontalAxis, _verticalAxis, 0);
                     transform.position += direction * _cameraMoveSpeed * Time.deltaTime;
                 }
-                else { // camera panning when mousing on edge of screen
-                    Vector2 panDirection = CalculateEdgePanDirection(Input.mousePosition);
-                    if (panDirection != Vector2.zero)
-                    {
-                        _vCam.Follow = null;
-                        transform.position += (Vector3) panDirection * _cameraMoveSpeed * Time.deltaTime;
-                    }
-                }
-                
+
                 // zoom in/out with mousewheel
                 float zoom = Input.GetAxis("Mouse ScrollWheel");
                 if (zoom != 0)
                 {
                     // prevent zoom in past 1.0f orthographic cam size
-                    if (zoom > 0 && _vCam.m_Lens.OrthographicSize < 1.01f) return;
-
                     _vCam.m_Lens.OrthographicSize -= zoom;
-                    _composer.ForceCameraPosition(transform.position + new Vector3(0f, -0.25f * zoom, 0f), Quaternion.identity);
+                    _vCam.m_Lens.OrthographicSize = Mathf.Clamp(_vCam.m_Lens.OrthographicSize, 1f, 15f);
+                    // _composer.ForceCameraPosition(transform.position + new Vector3(0f, -0.25f * zoom, 0f), Quaternion.identity);
                 }
                 
                 // C to reset cam
                 if (Input.GetKeyDown(KeyCode.C))
                 {
                     Input.ResetInputAxes();
+                    _horizontalAxis = 0;
+                    _verticalAxis = 0;
                     _vCam.Follow = _ballTransform;
                 }
             }
@@ -130,27 +126,24 @@ namespace UI.BallArena
             }
         }
 
-        private Vector2 CalculateEdgePanDirection(Vector2 mousePos)
+        private void CalculateEdgePanDirection(Vector2 mousePos)
         {
-            Vector2 direction = Vector2.zero;
-            if (mousePos.y >= Screen.height * .99f)
+            if (mousePos.y >= Screen.height * .999f && _panDirection.y < 1)
             {
-                direction.y += 1;
+                _panDirection.y += 1;
             }
-            else if (mousePos.y <= Screen.height * .01f)
+            else if (mousePos.y <= .001f && _panDirection.y > -1)
             {
-                direction.y -= 1;
+                _panDirection.y -= 1;
             }
-            if (mousePos.x >= Screen.width * .99f)
+            if (mousePos.x >= Screen.width * .999f && _panDirection.x < 1)
             {
-                direction.x += 1;
+                _panDirection.x += 1;
             }
-            else if (mousePos.x <= Screen.width * .01f)
+            else if (mousePos.x <= .001f && _panDirection.x > -1)
             {
-                direction.x -= 1;
+                _panDirection.x -= 1;
             }
-
-            return direction;
         }
 
         private void BallSwitched(Ball ball)
