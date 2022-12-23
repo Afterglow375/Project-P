@@ -21,6 +21,7 @@ namespace UI.BallArena
         private float _cameraGravity = 5;
         private float _horizontalAxis;
         private float _verticalAxis;
+        private float _zoom;
         private Vector3 _mouseDragOrigin;
         private Vector3 _panDirection = Vector3.zero;
         private Camera _cam;
@@ -52,6 +53,7 @@ namespace UI.BallArena
                 if (Input.GetMouseButtonDown(2))
                 {
                     _vCam.Follow = null;
+                    _panDirection = Vector3.zero;
                     _mouseDragOrigin = _cam.ScreenToWorldPoint(Input.mousePosition);
                 }
                 if (Input.GetMouseButton(2))
@@ -77,13 +79,17 @@ namespace UI.BallArena
                 }
 
                 // zoom in/out with mousewheel
-                float zoom = Input.GetAxis("Mouse ScrollWheel");
-                if (zoom != 0)
+                _zoom = Input.GetAxis("Mouse ScrollWheel") * 2;
+                if (_zoom != 0)
                 {
-                    // prevent zoom in past 1.0f orthographic cam size
-                    _vCam.m_Lens.OrthographicSize -= zoom;
-                    _vCam.m_Lens.OrthographicSize = Mathf.Clamp(_vCam.m_Lens.OrthographicSize, 1f, 15f);
-                    // _composer.ForceCameraPosition(transform.position + new Vector3(0f, -0.25f * zoom, 0f), Quaternion.identity);
+                    float zoomChange = _vCam.m_Lens.OrthographicSize;
+                    _vCam.m_Lens.OrthographicSize -= _zoom;
+                    _vCam.m_Lens.OrthographicSize = Mathf.Clamp(_vCam.m_Lens.OrthographicSize, 2f, 20f);
+                    zoomChange -= _vCam.m_Lens.OrthographicSize;
+                    if (zoomChange != 0)
+                    {
+                        _composer.ForceCameraPosition(transform.position + new Vector3(0f, -0.25f * zoomChange, 0f), Quaternion.identity);
+                    }
                 }
                 
                 // C to reset cam
