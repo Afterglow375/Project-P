@@ -28,10 +28,12 @@ namespace Gameplay.Balls
         {
             if (GameManager.Instance.state == GameState.ReadyToShoot)
             {
-                _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-                _shootDirection = (_mousePos - transform.position).normalized;
-                transform.up = _shootDirection;
-                
+                if (Input.GetMouseButton(1))
+                {
+                    _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+                    _shootDirection = (_mousePos - transform.position).normalized;
+                    transform.up = _shootDirection;
+                }
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     _ball.TriggerShoot(_shootDirection);
