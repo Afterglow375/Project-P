@@ -34,6 +34,7 @@ namespace UI.BallArena
         private float _cameraBoundsMaxX;
         private float _cameraBoundsMinY;
         private float _cameraBoundsMaxY;
+        private float _maxOrthographicSize;
 
         private void Start()
         {
@@ -46,11 +47,21 @@ namespace UI.BallArena
             _origDeadZoneHeight = _composer.m_DeadZoneHeight;
             _ballTransform = _vCam.Follow;
             _cam = Camera.main;
+            SetupCameraConfines();
+        }
+
+        private void SetupCameraConfines()
+        {
             Debug.Assert(_cameraBounds != null, "Must set the camera confines collider");
             _cameraBoundsMinX = _cameraBounds.bounds.min.x;
             _cameraBoundsMaxX = _cameraBounds.bounds.max.x;
             _cameraBoundsMinY = _cameraBounds.bounds.min.y;
             _cameraBoundsMaxY = _cameraBounds.bounds.max.y;
+
+            float confinesWidth = _cameraBounds.bounds.size.x;
+            float confinesHeight = _cameraBounds.bounds.size.y;
+            _maxOrthographicSize = Mathf.Min(confinesHeight / 2, confinesWidth / 2 / _cam.aspect);
+            
             // delete camera bounds collider to avoid physics bugs
             Destroy(_cameraBounds.gameObject);
         }
@@ -68,7 +79,7 @@ namespace UI.BallArena
                 HandleCameraPan();
                 HandleCameraZoom();
                 HandleCameraReset();
-                ClampCameraPosition();
+                ClampCamera();
             }
         }
 
@@ -129,7 +140,7 @@ namespace UI.BallArena
             {
                 float zoomChange = _vCam.m_Lens.OrthographicSize;
                 _vCam.m_Lens.OrthographicSize -= _zoomChange;
-                _vCam.m_Lens.OrthographicSize = Mathf.Clamp(_vCam.m_Lens.OrthographicSize, 2f, 20f);
+                _vCam.m_Lens.OrthographicSize = Mathf.Clamp(_vCam.m_Lens.OrthographicSize, 2f, _maxOrthographicSize);
                 zoomChange -= _vCam.m_Lens.OrthographicSize;
                 if (zoomChange != 0)
                 {
@@ -191,12 +202,12 @@ namespace UI.BallArena
         }
 
         // clamp camera to be within confines
-        private void ClampCameraPosition()
+        private void ClampCamera()
         {
             if (!_cameraChange) return;
             
-            float camHeight = _cam.orthographicSize;
-            float camWidth = _cam.orthographicSize * _cam.aspect;
+            float camHeight = _vCam.m_Lens.OrthographicSize;
+            float camWidth = _vCam.m_Lens.OrthographicSize * _vCam.m_Lens.Aspect;
             float minX = _cameraBoundsMinX + camWidth;
             float maxX = _cameraBoundsMaxX - camWidth;
             float minY = _cameraBoundsMinY + camHeight;
@@ -205,6 +216,7 @@ namespace UI.BallArena
             float newY = Mathf.Clamp(transform.position.y, minY, maxY);
             
             transform.position = new Vector3(newX, newY, transform.position.z);
+            _cameraChange = false;
         }
 
         private void BallSwitched(Ball ball)
