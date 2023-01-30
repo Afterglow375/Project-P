@@ -10,6 +10,11 @@ namespace UI.BallArena
     {
         [SerializeField] private float _cameraMoveSpeed;
         [SerializeField] private Collider2D _cameraBounds;
+        // cameraSensitvity controls how fast camera reaches full speed when starting to move
+        [SerializeField] private float _cameraSensitivity = 10;
+        // cameraSensitvity controls how fast camera stops moving after stopping camera movement
+        [SerializeField] private float _cameraGravity = 5;
+        [SerializeField] private float _zoomMultiplier = 2;
         
         private CinemachineVirtualCamera _vCam;
         private Transform _ballTransform;
@@ -17,12 +22,9 @@ namespace UI.BallArena
         private Vector3 _origCameraPosition;
         private float _origDeadZoneWidth;
         private float _origDeadZoneHeight;
-        private bool _resetBall;
-        private float _cameraSensitivity = 10;
-        private float _cameraGravity = 5;
         private float _horizontalAxis;
         private float _verticalAxis;
-        private float _zoom;
+        private float _zoomChange;
         private bool _cameraChange;
         private Vector3 _mouseDragOrigin;
         private Vector3 _panDirection = Vector3.zero;
@@ -51,67 +53,10 @@ namespace UI.BallArena
         {
             if (GameManager.Instance.state != GameState.ResettingBall && GameManager.Instance.state != GameState.Pause)
             {
-                // camera panning when holding middle mouse and dragging
-                if (Input.GetMouseButtonDown(2))
-                {
-                    _vCam.Follow = null;
-                    _panDirection = Vector3.zero;
-                    _mouseDragOrigin = _cam.ScreenToWorldPoint(Input.mousePosition);
-                }
-                if (Input.GetMouseButton(2))
-                {
-                    Vector3 difference = _mouseDragOrigin - _cam.ScreenToWorldPoint(Input.mousePosition);
-                    transform.position += difference;
-                    _cameraChange = true;
-                }
-                else
-                {
-                    _horizontalAxis = Input.GetAxisRaw("Horizontal");
-                    _verticalAxis = Input.GetAxisRaw("Vertical");
-                    // TODO: uncomment this for release
-                    // CalculateEdgePanDirection(Input.mousePosition);
-                    _panDirection.x = GetSmoothAxis(_horizontalAxis, _panDirection.x);
-                    _panDirection.y = GetSmoothAxis(_verticalAxis, _panDirection.y);
-                    
-                    // camera panning w/ WASD or edge panning
-                    if (_panDirection != Vector3.zero)
-                    {
-                        _vCam.Follow = null;
-                        // clamp transform position to be within confines
-                        transform.position += _panDirection * _cameraMoveSpeed * Time.deltaTime;
-                        _cameraChange = true;
-                    }
-                }
-
-                // zoom in/out with mousewheel
-                _zoom = Input.GetAxis("Mouse ScrollWheel") * 2;
-                if (_zoom != 0)
-                {
-                    float zoomChange = _vCam.m_Lens.OrthographicSize;
-                    _vCam.m_Lens.OrthographicSize -= _zoom;
-                    _vCam.m_Lens.OrthographicSize = Mathf.Clamp(_vCam.m_Lens.OrthographicSize, 2f, 20f);
-                    zoomChange -= _vCam.m_Lens.OrthographicSize;
-                    if (zoomChange != 0)
-                    {
-                        _composer.ForceCameraPosition(transform.position + new Vector3(0f, -0.25f * zoomChange, 0f), Quaternion.identity);
-                    }
-                    _cameraChange = true;
-                }
-
-                // clamp camera to be within confines
-                if (_cameraChange)
-                {
-                    transform.position = ClampCamera();
-                    _cameraChange = false;
-                }
-                
-                // C to reset cam
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    Input.ResetInputAxes();
-                    _panDirection = Vector3.zero;
-                    _vCam.Follow = _ballTransform;
-                }
+                HandleCameraPan();
+                HandleCameraZoom();
+                HandleCameraReset();
+                ClampCameraPosition();
             }
         }
 
@@ -130,7 +75,71 @@ namespace UI.BallArena
             _composer.m_UnlimitedSoftZone = false;
             _vCam.Follow = _ballTransform;
         }
+
+        private void HandleCameraPan()
+        {
+            // camera panning when holding middle mouse and dragging
+            if (Input.GetMouseButtonDown(2))
+            {
+                _vCam.Follow = null;
+                _panDirection = Vector3.zero;
+                _mouseDragOrigin = _cam.ScreenToWorldPoint(Input.mousePosition);
+            }
+            if (Input.GetMouseButton(2))
+            {
+                Vector3 difference = _mouseDragOrigin - _cam.ScreenToWorldPoint(Input.mousePosition);
+                transform.position += difference;
+                _cameraChange = true;
+            }
+            else // camera panning w/ WASD or edge panning
+            { 
+                _horizontalAxis = Input.GetAxisRaw("Horizontal");
+                _verticalAxis = Input.GetAxisRaw("Vertical");
+                // TODO: uncomment this for release
+                // CalculateEdgePanDirection(Input.mousePosition);
+                _panDirection.x = GetSmoothAxis(_horizontalAxis, _panDirection.x);
+                _panDirection.y = GetSmoothAxis(_verticalAxis, _panDirection.y);
+                if (_panDirection != Vector3.zero)
+                {
+                    _vCam.Follow = null;
+                    // clamp transform position to be within confines
+                    transform.position += _panDirection * _cameraMoveSpeed * Time.deltaTime;
+                    _cameraChange = true;
+                }
+            }
+        }
         
+        // zoom in/out with mousewheel
+        private void HandleCameraZoom()
+        {
+            _zoomChange = Input.GetAxis("Mouse ScrollWheel") * _zoomMultiplier;
+            if (_zoomChange != 0)
+            {
+                float zoomChange = _vCam.m_Lens.OrthographicSize;
+                _vCam.m_Lens.OrthographicSize -= _zoomChange;
+                _vCam.m_Lens.OrthographicSize = Mathf.Clamp(_vCam.m_Lens.OrthographicSize, 2f, 20f);
+                zoomChange -= _vCam.m_Lens.OrthographicSize;
+                if (zoomChange != 0)
+                {
+                    // have to shift camera down slightly because of combat HUD
+                    _composer.ForceCameraPosition(transform.position + new Vector3(0f, -0.25f * zoomChange, 0f), Quaternion.identity);
+                    _cameraChange = true;
+                }
+            }
+        }
+
+        // C to reset cam to follow ball
+        private void HandleCameraReset()
+        {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                Input.ResetInputAxes();
+                _panDirection = Vector3.zero;
+                _vCam.Follow = _ballTransform;
+                _cameraChange = false;
+            }
+        }
+
         private float GetSmoothAxis(float r, float axis, float limit = 1f)
         {
             if (r != 0)
@@ -169,20 +178,21 @@ namespace UI.BallArena
             }
         }
 
-        private Vector3 ClampCamera()
+        // clamp camera to be within confines
+        private void ClampCameraPosition()
         {
+            if (!_cameraChange) return;
+            
             float camHeight = _cam.orthographicSize;
             float camWidth = _cam.orthographicSize * _cam.aspect;
-
             float minX = _cameraBounds.bounds.min.x + camWidth;
             float maxX = _cameraBounds.bounds.max.x - camWidth;
             float minY = _cameraBounds.bounds.min.y + camHeight;
             float maxY = _cameraBounds.bounds.max.y - camHeight;
-
             float newX = Mathf.Clamp(transform.position.x, minX, maxX);
             float newY = Mathf.Clamp(transform.position.y, minY, maxY);
             
-            return new Vector3(newX, newY, transform.position.z);
+            transform.position = new Vector3(newX, newY, transform.position.z);
         }
 
         private void BallSwitched(Ball ball)
