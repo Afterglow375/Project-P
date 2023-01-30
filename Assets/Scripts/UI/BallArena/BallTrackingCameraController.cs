@@ -9,6 +9,7 @@ namespace UI.BallArena
     public class BallTrackingCameraController : MonoBehaviour
     {
         [SerializeField] private float _cameraMoveSpeed;
+        [SerializeField] private Collider2D _cameraBounds;
         
         private CinemachineVirtualCamera _vCam;
         private Transform _ballTransform;
@@ -22,6 +23,7 @@ namespace UI.BallArena
         private float _horizontalAxis;
         private float _verticalAxis;
         private float _zoom;
+        private bool _cameraChange;
         private Vector3 _mouseDragOrigin;
         private Vector3 _panDirection = Vector3.zero;
         private Camera _cam;
@@ -60,6 +62,7 @@ namespace UI.BallArena
                 {
                     Vector3 difference = _mouseDragOrigin - _cam.ScreenToWorldPoint(Input.mousePosition);
                     transform.position += difference;
+                    _cameraChange = true;
                 }
                 else
                 {
@@ -74,7 +77,9 @@ namespace UI.BallArena
                     if (_panDirection != Vector3.zero)
                     {
                         _vCam.Follow = null;
+                        // clamp transform position to be within confines
                         transform.position += _panDirection * _cameraMoveSpeed * Time.deltaTime;
+                        _cameraChange = true;
                     }
                 }
 
@@ -90,6 +95,14 @@ namespace UI.BallArena
                     {
                         _composer.ForceCameraPosition(transform.position + new Vector3(0f, -0.25f * zoomChange, 0f), Quaternion.identity);
                     }
+                    _cameraChange = true;
+                }
+
+                // clamp camera to be within confines
+                if (_cameraChange)
+                {
+                    transform.position = ClampCamera();
+                    _cameraChange = false;
                 }
                 
                 // C to reset cam
@@ -154,6 +167,22 @@ namespace UI.BallArena
             {
                 _horizontalAxis -= 1;
             }
+        }
+
+        private Vector3 ClampCamera()
+        {
+            float camHeight = _cam.orthographicSize;
+            float camWidth = _cam.orthographicSize * _cam.aspect;
+
+            float minX = _cameraBounds.bounds.min.x + camWidth;
+            float maxX = _cameraBounds.bounds.max.x - camWidth;
+            float minY = _cameraBounds.bounds.min.y + camHeight;
+            float maxY = _cameraBounds.bounds.max.y - camHeight;
+
+            float newX = Mathf.Clamp(transform.position.x, minX, maxX);
+            float newY = Mathf.Clamp(transform.position.y, minY, maxY);
+            
+            return new Vector3(newX, newY, transform.position.z);
         }
 
         private void BallSwitched(Ball ball)
