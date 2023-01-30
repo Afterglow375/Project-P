@@ -30,6 +30,11 @@ namespace UI.BallArena
         private Vector3 _panDirection = Vector3.zero;
         private Camera _cam;
 
+        private float _cameraBoundsMinX;
+        private float _cameraBoundsMaxX;
+        private float _cameraBoundsMinY;
+        private float _cameraBoundsMaxY;
+
         private void Start()
         {
             Ball.BallExplosionEvent += BallExplosionEvent;
@@ -41,6 +46,13 @@ namespace UI.BallArena
             _origDeadZoneHeight = _composer.m_DeadZoneHeight;
             _ballTransform = _vCam.Follow;
             _cam = Camera.main;
+            Debug.Assert(_cameraBounds != null, "Must set the camera confines collider");
+            _cameraBoundsMinX = _cameraBounds.bounds.min.x;
+            _cameraBoundsMaxX = _cameraBounds.bounds.max.x;
+            _cameraBoundsMinY = _cameraBounds.bounds.min.y;
+            _cameraBoundsMaxY = _cameraBounds.bounds.max.y;
+            // delete camera bounds collider to avoid physics bugs
+            Destroy(_cameraBounds.gameObject);
         }
 
         private void OnDestroy()
@@ -185,10 +197,10 @@ namespace UI.BallArena
             
             float camHeight = _cam.orthographicSize;
             float camWidth = _cam.orthographicSize * _cam.aspect;
-            float minX = _cameraBounds.bounds.min.x + camWidth;
-            float maxX = _cameraBounds.bounds.max.x - camWidth;
-            float minY = _cameraBounds.bounds.min.y + camHeight;
-            float maxY = _cameraBounds.bounds.max.y - camHeight;
+            float minX = _cameraBoundsMinX + camWidth;
+            float maxX = _cameraBoundsMaxX - camWidth;
+            float minY = _cameraBoundsMinY + camHeight;
+            float maxY = _cameraBoundsMaxY - camHeight;
             float newX = Mathf.Clamp(transform.position.x, minX, maxX);
             float newY = Mathf.Clamp(transform.position.y, minY, maxY);
             
