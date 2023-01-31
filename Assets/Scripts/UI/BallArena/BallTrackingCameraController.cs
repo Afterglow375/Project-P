@@ -125,8 +125,7 @@ namespace UI.BallArena
                 if (_panDirection != Vector3.zero)
                 {
                     _vCam.Follow = null;
-                    // clamp transform position to be within confines
-                    transform.position += _panDirection * _cameraMoveSpeed * Time.deltaTime;
+                    transform.position += _panDirection * _cameraMoveSpeed * Time.deltaTime * _vCam.m_Lens.OrthographicSize / 5;
                     _cameraChange = true;
                 }
             }
